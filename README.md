@@ -34,3 +34,6 @@ admin
 # Setup api
 client_id: 53e3332f-2a75-4492-9a6c-a92bdc37561b
 client_secret: encPajhJR4nQgpA5EkfL6XJL0ijYkTd2
+
+# Generate product in https://ttv-local.com:8109/admin/config/development/generate/product
+Select furniture, in tab user select member then click generate
