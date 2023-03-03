@@ -1,0 +1,29 @@
+uuid: cdb5bc94-f25b-4571-8128-41c4a74d3688
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.restricted_html
+    - rest.resource.hb_rest_user_register
+  module:
+    - comment
+    - contact
+    - filter
+    - media
+    - rest
+    - search
+    - system
+_core:
+  default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access site-wide contact form'
+  - 'restful post hb_rest_user_register'
+  - 'search content'
+  - 'use text format restricted_html'
+  - 'view media'

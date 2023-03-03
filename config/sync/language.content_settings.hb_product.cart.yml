@@ -1,0 +1,18 @@
+uuid: 0104dfc5-9414-45cf-afd3-00c36a3fe579
+langcode: en
+status: true
+dependencies:
+  config:
+    - hb_product.hb_product_type.cart
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: hb_product.cart
+target_entity_type_id: hb_product
+target_bundle: cart
+default_langcode: site_default
+language_alterable: true

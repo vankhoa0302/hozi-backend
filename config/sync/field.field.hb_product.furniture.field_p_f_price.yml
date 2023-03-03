@@ -1,0 +1,23 @@
+uuid: 42e368fd-7b3c-4f01-a1c1-477535cb30f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_price
+    - hb_product.hb_product_type.furniture
+id: hb_product.furniture.field_p_f_price
+field_name: field_p_f_price
+entity_type: hb_product
+bundle: furniture
+label: Price
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

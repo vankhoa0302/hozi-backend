@@ -1,0 +1,20 @@
+uuid: afa122d5-1f4d-416d-b8a1-ab27c1f0cdee
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_product.field_p_c_quantity
+field_name: field_p_c_quantity
+entity_type: hb_product
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

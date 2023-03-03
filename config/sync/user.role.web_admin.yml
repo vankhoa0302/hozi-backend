@@ -1,0 +1,9 @@
+uuid: a40435ad-6804-4d91-89c5-9e7931356318
+langcode: en
+status: true
+dependencies: {  }
+id: web_admin
+label: 'Web Admin'
+weight: 4
+is_admin: null
+permissions: {  }

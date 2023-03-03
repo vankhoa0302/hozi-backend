@@ -1,0 +1,18 @@
+uuid: 771b5edc-f38b-4652-9871-b8f4e7f36d7e
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_product.field_p_f_discount
+field_name: field_p_f_discount
+entity_type: hb_product
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

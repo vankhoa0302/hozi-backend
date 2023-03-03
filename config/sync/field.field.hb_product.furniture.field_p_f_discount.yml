@@ -1,0 +1,23 @@
+uuid: 812b4f64-5c5d-49f2-9384-6ed6234c4c35
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_discount
+    - hb_product.hb_product_type.furniture
+id: hb_product.furniture.field_p_f_discount
+field_name: field_p_f_discount
+entity_type: hb_product
+bundle: furniture
+label: Discount
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: float

@@ -1,0 +1,73 @@
+uuid: 573b7875-07d2-4ed8-8fd0-e83adb62da95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.hb_product.furniture.field_f_p_quantity
+    - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_media
+    - field.field.hb_product.furniture.field_p_f_price
+    - hb_product.hb_product_type.furniture
+  module:
+    - file
+    - text
+id: hb_product.furniture.default
+targetEntityType: hb_product
+bundle: furniture
+mode: default
+content:
+  description:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_f_p_quantity:
+    type: number
+    weight: 5
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_f_discount:
+    type: number
+    weight: 4
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_f_media:
+    type: file_generic
+    weight: 2
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_p_f_price:
+    type: number
+    weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  label:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true
+  uid: true

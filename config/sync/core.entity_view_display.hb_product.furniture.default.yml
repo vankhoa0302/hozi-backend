@@ -1,0 +1,102 @@
+uuid: 0fb45b39-3381-4366-af0d-cbdae581bc4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.hb_product.furniture.field_f_p_quantity
+    - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_media
+    - field.field.hb_product.furniture.field_p_f_price
+    - hb_product.hb_product_type.furniture
+  module:
+    - file
+    - text
+    - user
+id: hb_product.furniture.default
+targetEntityType: hb_product
+bundle: furniture
+mode: default
+content:
+  created:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_f_p_quantity:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 24
+    region: content
+  field_p_f_discount:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 23
+    region: content
+  field_p_f_media:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  field_p_f_price:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 22
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+  status:
+    type: boolean
+    label: above
+    settings:
+      format: enabled-disabled
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  uid:
+    type: author
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 15
+    region: content
+hidden:
+  langcode: true

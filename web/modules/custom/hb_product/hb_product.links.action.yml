@@ -1,0 +1,11 @@
+hb_product.type_add:
+  title: 'Add product type'
+  route_name: entity.hb_product_type.add_form
+  appears_on:
+    - entity.hb_product_type.collection
+
+hb_product.add_page:
+  title: 'Add product'
+  route_name: entity.hb_product.add_page
+  appears_on:
+    - entity.hb_product.collection

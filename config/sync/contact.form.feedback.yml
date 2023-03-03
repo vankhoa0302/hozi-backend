@@ -1,0 +1,14 @@
+uuid: 34728319-6651-4bfc-87d8-29a0b0f344a2
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vymHlgJy26BuI5GGj9-IXjwR3dRC5C0tij4BpWJnoqw
+id: feedback
+label: 'Website feedback'
+recipients:
+  - cp19112000@gmail.com
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''

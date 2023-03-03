@@ -1,0 +1,3 @@
+services:
+  hb_guard.data_guard:
+    class: Drupal\hb_guard\HbDataGuardService

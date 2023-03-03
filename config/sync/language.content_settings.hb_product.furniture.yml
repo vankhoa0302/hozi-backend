@@ -1,0 +1,18 @@
+uuid: 6a96fe8a-b5aa-41ba-8949-d2318011cfd8
+langcode: en
+status: true
+dependencies:
+  config:
+    - hb_product.hb_product_type.furniture
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+    bundle_settings:
+      untranslatable_fields_hide: '0'
+id: hb_product.furniture
+target_entity_type_id: hb_product
+target_bundle: furniture
+default_langcode: site_default
+language_alterable: true

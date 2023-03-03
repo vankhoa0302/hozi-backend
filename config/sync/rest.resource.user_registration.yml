@@ -1,0 +1,19 @@
+uuid: bbac9b25-d6f9-43eb-8dc6-e67e1425c238
+langcode: en
+status: false
+dependencies:
+  module:
+    - serialization
+    - simple_oauth
+    - user
+id: user_registration
+plugin_id: user_registration
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

@@ -1,0 +1,23 @@
+uuid: 2a47b038-7959-44ed-b5e7-669b8d2f3cdf
+langcode: en
+status: true
+dependencies:
+  module:
+    - file
+    - hb_product
+id: hb_product.field_p_f_media
+field_name: field_p_f_media
+entity_type: hb_product
+type: file
+settings:
+  target_type: file
+  display_field: false
+  display_default: false
+  uri_scheme: public
+module: file
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

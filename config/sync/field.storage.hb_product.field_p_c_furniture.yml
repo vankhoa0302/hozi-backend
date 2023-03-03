@@ -1,0 +1,19 @@
+uuid: b6f99f1e-be51-4b85-9901-882f3acc2c56
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_product.field_p_c_furniture
+field_name: field_p_c_furniture
+entity_type: hb_product
+type: entity_reference
+settings:
+  target_type: hb_product_type
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

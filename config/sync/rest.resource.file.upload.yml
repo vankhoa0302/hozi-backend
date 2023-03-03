@@ -1,0 +1,20 @@
+uuid: 9e04cfda-472c-4e81-99fd-ad3ad8113516
+langcode: en
+status: false
+dependencies:
+  module:
+    - file
+    - serialization
+    - simple_oauth
+    - user
+id: file.upload
+plugin_id: 'file:upload'
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

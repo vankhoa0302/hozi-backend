@@ -1,0 +1,27 @@
+uuid: 132e086c-3418-4f4c-93ab-23230f10bd79
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_media
+    - hb_product.hb_product_type.furniture
+  module:
+    - file
+id: hb_product.furniture.field_p_f_media
+field_name: field_p_f_media
+entity_type: hb_product
+bundle: furniture
+label: Media
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'jpg jpeg png mp4'
+  max_filesize: ''
+  description_field: false
+field_type: file
