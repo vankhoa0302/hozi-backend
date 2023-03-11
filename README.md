@@ -24,7 +24,7 @@ run cat config/backup/db/backup.sql | docker exec -i ttv_db /usr/bin/mysql -u ro
 run docker exec -it ttv /bin/bash
 run COMPOSER_PROCESS_TIMEOUT=2000 composer install && drush cr && drush cim -y
 create folder config/keys and generate keys in /admin/config/people/simple_oauth
-Access web http://localhost:8106
+Access web https://localhost:8106 | http://localhost:80
 Access phpmyadmin http://localhost:8105
 
 # Account

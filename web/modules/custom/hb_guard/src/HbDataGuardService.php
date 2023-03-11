@@ -13,7 +13,9 @@ class HbDataGuardService {
 
     public function guardRequiredData(array $required_data, array $data) {
         foreach ($data as $item) {
-            if (empty($required_data[$item])) {
+            if (!isset($required_data[$item])) {
+	            $userData = \Drupal::service('user.data');
+	            $userData->set('hb_guard', \Drupal::currentUser()->id(), 'guard_field', $item);
                 return FALSE;
             }
         }
