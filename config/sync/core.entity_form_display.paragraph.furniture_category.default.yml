@@ -1,0 +1,21 @@
+uuid: 6996f05a-2228-4b0e-96db-52c496086026
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.furniture_category.field_p_f_c_type
+    - paragraphs.paragraphs_type.furniture_category
+id: paragraph.furniture_category.default
+targetEntityType: paragraph
+bundle: furniture_category
+mode: default
+content:
+  field_p_f_c_type:
+    type: options_buttons
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

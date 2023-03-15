@@ -1,15 +1,5 @@
-uuid: 02a720e7-c7cf-406d-ab70-135188b0fd45
-langcode: en
-status: false
-dependencies:
-  module:
-    - hb_product
-    - serialization
-    - user
-_core:
-  default_config_hash: BOszaJvpuCcWbx0Tti_Oh7kDX34gjjADc9zD32WKsy8
-id: entity.hb_product
-plugin_id: 'entity:hb_product'
+id: entity.hb_cart
+plugin_id: 'entity:hb_cart'
 granularity: method
 configuration:
   GET:
@@ -24,15 +14,18 @@ configuration:
       - xml
     supported_auth:
       - cookie
-  DELETE:
-    supported_formats:
-      - json
-      - xml
-    supported_auth:
-      - cookie
   PATCH:
     supported_formats:
       - json
       - xml
     supported_auth:
       - cookie
+  DELETE:
+    supported_formats:
+      - json
+      - xml
+    supported_auth:
+      - cookie
+dependencies:
+  module:
+    - user

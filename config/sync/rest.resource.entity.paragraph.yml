@@ -1,18 +1,18 @@
-uuid: 3f7805a7-7b8a-47e7-8350-ae335e377a71
+uuid: 05d690ea-95a2-4695-b053-e7fcc099b942
 langcode: en
-status: true
+status: false
 dependencies:
   module:
-    - hb_account
+    - paragraphs
     - serialization
     - simple_oauth
     - user
-id: hb_rest_user_register
-plugin_id: hb_rest_user_register
+id: entity.paragraph
+plugin_id: 'entity:paragraph'
 granularity: resource
 configuration:
   methods:
-    - POST
+    - GET
   formats:
     - json
   authentication:

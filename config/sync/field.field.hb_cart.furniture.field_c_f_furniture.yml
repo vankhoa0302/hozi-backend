@@ -1,0 +1,29 @@
+uuid: af04c97b-443f-4a1d-9d65-3a2e66f2e912
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_cart.field_c_f_furniture
+    - hb_product.hb_cart_type.furniture
+    - hb_product.hb_product_type.furniture
+id: hb_cart.furniture.field_c_f_furniture
+field_name: field_c_f_furniture
+entity_type: hb_cart
+bundle: furniture
+label: Furniture
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:hb_product'
+  handler_settings:
+    target_bundles:
+      furniture: furniture
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

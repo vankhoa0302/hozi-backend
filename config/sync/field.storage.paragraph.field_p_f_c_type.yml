@@ -1,0 +1,30 @@
+uuid: ece0ceb4-1b6a-42bb-8c60-50723e26f297
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_p_f_c_type
+field_name: field_p_f_c_type
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: table
+      label: Table
+    -
+      value: chair
+      label: Chair
+    -
+      value: sofa
+      label: Sofa
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

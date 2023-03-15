@@ -23,6 +23,7 @@ module:
   devel_generate: 0
   dynamic_page_cache: 0
   editor: 0
+  entity_reference_revisions: 0
   field: 0
   field_ui: 0
   file: 0
@@ -31,6 +32,7 @@ module:
   hb_cms: 0
   hb_devel: 0
   hb_guard: 0
+  hb_paragraphs: 0
   hb_product: 0
   help: 0
   history: 0
@@ -64,6 +66,7 @@ module:
   views_ui: 0
   content_translation: 10
   views: 10
+  paragraphs: 11
   standard: 1000
 theme:
   olivero: 0

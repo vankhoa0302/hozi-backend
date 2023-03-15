@@ -10,9 +10,9 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides a list controller for the product entity type.
+ * Provides a list controller for the hb_cart entity type.
  */
-class HbProductListBuilder extends EntityListBuilder {
+class HbCartListBuilder extends EntityListBuilder {
 
 	protected $limit = 10;
 
@@ -24,7 +24,7 @@ class HbProductListBuilder extends EntityListBuilder {
   protected $dateFormatter;
 
   /**
-   * Constructs a new HbProductListBuilder object.
+   * Constructs a new HbCartListBuilder object.
    *
    * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
    *   The entity type definition.
@@ -53,14 +53,15 @@ class HbProductListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function render() {
-	  $build['table'] = parent::render();
+    $build['table'] = parent::render();
 
     $total = $this->getStorage()
       ->getQuery()
       ->accessCheck(FALSE)
       ->count()
       ->execute();
-    $build['summary']['#markup'] = $this->t('Total products: @total', ['@total' => $total]);
+
+    $build['summary']['#markup'] = $this->t('Total carts: @total', ['@total' => $total]);
     return $build;
   }
 
@@ -69,7 +70,6 @@ class HbProductListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('ID');
-    $header['type'] = $this->t('Type');
     $header['label'] = $this->t('Label');
     $header['status'] = $this->t('Status');
     $header['uid'] = $this->t('Author');
@@ -82,10 +82,9 @@ class HbProductListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /** @var \Drupal\hb_product\HbProductInterface $entity */
+    /** @var \Drupal\hb_product\HbCartInterface $entity */
     $row['id'] = $entity->id();
-    $row['type'] = $entity->bundle();
-    $row['label'] = $entity->label();
+    $row['label'] = $entity->toLink();
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',

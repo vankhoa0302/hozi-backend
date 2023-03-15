@@ -1,0 +1,31 @@
+uuid: cf8812eb-94b6-4f4f-be8c-45a6e61f47cf
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_attributes
+    - hb_product.hb_product_type.furniture
+    - paragraphs.paragraphs_type.furniture_category
+  module:
+    - entity_reference_revisions
+id: hb_product.furniture.field_p_f_attributes
+field_name: field_p_f_attributes
+entity_type: hb_product
+bundle: furniture
+label: Attributes
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      furniture_category: furniture_category
+    negate: 0
+    target_bundles_drag_drop:
+      furniture_category:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

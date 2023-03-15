@@ -9,3 +9,15 @@ hb_product.add_page:
   route_name: entity.hb_product.add_page
   appears_on:
     - entity.hb_product.collection
+
+hb_cart.type_add:
+  title: 'Add cart type'
+  route_name: entity.hb_cart_type.add_form
+  appears_on:
+    - entity.hb_cart_type.collection
+
+hb_cart.add_page:
+  title: 'Add cart'
+  route_name: entity.hb_cart.add_page
+  appears_on:
+    - entity.hb_cart.collection

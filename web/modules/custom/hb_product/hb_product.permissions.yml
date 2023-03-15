@@ -2,3 +2,8 @@ administer product types:
   title: 'Administer product types'
   description: 'Maintain the types of product entity.'
   restrict access: true
+
+administer hb_cart types:
+  title: 'Administer cart types'
+  description: 'Maintain the types of hb_cart entity.'
+  restrict access: true

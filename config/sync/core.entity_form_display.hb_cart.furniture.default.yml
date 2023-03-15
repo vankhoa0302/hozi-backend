@@ -1,16 +1,16 @@
-uuid: c8d51b13-17d0-42b8-955b-c9cf72a26e2e
+uuid: d018f95b-6f4d-4b90-a5a5-a04c0a131df8
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.hb_product.cart.field_p_c_furniture
-    - field.field.hb_product.cart.field_p_c_quantity
-    - hb_product.hb_product_type.cart
+    - field.field.hb_cart.furniture.field_c_f_furniture
+    - field.field.hb_cart.furniture.field_c_f_quantity
+    - hb_product.hb_cart_type.furniture
   module:
     - text
-id: hb_product.cart.default
-targetEntityType: hb_product
-bundle: cart
+id: hb_cart.furniture.default
+targetEntityType: hb_cart
+bundle: furniture
 mode: default
 content:
   created:
@@ -27,9 +27,9 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-  field_p_c_furniture:
+  field_c_f_furniture:
     type: entity_reference_autocomplete
-    weight: 21
+    weight: 28
     region: content
     settings:
       match_operator: CONTAINS
@@ -37,9 +37,9 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  field_p_c_quantity:
+  field_c_f_quantity:
     type: number
-    weight: 22
+    weight: 27
     region: content
     settings:
       placeholder: ''

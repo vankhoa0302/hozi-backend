@@ -19,7 +19,7 @@ use Drupal\Core\Url;
 use Drupal\devel_generate\DevelGenerateBase;
 use Drupal\devel_generate\Plugin\DevelGenerate\ContentDevelGenerate;
 use Drupal\field\Entity\FieldConfig;
-use Drupal\hb_product\HbProductInterface;
+use Drupal\hb_product\HbcartInterface;
 use Drupal\node\NodeInterface;
 use Drupal\path_alias\PathAliasStorage;
 use Drupal\user\UserStorageInterface;
@@ -30,10 +30,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Provides a ContentDevelGenerate plugin.
  *
  * @DevelGenerate(
- *   id = "product",
- *   label = @Translation("product"),
- *   description = @Translation("Generate a given number of product. Optionally delete current product."),
- *   url = "product",
+ *   id = "cart",
+ *   label = @Translation("cart"),
+ *   description = @Translation("Generate a given number of cart. Optionally delete current cart."),
+ *   url = "cart",
  *   permission = "administer devel_generate",
  *   settings = {
  *     "num" = 50,
@@ -42,26 +42,23 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *     "title_length" = 4,
  *     "add_type_label" = FALSE
  *   },
- *   dependencies = {
- *     "hb_product",
- *   },
  * )
  */
-class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactoryPluginInterface {
+class CartDevelGenerate extends DevelGenerateBase implements ContainerFactoryPluginInterface {
 
     /**
      * The node storage.
      *
      * @var \Drupal\Core\Entity\EntityStorageInterface
      */
-    protected $productStorage;
+    protected $cartStorage;
 
     /**
      * The node type storage.
      *
      * @var \Drupal\Core\Entity\EntityStorageInterface
      */
-    protected $productTypeStorage;
+    protected $cartTypeStorage;
 
     /**
      * The user storage.
@@ -149,9 +146,9 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      *   The plugin ID for the plugin instance.
      * @param array $plugin_definition
      *   The plugin implementation definition.
-     * @param \Drupal\Core\Entity\EntityStorageInterface $product_storage
+     * @param \Drupal\Core\Entity\EntityStorageInterface $cart_storage
      *   The node storage.
-     * @param \Drupal\Core\Entity\EntityStorageInterface $product_type_storage
+     * @param \Drupal\Core\Entity\EntityStorageInterface $cart_type_storage
      *   The node type storage.
      * @param \Drupal\user\UserStorageInterface $user_storage
      *   The user storage.
@@ -174,12 +171,12 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      * @param \Drupal\Core\Database\Connection $database
      *   Database connection.
      */
-    public function __construct(array $configuration, $plugin_id, array $plugin_definition, EntityStorageInterface $product_storage, EntityStorageInterface $product_type_storage, UserStorageInterface $user_storage, ModuleHandlerInterface $module_handler, CommentManagerInterface $comment_manager = NULL, LanguageManagerInterface $language_manager, ContentTranslationManagerInterface $content_translation_manager = NULL, UrlGeneratorInterface $url_generator, PathAliasStorage $alias_storage, DateFormatterInterface $date_formatter, Time $time, Connection $database) {
+    public function __construct(array $configuration, $plugin_id, array $plugin_definition, EntityStorageInterface $cart_storage, EntityStorageInterface $cart_type_storage, UserStorageInterface $user_storage, ModuleHandlerInterface $module_handler, CommentManagerInterface $comment_manager = NULL, LanguageManagerInterface $language_manager, ContentTranslationManagerInterface $content_translation_manager = NULL, UrlGeneratorInterface $url_generator, PathAliasStorage $alias_storage, DateFormatterInterface $date_formatter, Time $time, Connection $database) {
         parent::__construct($configuration, $plugin_id, $plugin_definition);
 
         $this->moduleHandler = $module_handler;
-        $this->productStorage = $product_storage;
-        $this->productTypeStorage = $product_type_storage;
+        $this->cartStorage = $cart_storage;
+        $this->cartTypeStorage = $cart_type_storage;
         $this->userStorage = $user_storage;
         $this->commentManager = $comment_manager;
         $this->languageManager = $language_manager;
@@ -198,8 +195,8 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
         $entity_type_manager = $container->get('entity_type.manager');
         return new static(
             $configuration, $plugin_id, $plugin_definition,
-            $entity_type_manager->getStorage('hb_product'),
-            $entity_type_manager->getStorage('hb_product_type'),
+            $entity_type_manager->getStorage('hb_cart'),
+            $entity_type_manager->getStorage('hb_cart_type'),
             $entity_type_manager->getStorage('user'),
             $container->get('module_handler'),
             $container->has('comment.manager') ? $container->get('comment.manager') : NULL,
@@ -217,10 +214,10 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      * {@inheritdoc}
      */
     public function settingsForm(array $form, FormStateInterface $form_state) {
-        $types = $this->productTypeStorage->loadMultiple();
+        $types = $this->cartTypeStorage->loadMultiple();
         if (empty($types)) {
-            $create_url = $this->urlGenerator->generateFromRoute('hb_product.type_add');
-            $this->setMessage($this->t('You do not have any product types that can be generated. <a href=":create-type">Go create a new product type</a>', [':create-type' => $create_url]), 'error', FALSE);
+            $create_url = $this->urlGenerator->generateFromRoute('hb_cart.type_add');
+            $this->setMessage($this->t('You do not have any cart types that can be generated. <a href=":create-type">Go create a new cart type</a>', [':create-type' => $create_url]), 'error', FALSE);
             return;
         }
 
@@ -231,14 +228,14 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
                 'type' => ['#markup' => $type->label()],
             ];
             if ($this->commentManager) {
-                $comment_fields = $this->commentManager->getFields('hb_product');
+                $comment_fields = $this->commentManager->getFields('hb_cart');
                 $map = [$this->t('Hidden'), $this->t('Closed'), $this->t('Open')];
 
                 $fields = [];
                 foreach ($comment_fields as $field_name => $info) {
                     // Find all comment fields for the bundle.
                     if (in_array($type->id(), $info['bundles'])) {
-                        $instance = FieldConfig::loadByName('hb_product', $type->id(), $field_name);
+                        $instance = FieldConfig::loadByName('hb_cart', $type->id(), $field_name);
                         $default_value = $instance->getDefaultValueLiteral();
                         $default_mode = reset($default_value);
                         $fields[] = new FormattableMarkup('@field: @state', [
@@ -263,7 +260,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
         }
 
         $header = [
-            'type' => $this->t('Product type'),
+            'type' => $this->t('cart type'),
         ];
         if ($this->commentManager) {
             $header['comments'] = [
@@ -272,7 +269,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
             ];
         }
 
-        $form['product_types'] = [
+        $form['cart_types'] = [
             '#type' => 'tableselect',
             '#header' => $header,
             '#options' => $options,
@@ -393,8 +390,8 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      * {@inheritdoc}
      */
     public function settingsFormValidate(array $form, FormStateInterface $form_state) {
-        if (!array_filter($form_state->getValue('product_types'))) {
-            $form_state->setErrorByName('product_types', $this->t('Please select at least one content type'));
+        if (!array_filter($form_state->getValue('cart_types'))) {
+            $form_state->setErrorByName('cart_types', $this->t('Please select at least one content type'));
         }
         $skip_fields = is_null($form_state->getValue('skip_fields')) ? [] : StringUtils::csvToArray($form_state->getValue('skip_fields'));
         $base_fields = is_null($form_state->getValue('base_fields')) ? [] : StringUtils::csvToArray($form_state->getValue('base_fields'));
@@ -420,12 +417,12 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      * This method is used when the number of elements is under 50.
      */
     private function generateContent($values) {
-        $values['product_types'] = array_filter($values['product_types']);
-        if (!empty($values['kill']) && $values['product_types']) {
+        $values['cart_types'] = array_filter($values['cart_types']);
+        if (!empty($values['kill']) && $values['cart_types']) {
             $this->contentKill($values);
         }
 
-        if (!empty($values['product_types'])) {
+        if (!empty($values['cart_types'])) {
             // Generate nodes.
             $this->develGenerateContentPreNode($values);
             $start = time();
@@ -438,14 +435,14 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
                         '@feedback' => $values['feedback'],
                         '@rate' => ($values['feedback'] * 60) / ($now - $start),
                     ];
-                    $this->messenger()->addStatus(dt('Completed @feedback products (@rate product/min)', $options));
+                    $this->messenger()->addStatus(dt('Completed @feedback carts (@rate cart/min)', $options));
                     $start = $now;
                 }
             }
         }
         $this->setMessage($this->formatPlural($values['num'], 'Created 1 node', 'Created @count nodes'));
         if ($values['num_translations'] > 0) {
-            $this->setMessage($this->formatPlural($values['num_translations'], 'Created 1 product translation', 'Created @count product translations'));
+            $this->setMessage($this->formatPlural($values['num_translations'], 'Created 1 cart translation', 'Created @count cart translations'));
         }
     }
 
@@ -456,7 +453,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      */
     private function generateBatchContent($values) {
         // Remove unselected node types.
-        $values['product_types'] = array_filter($values['product_types']);
+        $values['cart_types'] = array_filter($values['cart_types']);
         // If it is drushBatch then this operation is already run in the
         // self::validateDrushParams().
         if (!$this->drushBatch) {
@@ -563,19 +560,19 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
         $selected_types = StringUtils::csvToArray($options['bundles'] ?: $default_types);
 
         if (empty($selected_types)) {
-            throw new \Exception(dt('No product types available'));
+            throw new \Exception(dt('No cart types available'));
         }
 
-        $values['product_types'] = array_combine($selected_types, $selected_types);
-        $product_types = array_filter($values['product_types']);
+        $values['cart_types'] = array_combine($selected_types, $selected_types);
+        $cart_types = array_filter($values['cart_types']);
 
-        if (!empty($values['kill']) && empty($product_types)) {
-            throw new \Exception(dt('To delete content, please provide the product types (--bundles)'));
+        if (!empty($values['kill']) && empty($cart_types)) {
+            throw new \Exception(dt('To delete content, please provide the cart types (--bundles)'));
         }
 
         // Checks for any missing content types before generating nodes.
-        if (array_diff($product_types, $all_types)) {
-            throw new \Exception(dt('One or more product types have been entered that don\'t exist on this site'));
+        if (array_diff($cart_types, $all_types)) {
+            throw new \Exception(dt('One or more cart types have been entered that don\'t exist on this site'));
         }
 
         if ($this->isBatch($values['num'], $values['max_comments'])) {
@@ -600,15 +597,15 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      *   The input values from the settings form.
      */
     protected function contentKill(array $values) {
-        $nids = $this->productStorage->getQuery()
-            ->condition('bundle', $values['product_types'], 'IN')
+        $nids = $this->cartStorage->getQuery()
+            ->condition('bundle', $values['cart_types'], 'IN')
             ->accessCheck(FALSE)
             ->execute();
 
         if (!empty($nids)) {
-            $nodes = $this->productStorage->loadMultiple($nids);
-            $this->productStorage->delete($nodes);
-            $this->setMessage($this->t('Deleted %count products.', ['%count' => count($nids)]));
+            $nodes = $this->cartStorage->loadMultiple($nids);
+            $this->cartStorage->delete($nodes);
+            $this->setMessage($this->t('Deleted %count carts.', ['%count' => count($nids)]));
         }
     }
 
@@ -649,33 +646,23 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
             $results['time_range'] = 0;
         }
         $users = $results['users'];
-        $product_type = array_rand($results['product_types']);
+        $cart_type = array_rand($results['cart_types']);
         $uid = $users[array_rand($users)];
         // Add the content type label if required.
-        $title_prefix = $results['add_type_label'] ? $this->productTypeStorage->load($product_type)->label() . ' - ' : '';
-        $file_arr = [];
-        for ($i = rand(1, 10); $i < 11; $i ++) {
-            $file = \Drupal\file\Entity\File::create([
-                'filename' => $this->getRandom()->sentences(mt_rand(1, 20)),
-                'bundle' => 'image',
-                'uri' => 'https://picsum.photos/200/300.jpg',
-                'status' => 1,
-                'uid' => 1,
-            ]);
-            $file->save();
-            $file_arr[] = $file->id();
-        }
+        $title_prefix = $results['add_type_label'] ? $this->cartTypeStorage->load($cart_type)->label() . ' - ' : '';
+		    $products = \Drupal::entityQuery('hb_product')
+			    ->condition('bundle', $cart_type)
+			    ->range(0, 10)
+			    ->accessCheck(FALSE)
+					->execute();
         $values = [
             'id' => NULL,
-            'bundle' => $product_type,
+            'bundle' => $cart_type,
             'label' => $title_prefix . $this->getRandom()->sentences(mt_rand(1, $results['title_length']), TRUE),
             'uid' => $uid,
             'description' => $this->getRandom()->sentences(mt_rand(1, 500)),
-            'field_f_p_quantity' => mt_rand(100, 1000),
-            'field_p_f_discount' => mt_rand(100000, 1000000),
-            'field_p_f_price' => mt_rand(1000000, 100000000),
-            'field_p_f_media' => $file_arr,
-            'field_p_f_hot' => mt_rand(0, 1),
+            'field_c_f_furniture' => array_values($products),
+            'field_c_f_quantity' => mt_rand(10, 100),
             'status' => TRUE,
             'created' => $this->time->getRequestTime() - mt_rand(0, $results['time_range']),
         ];
@@ -683,16 +670,16 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
         if (isset($results['add_language'])) {
             $values['langcode'] = $this->getLangcode($results['add_language']);
         }
-        $product = $this->productStorage->create($values);
+        $cart = $this->cartStorage->create($values);
         // See devel_generate_entity_insert() for actions that happen before and
         // after this save.
-        $product->save();
+        $cart->save();
 
         // Add url alias if required.
         if (!empty($results['add_alias'])) {
             $path_alias = $this->aliasStorage->create([
-                'path' => '/product/' . $product->id(),
-                'alias' => '/product-' . $product->id() . '-' . $product->bundle(),
+                'path' => '/cart/' . $cart->id(),
+                'alias' => '/cart-' . $cart->id() . '-' . $cart->bundle(),
                 'langcode' => $values['langcode'] ?? LanguageInterface::LANGCODE_NOT_SPECIFIED,
             ]);
             $path_alias->save();
@@ -700,7 +687,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
 
         // Add translations.
         if (isset($results['translate_language']) && !empty($results['translate_language'])) {
-            $this->develGenerateContentAddNodeTranslation($results, $product);
+            $this->develGenerateContentAddNodeTranslation($results, $cart);
         }
     }
 
@@ -709,19 +696,19 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
      *
      * @param array $results
      *   Results array.
-     * @param \Drupal\hb_product\HbProductInterface $product
+     * @param \Drupal\hb_product\HbcartInterface $cart
      *   Node to add translations to.
      *
      * @throws \Drupal\Core\Entity\EntityStorageException
      */
-    protected function develGenerateContentAddNodeTranslation(array &$results, HbProductInterface $product) {
+    protected function develGenerateContentAddNodeTranslation(array &$results, HbcartInterface $cart) {
         if (is_null($this->contentTranslationManager)) {
             return;
         }
-        if (!$this->contentTranslationManager->isEnabled('hb_product', $product->getEntityTypeId())) {
+        if (!$this->contentTranslationManager->isEnabled('hb_cart', $cart->getEntityTypeId())) {
             return;
         }
-        if ($product->langcode == LanguageInterface::LANGCODE_NOT_SPECIFIED || $product->langcode == LanguageInterface::LANGCODE_NOT_APPLICABLE) {
+        if ($cart->langcode == LanguageInterface::LANGCODE_NOT_SPECIFIED || $cart->langcode == LanguageInterface::LANGCODE_NOT_APPLICABLE) {
             return;
         }
 
@@ -732,21 +719,21 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
         $skip_languages = [
             LanguageInterface::LANGCODE_NOT_SPECIFIED,
             LanguageInterface::LANGCODE_NOT_APPLICABLE,
-            $product->langcode->value,
+            $cart->langcode->value,
         ];
         foreach ($results['translate_language'] as $langcode) {
             if (in_array($langcode, $skip_languages)) {
                 continue;
             }
-            $translation_node = $product->addTranslation($langcode);
+            $translation_node = $cart->addTranslation($langcode);
             $translation_node->devel_generate = $results;
-            $translation_node->setTitle($product->bundle() . ' (' . $langcode . ')');
+            $translation_node->setTitle($cart->bundle() . ' (' . $langcode . ')');
             $this->populateFields($translation_node);
             $translation_node->save();
             if ($translation_node->id() > 0 && !empty($results['add_alias'])) {
                 $path_alias = $this->aliasStorage->create([
-                    'path' => '/product/' . $translation_node->id(),
-                    'alias' => '/product-' . $translation_node->id() . '-' . $translation_node->bundle() . '-' . $langcode,
+                    'path' => '/cart/' . $translation_node->id(),
+                    'alias' => '/cart-' . $translation_node->id() . '-' . $translation_node->bundle() . '-' . $langcode,
                     'langcode' => $langcode,
                 ]);
                 $path_alias->save();

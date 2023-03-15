@@ -1,16 +1,14 @@
-uuid: afa122d5-1f4d-416d-b8a1-ab27c1f0cdee
+uuid: 08d55c7f-a90c-40b2-82c2-2a833f7a74d0
 langcode: en
 status: true
 dependencies:
   module:
     - hb_product
-id: hb_product.field_p_c_quantity
-field_name: field_p_c_quantity
+id: hb_product.field_p_f_hot
+field_name: field_p_f_hot
 entity_type: hb_product
-type: integer
-settings:
-  unsigned: false
-  size: normal
+type: boolean
+settings: {  }
 module: core
 locked: false
 cardinality: 1

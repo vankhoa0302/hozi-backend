@@ -1,0 +1,10 @@
+uuid: 0e96e12f-753d-479f-886a-9f174d80af09
+langcode: en
+status: true
+dependencies: {  }
+id: furniture_category
+label: 'Furniture category'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

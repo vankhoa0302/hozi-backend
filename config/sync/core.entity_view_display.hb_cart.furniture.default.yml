@@ -1,17 +1,17 @@
-uuid: 6663b3b2-fef5-4a5d-a44e-5784d7cbc70a
+uuid: df431aa5-eee3-40ce-a316-7b414e1de12c
 langcode: en
 status: true
 dependencies:
   config:
-    - field.field.hb_product.cart.field_p_c_furniture
-    - field.field.hb_product.cart.field_p_c_quantity
-    - hb_product.hb_product_type.cart
+    - field.field.hb_cart.furniture.field_c_f_furniture
+    - field.field.hb_cart.furniture.field_c_f_quantity
+    - hb_product.hb_cart_type.furniture
   module:
     - text
     - user
-id: hb_product.cart.default
-targetEntityType: hb_product
-bundle: cart
+id: hb_cart.furniture.default
+targetEntityType: hb_cart
+bundle: furniture
 mode: default
 content:
   created:
@@ -31,15 +31,15 @@ content:
     third_party_settings: {  }
     weight: 10
     region: content
-  field_p_c_furniture:
+  field_c_f_furniture:
     type: entity_reference_label
     label: above
     settings:
       link: true
     third_party_settings: {  }
-    weight: 21
+    weight: 23
     region: content
-  field_p_c_quantity:
+  field_c_f_quantity:
     type: number_integer
     label: above
     settings:

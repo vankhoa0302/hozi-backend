@@ -4,11 +4,14 @@ status: true
 dependencies:
   config:
     - field.field.hb_product.furniture.field_f_p_quantity
+    - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
     - hb_product.hb_product_type.furniture
   module:
+    - entity_reference_revisions
     - file
     - text
     - user
@@ -43,6 +46,15 @@ content:
     third_party_settings: {  }
     weight: 24
     region: content
+  field_p_f_attributes:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 26
+    region: content
   field_p_f_discount:
     type: number_decimal
     label: above
@@ -53,6 +65,16 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 23
+    region: content
+  field_p_f_hot:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 25
     region: content
   field_p_f_media:
     type: file_default

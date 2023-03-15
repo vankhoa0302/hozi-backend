@@ -2,7 +2,7 @@ entity.hb_product.collection:
   title: 'Products'
   route_name: entity.hb_product.collection
   base_route: system.admin_content
-  weight: 10
+  weight: 4
 entity.hb_product_type.edit_form:
   title: 'Edit'
   route_name: entity.hb_product_type.edit_form
@@ -11,3 +11,28 @@ entity.hb_product_type.collection:
   title: 'List'
   route_name: entity.hb_product_type.collection
   base_route: entity.hb_product_type.collection
+entity.hb_cart.view:
+  title: 'View'
+  route_name: entity.hb_cart.canonical
+  base_route: entity.hb_cart.canonical
+entity.hb_cart.collection:
+  title: 'Carts'
+  route_name: entity.hb_cart.collection
+  base_route: system.admin_content
+  weight: 5
+entity.hb_cart.edit_form:
+  title: 'Edit'
+  route_name: entity.hb_cart.edit_form
+  base_route: entity.hb_cart.canonical
+entity.hb_cart.delete_form:
+  title: 'Delete'
+  route_name: entity.hb_cart.delete_form
+  base_route: entity.hb_cart.canonical
+entity.hb_cart_type.edit_form:
+  title: 'Edit'
+  route_name: entity.hb_cart_type.edit_form
+  base_route: entity.hb_cart_type.edit_form
+entity.hb_cart_type.collection:
+  title: 'List'
+  route_name: entity.hb_cart_type.collection
+  base_route: entity.hb_cart_type.collection

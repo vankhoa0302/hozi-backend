@@ -1,17 +1,18 @@
-uuid: bbac9b25-d6f9-43eb-8dc6-e67e1425c238
+uuid: 501db596-7009-47e6-aaed-3af42b5923c0
 langcode: en
 status: true
 dependencies:
   module:
+    - hb_paragraphs
     - serialization
     - simple_oauth
     - user
-id: user_registration
-plugin_id: user_registration
+id: hb_rest_paragraph_type_children
+plugin_id: hb_rest_paragraph_type_children
 granularity: resource
 configuration:
   methods:
-    - POST
+    - GET
   formats:
     - json
   authentication:

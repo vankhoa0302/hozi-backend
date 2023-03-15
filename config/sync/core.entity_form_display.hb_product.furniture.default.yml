@@ -4,12 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.hb_product.furniture.field_f_p_quantity
+    - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
     - hb_product.hb_product_type.furniture
   module:
     - file
+    - paragraphs
     - text
 id: hb_product.furniture.default
 targetEntityType: hb_product
@@ -31,12 +34,31 @@ content:
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_p_f_attributes:
+    type: entity_reference_paragraphs
+    weight: 12
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: button
+      form_display_mode: default
+      default_paragraph_type: furniture_category
+    third_party_settings: {  }
   field_p_f_discount:
     type: number
     weight: 4
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  field_p_f_hot:
+    type: boolean_checkbox
+    weight: 11
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   field_p_f_media:
     type: file_generic
@@ -66,6 +88,11 @@ content:
     region: content
     settings:
       include_locked: true
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
