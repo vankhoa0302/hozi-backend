@@ -43,7 +43,6 @@
 /web/.eslintignore
 /web/.eslintrc.json
 /web/.ht.router.php
-/web/.htaccess
 
 # Ignore vendor dependencies and scripts
 /vendor
