@@ -60,4 +60,3 @@
 
 # Ignore oauth key.
 /config/keys
-composer.lock
