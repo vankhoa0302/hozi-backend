@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - filter.format.restricted_html
+    - rest.resource.hb_rest_paragraph_type_children
     - rest.resource.hb_rest_user_register
   module:
     - comment
@@ -23,6 +24,7 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'access site-wide contact form'
+  - 'restful get hb_rest_paragraph_type_children'
   - 'restful post hb_rest_user_register'
   - 'search content'
   - 'use text format restricted_html'

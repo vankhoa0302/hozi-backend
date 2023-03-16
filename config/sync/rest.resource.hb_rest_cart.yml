@@ -1,0 +1,20 @@
+uuid: 40d5cd64-ad37-4c3a-b413-7ca856cdd9a1
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_cart
+plugin_id: hb_rest_cart
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

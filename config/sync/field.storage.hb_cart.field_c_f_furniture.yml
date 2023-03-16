@@ -1,16 +1,18 @@
-uuid: c91b1f4f-ec8d-4b78-b03d-170272ebc9fd
+uuid: fdec09ec-89b9-40bc-849d-5f925895523e
 langcode: en
 status: true
 dependencies:
   module:
+    - entity_reference_revisions
     - hb_product
+    - paragraphs
 id: hb_cart.field_c_f_furniture
 field_name: field_c_f_furniture
 entity_type: hb_cart
-type: entity_reference
+type: entity_reference_revisions
 settings:
-  target_type: hb_product
-module: core
+  target_type: paragraph
+module: entity_reference_revisions
 locked: false
 cardinality: -1
 translatable: true

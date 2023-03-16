@@ -1,0 +1,20 @@
+uuid: fa9c51b1-c803-4f7b-a682-e6459e615400
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_favorite
+plugin_id: hb_rest_favorite
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

@@ -23,3 +23,16 @@ hb_product.hb_cart_type.*:
       label: 'Label'
     uuid:
       type: string
+
+hb_product.hb_favorite_type.*:
+  type: config_entity
+  label: 'Favorite type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

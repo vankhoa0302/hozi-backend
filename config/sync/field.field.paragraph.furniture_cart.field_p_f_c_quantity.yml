@@ -1,0 +1,23 @@
+uuid: 0a000bd5-2545-4520-b2b3-07034f2fdca3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_f_c_quantity
+    - paragraphs.paragraphs_type.furniture_cart
+id: paragraph.furniture_cart.field_p_f_c_quantity
+field_name: field_p_f_c_quantity
+entity_type: paragraph
+bundle: furniture_cart
+label: Quantity
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

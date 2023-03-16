@@ -1,0 +1,67 @@
+uuid: 8a2bc818-eef6-4d4d-b67b-04a9ef8b2f95
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.hb_favorite.furniture.field_f_f_furniture
+    - hb_product.hb_favorite_type.furniture
+  module:
+    - text
+    - user
+id: hb_favorite.furniture.default
+targetEntityType: hb_favorite
+bundle: furniture
+mode: default
+content:
+  created:
+    type: timestamp
+    label: above
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    third_party_settings: {  }
+    weight: 20
+    region: content
+  description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_f_f_furniture:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 21
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: content
+  status:
+    type: boolean
+    label: above
+    settings:
+      format: enabled-disabled
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  uid:
+    type: author
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 15
+    region: content
+hidden:
+  langcode: true

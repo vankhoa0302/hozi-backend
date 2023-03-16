@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.hb_product.furniture.field_f_p_quantity
     - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_discount
     - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
+    - field.field.hb_product.furniture.field_p_f_quantity
     - hb_product.hb_product_type.furniture
   module:
     - entity_reference_revisions
@@ -36,15 +36,6 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 10
-    region: content
-  field_f_p_quantity:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 24
     region: content
   field_p_f_attributes:
     type: entity_reference_revisions_entity_view
@@ -94,6 +85,15 @@ content:
       prefix_suffix: true
     third_party_settings: {  }
     weight: 22
+    region: content
+  field_p_f_quantity:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 27
     region: content
   label:
     type: string

@@ -1,0 +1,33 @@
+uuid: 9e37d02e-d89a-49f0-b51b-b939b297dd3a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.furniture_cart.field_p_f_c_furniture
+    - field.field.paragraph.furniture_cart.field_p_f_c_quantity
+    - paragraphs.paragraphs_type.furniture_cart
+id: paragraph.furniture_cart.default
+targetEntityType: paragraph
+bundle: furniture_cart
+mode: default
+content:
+  field_p_f_c_furniture:
+    type: entity_reference_autocomplete
+    weight: 0
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_f_c_quantity:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

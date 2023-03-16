@@ -1,0 +1,23 @@
+uuid: a2fc6478-723c-4078-a196-d216dd10af92
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_quantity
+    - hb_product.hb_product_type.furniture
+id: hb_product.furniture.field_p_f_quantity
+field_name: field_p_f_quantity
+entity_type: hb_product
+bundle: furniture
+label: Quantity
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

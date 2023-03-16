@@ -7,3 +7,7 @@ administer hb_cart types:
   title: 'Administer cart types'
   description: 'Maintain the types of hb_cart entity.'
   restrict access: true
+administer favorite types:
+  title: 'Administer favorite types'
+  description: 'Maintain the types of favorite entity.'
+  restrict access: true

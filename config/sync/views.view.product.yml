@@ -3,15 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.hb_product.field_f_p_quantity
     - field.storage.hb_product.field_p_f_discount
     - field.storage.hb_product.field_p_f_hot
     - field.storage.hb_product.field_p_f_media
     - field.storage.hb_product.field_p_f_price
+    - field.storage.hb_product.field_p_f_quantity
     - field.storage.paragraph.field_p_f_c_type
     - hb_product.hb_product_type.furniture
   module:
     - file
+    - hb_cms
     - hb_product
     - options
     - paragraphs
@@ -89,6 +90,70 @@ display:
           settings:
             thousand_separator: ''
             prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        field_p_f_quantity:
+          id: field_p_f_quantity
+          table: hb_product__field_p_f_quantity
+          field: field_p_f_quantity
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -345,70 +410,6 @@ display:
             decimal_separator: .
             scale: 0
             prefix_suffix: false
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        field_f_p_quantity:
-          id: field_f_p_quantity
-          table: hb_product__field_f_p_quantity
-          field: field_f_p_quantity
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: field
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -894,11 +895,11 @@ display:
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
       tags:
-        - 'config:field.storage.hb_product.field_f_p_quantity'
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'
         - 'config:field.storage.hb_product.field_p_f_media'
         - 'config:field.storage.hb_product.field_p_f_price'
+        - 'config:field.storage.hb_product.field_p_f_quantity'
         - 'config:field.storage.paragraph.field_p_f_c_type'
   rest_export_product:
     id: rest_export_product
@@ -960,36 +961,41 @@ display:
         operator: AND
         groups:
           1: AND
+      style:
+        type: hb_serializer_with_pager
+        options:
+          formats:
+            json: json
       row:
         type: data_field
         options:
           field_options:
             id:
-              alias: ''
+              alias: product_id
+              raw_output: false
+            field_p_f_quantity:
+              alias: product_quantity
               raw_output: false
             label:
-              alias: ''
+              alias: product_label
               raw_output: false
             field_p_f_media:
-              alias: ''
+              alias: product_media
               raw_output: false
             description__value:
-              alias: ''
+              alias: product_description
               raw_output: false
             field_p_f_discount:
-              alias: ''
-              raw_output: false
-            field_f_p_quantity:
-              alias: ''
+              alias: product_discount
               raw_output: false
             field_p_f_price:
-              alias: ''
+              alias: product_price
               raw_output: false
             field_p_f_hot:
-              alias: ''
+              alias: product_hot
               raw_output: false
             field_p_f_c_type:
-              alias: ''
+              alias: product_type
               raw_output: false
       defaults:
         sorts: false
@@ -1007,11 +1013,11 @@ display:
         - request_format
         - url
       tags:
-        - 'config:field.storage.hb_product.field_f_p_quantity'
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'
         - 'config:field.storage.hb_product.field_p_f_media'
         - 'config:field.storage.hb_product.field_p_f_price'
+        - 'config:field.storage.hb_product.field_p_f_quantity'
         - 'config:field.storage.paragraph.field_p_f_c_type'
   rest_export_products:
     id: rest_export_products
@@ -1041,7 +1047,7 @@ display:
             offset_label: Offset
           quantity: 9
       style:
-        type: serializer_with_pager
+        type: hb_serializer_with_pager
         options:
           formats:
             json: json
@@ -1049,8 +1055,32 @@ display:
         type: data_field
         options:
           field_options:
+            id:
+              alias: product_id
+              raw_output: false
+            field_p_f_quantity:
+              alias: product_quantity
+              raw_output: false
             label:
-              alias: ''
+              alias: product_label
+              raw_output: false
+            field_p_f_media:
+              alias: product_media
+              raw_output: false
+            description__value:
+              alias: product_description
+              raw_output: false
+            field_p_f_discount:
+              alias: product_discount
+              raw_output: false
+            field_p_f_price:
+              alias: product_price
+              raw_output: false
+            field_p_f_hot:
+              alias: product_hot
+              raw_output: false
+            field_p_f_c_type:
+              alias: product_type
               raw_output: false
       display_description: ''
       display_extenders: {  }
@@ -1066,9 +1096,9 @@ display:
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
       tags:
-        - 'config:field.storage.hb_product.field_f_p_quantity'
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'
         - 'config:field.storage.hb_product.field_p_f_media'
         - 'config:field.storage.hb_product.field_p_f_price'
+        - 'config:field.storage.hb_product.field_p_f_quantity'
         - 'config:field.storage.paragraph.field_p_f_c_type'

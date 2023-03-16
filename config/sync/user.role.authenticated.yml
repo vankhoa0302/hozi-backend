@@ -4,11 +4,14 @@ status: true
 dependencies:
   config:
     - filter.format.basic_html
+    - rest.resource.hb_rest_cart
+    - rest.resource.hb_rest_favorite
   module:
     - comment
     - contact
     - filter
     - media
+    - rest
     - search
     - shortcut
     - system
@@ -23,8 +26,12 @@ permissions:
   - 'access content'
   - 'access shortcuts'
   - 'access site-wide contact form'
+  - 'access user profiles'
   - 'post comments'
+  - 'restful patch hb_rest_cart'
+  - 'restful post hb_rest_favorite'
   - 'search content'
   - 'skip comment approval'
   - 'use text format basic_html'
   - 'view media'
+  - 'view user email addresses'

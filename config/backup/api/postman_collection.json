@@ -7,10 +7,10 @@
 	},
 	"item": [
 		{
-			"name": "Simple Oauth",
+			"name": "Account",
 			"item": [
 				{
-					"name": "Sign in Request",
+					"name": "Login with user name and password",
 					"event": [
 						{
 							"listen": "test",
@@ -74,7 +74,7 @@
 					"response": []
 				},
 				{
-					"name": "Refresh Token",
+					"name": "Login with refresh token",
 					"event": [
 						{
 							"listen": "test",
@@ -161,12 +161,13 @@
 							"raw": "{\r\n    \"mail\": \"test_ttv@mailinator.com\",\r\n    \"name\": \"member1\",\r\n    \"pass\": \"123123\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}api/user-register",
+							"raw": "{{url}}api/user/register",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"user-register"
+								"user",
+								"register"
 							]
 						}
 					},
@@ -196,6 +197,34 @@
 							"path": [
 								"session",
 								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/user",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"user"
 							]
 						}
 					},
@@ -252,18 +281,262 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/product?page=2",
+							"raw": "{{url}}/api/products?page=0&sort_by=discount&sort_order=ASC&type=table&label=Aptent Huic Magn",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
-								"product"
+								"products"
 							],
 							"query": [
 								{
 									"key": "page",
-									"value": "2"
+									"value": "0"
+								},
+								{
+									"key": "hot",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "discount",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "sort_by",
+									"value": "discount"
+								},
+								{
+									"key": "sort_order",
+									"value": "ASC"
+								},
+								{
+									"key": "type",
+									"value": "table"
+								},
+								{
+									"key": "label",
+									"value": "Aptent Huic Magn"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}api/product/1220?_format=json",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"product",
+								"1220"
+							],
+							"query": [
+								{
+									"key": "_format",
+									"value": "json"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product Type",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/paragraph/furniture_category",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"paragraph",
+								"furniture_category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/cart",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cart"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to Cart",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": 1223,\r\n    \"product_quantity\": 50\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}api/cart",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"cart"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "_format",
+									"value": "json",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to favorite",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_id\": 1223\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}api/favorite",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "_format",
+									"value": "json",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Favorite Products",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/favorite",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"favorite"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "hot",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "discount",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "table",
+									"disabled": true
+								},
+								{
+									"key": "label",
+									"value": "Magna",
+									"disabled": true
 								}
 							]
 						}

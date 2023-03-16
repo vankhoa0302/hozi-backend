@@ -1,0 +1,10 @@
+uuid: 5d68fa7b-587c-439c-a158-4c14776ec1fd
+langcode: en
+status: true
+dependencies: {  }
+id: furniture_cart
+label: 'Furniture cart'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

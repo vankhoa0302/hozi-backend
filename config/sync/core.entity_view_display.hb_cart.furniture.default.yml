@@ -4,9 +4,9 @@ status: true
 dependencies:
   config:
     - field.field.hb_cart.furniture.field_c_f_furniture
-    - field.field.hb_cart.furniture.field_c_f_quantity
     - hb_product.hb_cart_type.furniture
   module:
+    - entity_reference_revisions
     - text
     - user
 id: hb_cart.furniture.default
@@ -32,21 +32,13 @@ content:
     weight: 10
     region: content
   field_c_f_furniture:
-    type: entity_reference_label
+    type: entity_reference_revisions_entity_view
     label: above
     settings:
-      link: true
+      view_mode: default
+      link: ''
     third_party_settings: {  }
-    weight: 23
-    region: content
-  field_c_f_quantity:
-    type: number_integer
-    label: above
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 22
+    weight: 21
     region: content
   label:
     type: string

@@ -3,12 +3,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.hb_product.furniture.field_f_p_quantity
     - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_discount
     - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
+    - field.field.hb_product.furniture.field_p_f_quantity
     - hb_product.hb_product_type.furniture
   module:
     - file
@@ -25,13 +25,6 @@ content:
     region: content
     settings:
       rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  field_f_p_quantity:
-    type: number
-    weight: 5
-    region: content
-    settings:
       placeholder: ''
     third_party_settings: {  }
   field_p_f_attributes:
@@ -70,6 +63,13 @@ content:
   field_p_f_price:
     type: number
     weight: 3
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_f_quantity:
+    type: number
+    weight: 13
     region: content
     settings:
       placeholder: ''

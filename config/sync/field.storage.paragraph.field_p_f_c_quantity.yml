@@ -1,0 +1,20 @@
+uuid: 028f95f5-14ce-40be-92af-7e2bfd1d4fec
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.field_p_f_c_quantity
+field_name: field_p_f_c_quantity
+entity_type: paragraph
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
