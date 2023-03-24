@@ -6,6 +6,8 @@ dependencies:
     - filter.format.basic_html
     - rest.resource.hb_rest_cart
     - rest.resource.hb_rest_favorite
+    - rest.resource.hb_rest_paragraph_type_children
+    - rest.resource.hb_rest_translation
   module:
     - comment
     - contact
@@ -28,7 +30,9 @@ permissions:
   - 'access site-wide contact form'
   - 'access user profiles'
   - 'post comments'
+  - 'restful get hb_rest_paragraph_type_children'
   - 'restful patch hb_rest_cart'
+  - 'restful patch hb_rest_translation'
   - 'restful post hb_rest_favorite'
   - 'search content'
   - 'skip comment approval'

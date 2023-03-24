@@ -233,37 +233,35 @@
 			]
 		},
 		{
-			"name": "Translation not done yet",
+			"name": "Translation",
 			"item": [
 				{
 					"name": "Translation",
 					"request": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							},
 							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    \"Forms\",\r\n    \"Title\"\r\n]   "
+						},
 						"url": {
-							"raw": "{{url}}api/ttv-translation/extra-menu?language=vi",
+							"raw": "{{url}}api/translate?lang=en",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"ttv-translation",
-								"extra-menu"
+								"translate"
 							],
 							"query": [
 								{
-									"key": "language",
-									"value": "vi"
+									"key": "lang",
+									"value": "en"
 								}
 							]
 						}

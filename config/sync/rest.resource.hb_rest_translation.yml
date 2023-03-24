@@ -1,0 +1,20 @@
+uuid: 1284db05-4af9-407a-a359-53cd35bdd134
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_cms
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_translation
+plugin_id: hb_rest_translation
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

@@ -350,7 +350,7 @@ display:
         options:
           offset: 0
       style:
-        type: hb_serializer_with_pager
+        type: serializer_with_pager
         options:
           uses_fields: false
           formats:
