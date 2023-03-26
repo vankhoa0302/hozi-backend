@@ -24,6 +24,7 @@
     "drupal/devel": "^5.1",
     "drupal/devel_entity_updates": "^4.1@RC",
     "drupal/paragraphs": "^1.15",
+    "drupal/phpmailer_smtp": "^2.2",
     "drupal/restui": "^1.21",
     "drupal/simple_oauth": "^5.2",
     "drupal/twig_tweak": "^3.2",
