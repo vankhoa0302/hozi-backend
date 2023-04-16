@@ -1,0 +1,20 @@
+uuid: 1a038cad-bbb8-46b2-81cb-d8f75421b432
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_account
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_user_logout
+plugin_id: hb_rest_user_logout
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

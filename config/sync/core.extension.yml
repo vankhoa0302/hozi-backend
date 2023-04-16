@@ -37,6 +37,7 @@ module:
   hb_paragraphs: 0
   hb_product: 0
   hb_rest: 0
+  hb_simple_oauth: 0
   help: 0
   history: 0
   image: 0

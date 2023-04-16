@@ -1,0 +1,5 @@
+services:
+  hb_cms.route_subscriber:
+    class: Drupal\hb_cms\Routing\HbCMSRouteSubscriber
+    tags:
+      - { name: event_subscriber }

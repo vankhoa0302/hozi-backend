@@ -1,0 +1,5 @@
+services:
+  hb_simple_oauth.route_subscriber:
+    class: Drupal\hb_simple_oauth\Routing\HbSimpleOauthRouteSubscriber
+    tags:
+      - { name: event_subscriber }
