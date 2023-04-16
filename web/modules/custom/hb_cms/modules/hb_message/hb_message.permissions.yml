@@ -1,0 +1,4 @@
+administer message types:
+  title: 'Administer message types'
+  description: 'Maintain the types of message entity.'
+  restrict access: true

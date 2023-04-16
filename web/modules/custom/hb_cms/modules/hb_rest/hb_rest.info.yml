@@ -1,0 +1,7 @@
+name: hb_rest
+type: module
+description: Provides additional functionality for core module rest.
+package: hb_cms
+core_version_requirement: ^9 || ^10
+dependencies:
+  - hb_cms

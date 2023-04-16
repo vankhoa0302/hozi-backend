@@ -1,0 +1,52 @@
+uuid: 7c838fd1-e05d-4652-831e-55ee87431967
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.hb_message.email_template.field_m_e_body
+    - field.field.hb_message.email_template.field_m_e_subject
+    - hb_message.hb_message_type.email_template
+  module:
+    - text
+id: hb_message.email_template.default
+targetEntityType: hb_message
+bundle: email_template
+mode: default
+content:
+  field_m_e_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_m_e_subject:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  label:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  status:
+    type: boolean
+    label: above
+    settings:
+      format: enabled-disabled
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+hidden:
+  created: true
+  description: true
+  langcode: true
+  uid: true

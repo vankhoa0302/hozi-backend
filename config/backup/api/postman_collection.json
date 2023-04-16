@@ -10,6 +10,139 @@
 			"name": "Account",
 			"item": [
 				{
+					"name": "Forgot password process",
+					"item": [
+						{
+							"name": "Fill email or Click Resend",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"hash\", jsonData.results);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mail\": \"test_ttv@mailinator.com\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/user/forgot-password",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify OTP",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.environment.set(\"hash\", jsonData.results);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mail\": \"test_ttv@mailinator.com\",\r\n    \"otp\": 939466,\r\n    \"hash\": \"{{hash}}\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/user/forgot-password",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Change Password",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"mail\": \"test_ttv@mailinator.com\",\r\n    \"pass\": \"12345678\",\r\n    \"hash\": \"{{hash}}\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/user/forgot-password",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"user",
+										"forgot-password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Login with user name and password",
 					"event": [
 						{
@@ -137,8 +270,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = JSON.parse(responseBody);",
-									"pm.environment.set(\"access_token\", jsonData.access_token);"
+									""
 								],
 								"type": "text/javascript"
 							}

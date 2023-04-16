@@ -1,9 +1,9 @@
-uuid: 1284db05-4af9-407a-a359-53cd35bdd134
+uuid: 63c72061-99a9-4854-a77c-76bc020edd59
 langcode: en
 status: true
 dependencies:
   module:
-    - hb_cms
+    - hb_locale
     - serialization
     - simple_oauth
     - user

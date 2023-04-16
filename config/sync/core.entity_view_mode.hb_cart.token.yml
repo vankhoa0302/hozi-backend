@@ -1,0 +1,10 @@
+uuid: c5213f74-c6aa-4733-b376-e1c6ecaff27d
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_cart.token
+label: Token
+targetEntityType: hb_cart
+cache: true

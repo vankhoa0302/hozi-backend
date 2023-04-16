@@ -1,0 +1,10 @@
+uuid: 82b9e435-501f-454e-800c-b3c04fd3cdf5
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_favorite.token
+label: Token
+targetEntityType: hb_favorite
+cache: true

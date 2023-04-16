@@ -1,0 +1,6 @@
+entity.hb_message_type.collection:
+  title: 'Message types'
+  description: 'Manage and CRUD actions on Message type.'
+  parent: system.admin_structure
+  route_name: entity.hb_message_type.collection
+  weight: 13

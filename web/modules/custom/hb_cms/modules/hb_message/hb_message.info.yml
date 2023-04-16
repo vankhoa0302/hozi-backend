@@ -1,0 +1,7 @@
+name: hb_message
+type: module
+description: Provides additional functionality for the site.
+package: hb_cms
+core_version_requirement: ^9 || ^10
+dependencies:
+  - hb_cms

@@ -1,0 +1,11 @@
+hb_message.type_add:
+  title: 'Add message type'
+  route_name: entity.hb_message_type.add_form
+  appears_on:
+    - entity.hb_message_type.collection
+
+hb_message.add_page:
+  title: 'Add message'
+  route_name: entity.hb_message.add_page
+  appears_on:
+    - entity.hb_message.collection

@@ -1,0 +1,6 @@
+uuid: cf2576b9-3ca2-4c1b-a70e-1e91757be0c5
+langcode: en
+status: true
+dependencies: {  }
+id: email_template
+label: 'Email Template'

@@ -1,0 +1,21 @@
+uuid: acbcf5a8-28c0-4339-aa78-438cfe9905ec
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_message.field_m_e_subject
+    - hb_message.hb_message_type.email_template
+id: hb_message.email_template.field_m_e_subject
+field_name: field_m_e_subject
+entity_type: hb_message
+bundle: email_template
+label: Subject
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'Resetting your password for :[site:url]'
+default_value_callback: ''
+settings: {  }
+field_type: string_long

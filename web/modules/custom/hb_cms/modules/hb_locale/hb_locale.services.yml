@@ -1,0 +1,5 @@
+services:
+  hb_locale.route_subscriber:
+    class: Drupal\hb_locale\Routing\HbRouteSubscriber
+    tags:
+      - { name: event_subscriber }

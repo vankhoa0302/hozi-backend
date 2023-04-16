@@ -18,7 +18,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *   id = "hb_rest_user_register",
  *   label = @Translation("User Register"),
  *   uri_paths = {
- *     "canonical" = "/api/user/register/{id}",
  *     "create" = "/api/user/register"
  *   }
  * )
@@ -52,7 +51,7 @@ class HbRestUserRegisterResource extends ResourceBase {
 					'mail' => $data['mail'],
 				]);
 			if ($exist_user) {
-				return new JsonResponse(['message' => 'User exist!'], 406);
+				return new JsonResponse(['message' => 'User\'s exist!'], 406);
 			}
 			User::create([
 				'mail'   => $data['mail'],

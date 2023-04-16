@@ -1,0 +1,7 @@
+name: hb_locale
+type: module
+description: Provides additional functionality for contrib module locale.
+package: hb_cms
+core_version_requirement: ^9 || ^10
+dependencies:
+  - hb_cms

@@ -32,8 +32,11 @@ module:
   hb_cms: 0
   hb_devel: 0
   hb_guard: 0
+  hb_locale: 0
+  hb_message: 0
   hb_paragraphs: 0
   hb_product: 0
+  hb_rest: 0
   help: 0
   history: 0
   image: 0
@@ -60,9 +63,11 @@ module:
   system: 0
   taxonomy: 0
   text: 0
+  token: 0
   toolbar: 0
   tour: 0
   twig_tweak: 0
+  update: 0
   user: 0
   views_ui: 0
   content_translation: 10

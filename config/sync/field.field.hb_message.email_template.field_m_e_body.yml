@@ -1,0 +1,24 @@
+uuid: 8ee56b4d-91de-46da-9043-0875d97057c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_message.field_m_e_body
+    - hb_message.hb_message_type.email_template
+  module:
+    - text
+id: hb_message.email_template.field_m_e_body
+field_name: field_m_e_body
+entity_type: hb_message
+bundle: email_template
+label: Body
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<div style="font-family:Helvetica,Arial,sans-serif;line-height:2;min-width:1000px;overflow:auto;"><div style="margin:50px auto;padding:20px 0;width:70%;"><div style="border-bottom:1px solid #eee;"><a style="color:#00466a;font-size:1.4em;text-decoration:none;" href=""><strong>Forgot Password Verify</strong></a></div><p style="font-size:1.1em;">Hi :[mail],</p><p>Thank you for choosing :[site:name]. Use the following OTP to complete your Forgot Password procedures. OTP is valid for 5 minutes</p><h2 style="background:#00466a;border-radius:4px;color:#fff;margin:0 auto;padding:0 10px;width:max-content;">:[otp]</h2><p style="font-size:0.9em;">Regards,&nbsp;&nbsp;<br>:[site:name]</p><hr><div style="color:#aaa;float:right;font-size:0.8em;font-weight:300;line-height:1;padding:8px 0;"><p>:[site:mail]</p></div></div></div>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text_long

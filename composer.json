@@ -27,6 +27,7 @@
     "drupal/phpmailer_smtp": "^2.2",
     "drupal/restui": "^1.21",
     "drupal/simple_oauth": "^5.2",
+    "drupal/token": "^1.11",
     "drupal/twig_tweak": "^3.2",
     "drush/drush": "^11.4"
   },

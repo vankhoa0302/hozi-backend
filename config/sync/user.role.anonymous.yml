@@ -6,6 +6,7 @@ dependencies:
     - filter.format.restricted_html
     - rest.resource.hb_rest_paragraph_type_children
     - rest.resource.hb_rest_translation
+    - rest.resource.hb_rest_user_forgot_password
     - rest.resource.hb_rest_user_register
   module:
     - comment
@@ -27,6 +28,7 @@ permissions:
   - 'access site-wide contact form'
   - 'restful get hb_rest_paragraph_type_children'
   - 'restful patch hb_rest_translation'
+  - 'restful post hb_rest_user_forgot_password'
   - 'restful post hb_rest_user_register'
   - 'search content'
   - 'use text format restricted_html'

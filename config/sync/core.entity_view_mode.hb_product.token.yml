@@ -1,0 +1,10 @@
+uuid: f2234927-9754-406b-8791-03a7a2fa31c3
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_product.token
+label: Token
+targetEntityType: hb_product
+cache: true

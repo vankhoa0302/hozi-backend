@@ -1,0 +1,3 @@
+services:
+    hb_message.send:
+        class: Drupal\hb_message\Services\HbSendEmailService
