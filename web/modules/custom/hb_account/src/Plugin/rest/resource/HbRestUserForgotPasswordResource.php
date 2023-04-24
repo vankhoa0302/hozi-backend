@@ -2,6 +2,7 @@
 
 namespace Drupal\hb_account\Plugin\rest\resource;
 
+use Drupal\hb_account\HbOTP;
 use Drupal\rest\Plugin\ResourceBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -67,9 +68,10 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
       }
     } catch (\Exception $e) {
       $this->logger->error($e);
-      return new JsonResponse([], 500);
+      return new JsonResponse(['message' => $e->getMessage()], 500);
     }
 
+    $otp = new HbOTP();
     $tempstore = \Drupal::service('tempstore.private');
     $store = $tempstore->get('hb_account');
     $exist_otp = $store->get('forgot_password.otp.' . $data['mail']);
@@ -90,7 +92,7 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
       }
 
       // If OTP is not expired then update hash
-      if ($this->isExpiredOTP($otp_values, self::OTP_EXPIRED_TIME)) {
+      if (!$otp->isExpired($otp_values->created, self::OTP_EXPIRED_TIME)) {
         $hash = \Drupal::service('hb_guard.data_guard')->generateHash();
         $store->set(
           'forgot_password.otp.' . $data['mail'],
@@ -149,7 +151,7 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
 
     // If there is not exist OTP then create new hash and otp
     if (!$exist_otp) {
-      $otp = $this->generateOTP();
+      $otp = rand(100000, 999999);
       $hash = \Drupal::service('hb_guard.data_guard')->generateHash();
       $store->set(
         'forgot_password.otp.' . $data['mail'],
@@ -166,7 +168,7 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
       $otp_values = json_decode($exist_otp);
 
       // If OTP is not expired then update hash
-      if (!$this->isExpiredOTP($otp_values, self::OTP_RESEND_TIME)) {
+      if (!$otp->isExpired($otp_values->created, self::OTP_RESEND_TIME)) {
         $hash = \Drupal::service('hb_guard.data_guard')->generateHash();
         $store->set(
           'forgot_password.otp.' . $data['mail'],
@@ -184,7 +186,7 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
       }
 
       // OTP is expired then create new OTP and new hash
-      $otp = $this->generateOTP();
+      $otp = rand(100000, 999999);
       $hash = \Drupal::service('hb_guard.data_guard')->generateHash();
       $store->set(
         'forgot_password.otp.' . $data['mail'],
@@ -234,31 +236,5 @@ class HbRestUserForgotPasswordResource extends ResourceBase {
       'results' => $hash,
     ], 200);
   }
-
-  protected function isExpiredOTP(object $otp_values, int $time) {
-    if (strtotime(
-        date(
-          'Y-m-d H:i:s',
-          strtotime(
-            date(
-              'Y-m-d H:i:s',
-              $otp_values->created,
-            ) . '+' . $time . ' minutes',
-          ),
-        ),
-      ) < \Drupal::time()->getRequestTime()
-    ) {
-      return TRUE;
-    }
-    return FALSE;
-  }
-
-  /**
-   * @return int
-   */
-  private function generateOTP(): int {
-    return rand(100000, 999999);
-  }
-
 
 }
