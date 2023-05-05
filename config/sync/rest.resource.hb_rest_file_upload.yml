@@ -1,0 +1,20 @@
+uuid: 8bb97f2b-bd02-406f-94d5-8942039fe0fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_rest
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_file_upload
+plugin_id: hb_rest_file_upload
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

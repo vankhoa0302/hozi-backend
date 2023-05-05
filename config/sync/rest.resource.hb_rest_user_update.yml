@@ -1,0 +1,20 @@
+uuid: 8efee8bd-95c7-42b7-9ba1-c6ba3394e211
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_account
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_user_update
+plugin_id: hb_rest_user_update
+granularity: resource
+configuration:
+  methods:
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

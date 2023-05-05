@@ -195,11 +195,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}oauth/token",
+							"raw": "{{url}}api/oauth/token",
 							"host": [
-								"{{url}}oauth"
+								"{{url}}api"
 							],
 							"path": [
+								"oauth",
 								"token"
 							]
 						}
@@ -252,11 +253,12 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}oauth/token",
+							"raw": "{{url}}api/oauth/token",
 							"host": [
-								"{{url}}oauth"
+								"{{url}}api"
 							],
 							"path": [
+								"oauth",
 								"token"
 							]
 						}
@@ -322,9 +324,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/session/token",
+							"raw": "{{url}}api/session/token",
 							"host": [
-								"{{url}}"
+								"{{url}}api"
 							],
 							"path": [
 								"session",
@@ -350,6 +352,67 @@
 								"type": "text"
 							}
 						],
+						"url": {
+							"raw": "{{url}}api/user",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/user/logout",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Update",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"picture\": \"4565\",\r\n    \"address\": [\r\n        \"address 1\",\r\n        \"address 2\"\r\n    ],\r\n    \"old_pass\": \"1234567\",\r\n    \"new_pass\": \"123456\"\r\n}"
+						},
 						"url": {
 							"raw": "{{url}}api/user",
 							"host": [
@@ -674,6 +737,45 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Upload file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/octet-stream",
+						"type": "text"
+					},
+					{
+						"key": "Content-Disposition",
+						"value": "file;filename=\"benefit2.png\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "file",
+					"file": {
+						"src": "/C:/Users/Archer/Pictures/9acb9298-47e0-41c6-90cb-5a7b17e13eac/53e0d74b4250ad14f1dc8460962e33791c3ad6e04e50744172277fd09549cd_640.jpg"
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/upload-file",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"upload-file"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
