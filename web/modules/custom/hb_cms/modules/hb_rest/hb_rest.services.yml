@@ -1,0 +1,5 @@
+services:
+  serializer.normalizer.entity_reference_field_item_list:
+    class: Drupal\hb_rest\Normalizer\HbEntityReferenceFieldItemListNormalizer
+    tags:
+      - { name: normalizer, priority: 10 }

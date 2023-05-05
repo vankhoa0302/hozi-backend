@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.user.compact
+    - field.field.user.user.field_user_address
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
@@ -28,5 +29,6 @@ content:
     weight: 0
     region: content
 hidden:
+  field_user_address: true
   langcode: true
   member_for: true

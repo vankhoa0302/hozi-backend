@@ -16,8 +16,8 @@ class HbLocaleController extends LocaleController {
 	 */
 	public function translatePage() {
 		return [
-			'filter' => $this->formBuilder()->getForm('Drupal\hb_cms\Form\HbTranslateFilterForm'),
-			'form'   => $this->formBuilder()->getForm('Drupal\hb_cms\Form\HbTranslateEditForm'),
+			'filter' => $this->formBuilder()->getForm('Drupal\hb_locale\Form\HbTranslateFilterForm'),
+			'form'   => $this->formBuilder()->getForm('Drupal\hb_locale\Form\HbTranslateEditForm'),
 		];
 	}
 }

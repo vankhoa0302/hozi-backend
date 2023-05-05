@@ -3,9 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.storage.user.field_user_address
     - field.storage.user.user_picture
   module:
-    - image
+    - hb_rest
+    - image_url_formatter
     - rest
     - serialization
     - user
@@ -199,15 +201,17 @@ display:
           element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: false
+          element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: target_id
-          type: image_url
+          type: image_url_formatter
           settings:
+            url_type: '0'
             image_style: ''
+            image_link: ''
           group_column: ''
           group_columns: {  }
           group_rows: true
@@ -217,6 +221,68 @@ display:
           delta_first_last: false
           multi_type: separator
           separator: ', '
+          field_api_classes: false
+        field_user_address:
+          id: field_user_address
+          table: user__field_user_address
+          field: field_user_address
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: basic_string
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: ol
+          separator: ' ,'
           field_api_classes: false
       pager:
         type: mini
@@ -338,6 +404,7 @@ display:
         - user
         - user.permissions
       tags:
+        - 'config:field.storage.user.field_user_address'
         - 'config:field.storage.user.user_picture'
   rest_export_user:
     id: rest_export_user
@@ -352,7 +419,6 @@ display:
       style:
         type: hb_serializer_with_pager
         options:
-          uses_fields: false
           formats:
             json: json
       row:
@@ -368,8 +434,14 @@ display:
             user_picture:
               alias: user_picture
               raw_output: false
+            field_user_address:
+              alias: user_address
+              raw_output: true
       display_extenders: {  }
       path: api/user
+      auth:
+        - oauth2
+        - cookie
     cache_metadata:
       max-age: -1
       contexts:
@@ -379,4 +451,5 @@ display:
         - user
         - user.permissions
       tags:
+        - 'config:field.storage.user.field_user_address'
         - 'config:field.storage.user.user_picture'

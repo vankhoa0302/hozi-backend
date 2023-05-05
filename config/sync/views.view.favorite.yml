@@ -11,8 +11,8 @@ dependencies:
     - field.storage.paragraph.field_p_f_c_type
   module:
     - file
-    - hb_cms
     - hb_product
+    - hb_rest
     - options
     - paragraphs
     - rest
@@ -754,12 +754,36 @@ display:
           formats:
             json: json
       row:
-        type: data_field
+        type: hb_data_field
         options:
           field_options:
+            id:
+              alias: product_id
+              raw_output: 0
+            field_p_f_quantity:
+              alias: product_quantity
+              raw_output: 0
             label:
-              alias: ''
-              raw_output: false
+              alias: product_label
+              raw_output: 0
+            field_p_f_media:
+              alias: product_media
+              raw_output: '1'
+            description__value:
+              alias: product_description
+              raw_output: 0
+            field_p_f_discount:
+              alias: product_discount
+              raw_output: 0
+            field_p_f_price:
+              alias: product_price
+              raw_output: 0
+            field_p_f_hot:
+              alias: product_hot
+              raw_output: 0
+            field_p_f_c_type:
+              alias: product_type
+              raw_output: 0
       display_description: ''
       display_extenders: {  }
       path: api/favorite
