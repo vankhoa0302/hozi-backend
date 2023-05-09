@@ -22,8 +22,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class HbRestUserUpdateResource extends ResourceBase {
 
-  const FIELD_ADDRESS = 'field_user_address';
-  const FIELD_PICTURE = 'user_picture';
+  private const FIELD_ADDRESS = 'field_user_address';
+  private const FIELD_PICTURE = 'user_picture';
 
   /**
    * Responds to PATCH requests and saves the new record.

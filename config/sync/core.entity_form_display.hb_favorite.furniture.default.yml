@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.hb_favorite.furniture.field_f_f_furniture
-    - hb_product.hb_favorite_type.furniture
+    - hb_favorite.hb_favorite_type.furniture
   module:
     - text
 id: hb_favorite.furniture.default

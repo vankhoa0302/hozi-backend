@@ -15,6 +15,7 @@ module:
   config_translation: 0
   consumers: 0
   contact: 0
+  content_moderation: 0
   contextual: 0
   datetime: 0
   dblog: 0
@@ -28,13 +29,17 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  form_options_attributes: 0
   hb_account: 0
+  hb_cart: 0
   hb_cms: 0
   hb_devel: 0
+  hb_favorite: 0
   hb_guard: 0
   hb_locale: 0
   hb_message: 0
   hb_paragraphs: 0
+  hb_payment: 0
   hb_product: 0
   hb_rest: 0
   hb_simple_oauth: 0
@@ -72,6 +77,8 @@ module:
   update: 0
   user: 0
   views_ui: 0
+  workflow: 0
+  workflows: 0
   content_translation: 10
   views: 10
   paragraphs: 11

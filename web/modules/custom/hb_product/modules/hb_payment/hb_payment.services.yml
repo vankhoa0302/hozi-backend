@@ -1,0 +1,5 @@
+services:
+  hb_payment.validate:
+    class: Drupal\hb_payment\Services\HbPaymentValidate
+  hb_payment.update_info:
+    class: Drupal\hb_payment\Services\HbPaymentUpdateInfo

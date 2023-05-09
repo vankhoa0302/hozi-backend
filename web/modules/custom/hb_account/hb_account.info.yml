@@ -1,4 +1,4 @@
-name: account
+name: hb_account
 type: module
 description: Provides additional functionality for the site.
 package: Custom

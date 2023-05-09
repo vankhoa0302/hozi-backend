@@ -1,0 +1,36 @@
+<?php
+
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_entity_operation_alter().
+ */
+function hb_product_entity_operation_alter(array &$operations, \Drupal\Core\Entity\EntityInterface $entity) {
+  switch ($entity->getEntityTypeId()) {
+    case 'hb_payment':
+      $operations['payment_info'] = [
+        'title' => t('Payment info'),
+        'weight' => 11,
+        'url' => Url::fromRoute('hb_product.payment', [
+          'cart_id' => $entity->get('cart')->entity->id(),
+          'destination' => Url::fromRoute('entity.hb_cart.collection')->toString()
+        ]),
+      ];
+      break;
+    case 'hb_cart':
+      $operations['payment_info'] = [
+        'title' => t('Payment info'),
+        'weight' => 11,
+        'url' => Url::fromRoute('hb_product.payment', [
+          'cart_id' => $entity->id(),
+          'destination' => Url::fromRoute('entity.hb_cart.collection')->toString()
+        ]),
+      ];
+
+      if ($entity->get('status')->getString()) {
+        $operations['payment_info']['title'] = t('Pay');
+      }
+      break;
+  }
+
+}

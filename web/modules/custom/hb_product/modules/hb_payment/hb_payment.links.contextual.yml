@@ -1,0 +1,9 @@
+entity.hb_payment.edit_form:
+  route_name: entity.hb_payment.edit_form
+  group: hb_payment
+  title: Edit
+
+entity.hb_payment.delete_form:
+  route_name: entity.hb_payment.delete_form
+  group: hb_payment
+  title: Delete

@@ -1,0 +1,6 @@
+uuid: 0bef50f7-dac2-45b1-a576-f67e764e0914
+langcode: en
+status: true
+dependencies: {  }
+id: furniture
+label: Furniture

@@ -1,0 +1,17 @@
+entity.hb_payment.view:
+  title: 'View'
+  route_name: entity.hb_payment.canonical
+  base_route: entity.hb_payment.canonical
+entity.hb_payment.edit_form:
+  title: 'Edit'
+  route_name: entity.hb_payment.edit_form
+  base_route: entity.hb_payment.canonical
+entity.hb_payment.delete_form:
+  title: 'Delete'
+  route_name: entity.hb_payment.delete_form
+  base_route: entity.hb_payment.canonical
+entity.hb_payment.collection:
+  title: 'Payments'
+  route_name: entity.hb_payment.collection
+  base_route: system.admin_content
+  weight: 7

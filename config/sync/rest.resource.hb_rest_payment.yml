@@ -1,0 +1,20 @@
+uuid: 4610db42-81c6-4545-817e-8da0ac9ea851
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_payment
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_payment
+plugin_id: hb_rest_payment
+granularity: resource
+configuration:
+  methods:
+    - POST
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

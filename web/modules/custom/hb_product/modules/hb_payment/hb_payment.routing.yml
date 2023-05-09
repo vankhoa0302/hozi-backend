@@ -1,0 +1,7 @@
+hb_product.payment:
+  path: '/cart/{cart_id}/pay'
+  defaults:
+    _title: 'Pay'
+    _form: '\Drupal\hb_payment\Form\HbPaymentProgressForm'
+  requirements:
+    _permission: 'access content'

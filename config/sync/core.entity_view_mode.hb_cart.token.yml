@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - hb_product
+    - hb_cart
 id: hb_cart.token
 label: Token
 targetEntityType: hb_cart

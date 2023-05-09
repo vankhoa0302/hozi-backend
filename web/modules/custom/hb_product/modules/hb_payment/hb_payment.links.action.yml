@@ -1,0 +1,5 @@
+#hb_payment.add_form:
+#  title: 'Add payment'
+#  route_name: entity.hb_payment.add_form
+#  appears_on:
+#    - entity.hb_payment.collection

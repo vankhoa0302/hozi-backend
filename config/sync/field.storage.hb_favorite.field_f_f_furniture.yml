@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - hb_product
+    - hb_favorite
 id: hb_favorite.field_f_f_furniture
 field_name: field_f_f_furniture
 entity_type: hb_favorite

@@ -4,7 +4,7 @@ status: true
 dependencies:
   module:
     - entity_reference_revisions
-    - hb_product
+    - hb_cart
     - paragraphs
 id: hb_cart.field_c_f_furniture
 field_name: field_c_f_furniture

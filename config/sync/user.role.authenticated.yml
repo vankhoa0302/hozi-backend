@@ -8,6 +8,7 @@ dependencies:
     - rest.resource.hb_rest_favorite
     - rest.resource.hb_rest_file_upload
     - rest.resource.hb_rest_paragraph_type_children
+    - rest.resource.hb_rest_payment
     - rest.resource.hb_rest_translation
     - rest.resource.hb_rest_user_logout
     - rest.resource.hb_rest_user_update
@@ -39,6 +40,7 @@ permissions:
   - 'restful patch hb_rest_user_update'
   - 'restful post hb_rest'
   - 'restful post hb_rest_favorite'
+  - 'restful post hb_rest_payment'
   - 'restful post hb_rest_user_logout'
   - 'search content'
   - 'skip comment approval'

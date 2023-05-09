@@ -21,15 +21,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
  */
 class HbRestUserForgotPasswordResource extends ResourceBase {
 
-  const FORGOT_PASSWORD_TEMPLATE = 'email_template';
+  private const FORGOT_PASSWORD_TEMPLATE = 'email_template';
 
-  const FIELD_BODY = 'field_m_e_body';
+  private const FIELD_BODY = 'field_m_e_body';
 
-  const FIELD_SUBJECT = 'field_m_e_subject';
+  private const FIELD_SUBJECT = 'field_m_e_subject';
 
-  const OTP_EXPIRED_TIME = 5;
+  private const OTP_EXPIRED_TIME = 5;
 
-  const OTP_RESEND_TIME = 1;
+  private const OTP_RESEND_TIME = 1;
 
   /**
    * Responds to POST requests and saves the new record.

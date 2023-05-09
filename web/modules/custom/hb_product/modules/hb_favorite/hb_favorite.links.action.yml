@@ -1,0 +1,11 @@
+hb_favorite.type_add:
+  title: 'Add favorite type'
+  route_name: entity.hb_favorite_type.add_form
+  appears_on:
+    - entity.hb_favorite_type.collection
+
+hb_favorite.add_page:
+  title: 'Add favorite'
+  route_name: entity.hb_favorite.add_page
+  appears_on:
+    - entity.hb_favorite.collection

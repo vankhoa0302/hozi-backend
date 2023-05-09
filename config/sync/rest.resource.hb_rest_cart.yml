@@ -3,7 +3,7 @@ langcode: en
 status: true
 dependencies:
   module:
-    - hb_product
+    - hb_cart
     - serialization
     - simple_oauth
     - user
