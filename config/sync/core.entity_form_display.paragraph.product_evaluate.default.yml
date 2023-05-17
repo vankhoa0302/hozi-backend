@@ -1,0 +1,30 @@
+uuid: 8ca7f082-8365-4f71-b89a-42c7046ab19b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.product_evaluate.field_p_p_e_evaluate
+    - field.field.paragraph.product_evaluate.field_p_p_e_people
+    - paragraphs.paragraphs_type.product_evaluate
+id: paragraph.product_evaluate.default
+targetEntityType: paragraph
+bundle: product_evaluate
+mode: default
+content:
+  field_p_p_e_evaluate:
+    type: number
+    weight: 1
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_p_e_people:
+    type: number
+    weight: 0
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

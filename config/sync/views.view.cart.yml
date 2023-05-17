@@ -10,8 +10,10 @@ dependencies:
     - field.storage.hb_product.field_p_f_quantity
     - field.storage.paragraph.field_p_f_c_quantity
     - field.storage.paragraph.field_p_f_c_type
+    - user.role.authenticated
   module:
     - file
+    - hb_cart
     - hb_product
     - hb_rest
     - options
@@ -774,8 +776,10 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       access:
-        type: none
-        options: {  }
+        type: role
+        options:
+          role:
+            authenticated: authenticated
       cache:
         type: tag
         options: {  }
@@ -889,6 +893,7 @@ display:
         - request_format
         - url.query_args
         - user
+        - user.roles
       tags:
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'
@@ -969,6 +974,9 @@ display:
       display_description: ''
       display_extenders: {  }
       path: api/cart
+      auth:
+        - oauth2
+        - cookie
     cache_metadata:
       max-age: -1
       contexts:
@@ -977,6 +985,7 @@ display:
         - request_format
         - url.query_args
         - user
+        - user.roles
       tags:
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'

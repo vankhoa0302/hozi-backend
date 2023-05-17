@@ -23,6 +23,7 @@
     "drupal/core-recommended": "^10.0",
     "drupal/devel": "^5.1",
     "drupal/devel_entity_updates": "^4.1@RC",
+    "drupal/flag": "^4.0@beta",
     "drupal/form_options_attributes": "^2.0",
     "drupal/image_url_formatter": "dev-1.x",
     "drupal/paragraphs": "^1.15",

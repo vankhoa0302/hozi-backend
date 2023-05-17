@@ -1,0 +1,20 @@
+uuid: 60de229e-26cc-4f09-b0cb-7764de5756fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - hb_product
+id: hb_product.field_p_f_comments
+field_name: field_p_f_comments
+entity_type: hb_product
+type: comment
+settings:
+  comment_type: comments_of_product
+module: comment
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -3,14 +3,18 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_display.comment.comments_of_product.default
     - field.field.hb_product.furniture.field_p_f_attributes
+    - field.field.hb_product.furniture.field_p_f_comments
     - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_evaluate
     - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
     - field.field.hb_product.furniture.field_p_f_quantity
     - hb_product.hb_product_type.furniture
   module:
+    - comment
     - entity_reference_revisions
     - file
     - text
@@ -28,14 +32,14 @@ content:
       custom_date_format: ''
       timezone: ''
     third_party_settings: {  }
-    weight: 20
+    weight: 4
     region: content
   description:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 10
+    weight: 2
     region: content
   field_p_f_attributes:
     type: entity_reference_revisions_entity_view
@@ -44,7 +48,16 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    weight: 26
+    weight: 9
+    region: content
+  field_p_f_comments:
+    type: comment_default
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    weight: 12
     region: content
   field_p_f_discount:
     type: number_decimal
@@ -55,7 +68,16 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 23
+    weight: 7
+    region: content
+  field_p_f_evaluate:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 13
     region: content
   field_p_f_hot:
     type: boolean
@@ -65,7 +87,7 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 25
+    weight: 8
     region: content
   field_p_f_media:
     type: file_default
@@ -73,7 +95,7 @@ content:
     settings:
       use_description_as_link_text: true
     third_party_settings: {  }
-    weight: 21
+    weight: 5
     region: content
   field_p_f_price:
     type: number_decimal
@@ -84,7 +106,7 @@ content:
       scale: 2
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 22
+    weight: 6
     region: content
   field_p_f_quantity:
     type: number_integer
@@ -93,7 +115,12 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 27
+    weight: 10
+    region: content
+  flag_favorite:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: content
   label:
     type: string
@@ -101,7 +128,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: -5
+    weight: 0
     region: content
   status:
     type: boolean
@@ -111,14 +138,14 @@ content:
       format_custom_false: ''
       format_custom_true: ''
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   uid:
     type: author
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 15
+    weight: 3
     region: content
 hidden:
   langcode: true

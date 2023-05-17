@@ -1,0 +1,16 @@
+uuid: 15ef4e7a-3e5e-4cb9-9e24-610b8d4a0bf9
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comments_of_product
+  module:
+    - content_translation
+third_party_settings:
+  content_translation:
+    enabled: true
+id: comment.comments_of_product
+target_entity_type_id: comment
+target_bundle: comments_of_product
+default_langcode: site_default
+language_alterable: true

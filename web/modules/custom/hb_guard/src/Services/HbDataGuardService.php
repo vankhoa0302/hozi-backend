@@ -8,6 +8,13 @@ namespace Drupal\hb_guard\Services;
  */
 class HbDataGuardService {
 
+  public function existEntity($type, $id) {
+    if (empty($type::load($id))) {
+      return FALSE;
+    }
+    return TRUE;
+  }
+
 	public function guardRequiredData(array $required_data, array $data) {
 		foreach ($required_data as $item) {
 			if (!isset($data[$item])) {

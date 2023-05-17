@@ -1,0 +1,23 @@
+uuid: 89fbfb9d-5be5-43d8-ae49-102ee3dbe768
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_p_e_people
+    - paragraphs.paragraphs_type.product_evaluate
+id: paragraph.product_evaluate.field_p_p_e_people
+field_name: field_p_p_e_people
+entity_type: paragraph
+bundle: product_evaluate
+label: People
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

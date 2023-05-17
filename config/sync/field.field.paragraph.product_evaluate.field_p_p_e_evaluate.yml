@@ -1,0 +1,23 @@
+uuid: f22f43ac-b01f-4983-b820-86bbcccf5dc6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_p_e_evaluate
+    - paragraphs.paragraphs_type.product_evaluate
+id: paragraph.product_evaluate.field_p_p_e_evaluate
+field_name: field_p_p_e_evaluate
+entity_type: paragraph
+bundle: product_evaluate
+label: Evaluate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

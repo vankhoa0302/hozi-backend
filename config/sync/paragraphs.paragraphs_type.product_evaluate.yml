@@ -1,0 +1,10 @@
+uuid: 6d2577d9-32fc-4482-8d41-c28360699ea6
+langcode: en
+status: true
+dependencies: {  }
+id: product_evaluate
+label: 'Product Evaluate'
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins: {  }

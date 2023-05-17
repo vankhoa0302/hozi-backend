@@ -469,12 +469,248 @@
 			"name": "Product",
 			"item": [
 				{
+					"name": "Favorite",
+					"item": [
+						{
+							"name": "Get Favorite Products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}api/favorite",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"favorite"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "hot",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "discount",
+											"value": "0",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "table",
+											"disabled": true
+										},
+										{
+											"key": "label",
+											"value": "Magna",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add to favorite",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product_id\": 1223\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/favorite",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"favorite"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1",
+											"disabled": true
+										},
+										{
+											"key": "_format",
+											"value": "json",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "Comment",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": \"test comment\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/product/1940/comment",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"product",
+										"1940",
+										"comment"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update comment",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": \"test comment2\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/product/1940/comment/51",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"product",
+										"1940",
+										"comment",
+										"51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove comment",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": \"test comment2\"\r\n}"
+								},
+								"url": {
+									"raw": "{{url}}api/product/1940/comment/51",
+									"host": [
+										"{{url}}api"
+									],
+									"path": [
+										"product",
+										"1940",
+										"comment",
+										"51"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Get Product",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url}}/api/products?page=0&sort_by=discount&sort_order=ASC&type=table&label=Aptent Huic Magn",
+							"raw": "{{url}}/api/products",
 							"host": [
 								"{{url}}"
 							],
@@ -483,10 +719,6 @@
 								"products"
 							],
 							"query": [
-								{
-									"key": "page",
-									"value": "0"
-								},
 								{
 									"key": "hot",
 									"value": "1",
@@ -498,20 +730,14 @@
 									"disabled": true
 								},
 								{
-									"key": "sort_by",
-									"value": "discount"
-								},
-								{
-									"key": "sort_order",
-									"value": "ASC"
-								},
-								{
 									"key": "type",
-									"value": "table"
+									"value": "table",
+									"disabled": true
 								},
 								{
 									"key": "label",
-									"value": "Aptent Huic Magn"
+									"value": "Aptent Huic Magn",
+									"disabled": true
 								}
 							]
 						}
@@ -640,7 +866,7 @@
 					"response": []
 				},
 				{
-					"name": "Add to favorite",
+					"name": "Payment",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {}
 					},
@@ -660,26 +886,20 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\": 1223\r\n}"
+							"raw": "{\r\n    \"cart_id\": 202,\r\n    \"ip_address\": \"127.0.0.1\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}api/favorite",
+							"raw": "{{url}}api/payment?lang=vi",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"favorite"
+								"payment"
 							],
 							"query": [
 								{
-									"key": "page",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "_format",
-									"value": "json",
-									"disabled": true
+									"key": "lang",
+									"value": "vi"
 								}
 							]
 						}
@@ -687,50 +907,36 @@
 					"response": []
 				},
 				{
-					"name": "Get Favorite Products",
+					"name": "Get BANK LIST",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tmn_code",
+									"value": "PLPAZE7V",
+									"type": "text"
+								}
+							]
+						},
 						"url": {
-							"raw": "{{url}}api/favorite",
+							"raw": "https://sandbox.vnpayment.vn/qrpayauth/api/merchant/get_bank_list",
+							"protocol": "https",
 							"host": [
-								"{{url}}api"
+								"sandbox",
+								"vnpayment",
+								"vn"
 							],
 							"path": [
-								"favorite"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "1",
-									"disabled": true
-								},
-								{
-									"key": "hot",
-									"value": "0",
-									"disabled": true
-								},
-								{
-									"key": "discount",
-									"value": "0",
-									"disabled": true
-								},
-								{
-									"key": "type",
-									"value": "table",
-									"disabled": true
-								},
-								{
-									"key": "label",
-									"value": "Magna",
-									"disabled": true
-								}
+								"qrpayauth",
+								"api",
+								"merchant",
+								"get_bank_list"
 							]
 						}
 					},

@@ -2,6 +2,7 @@
 
 namespace Drupal\hb_rest\Plugin\views\row;
 
+use Drupal\comment\Entity\Comment;
 use Drupal\rest\Plugin\views\row\DataFieldRow;
 use Drupal\views\ResultRow;
 
@@ -30,8 +31,12 @@ class HbDataFieldRow extends DataFieldRow {
       // If the raw output option has been set, just get the raw value.
       if (!empty($this->rawOutputOptions[$id])) {
         $value = array_map(function ($item) {
-          return $item['rendered']['#markup'];
+          if (isset($item['rendered']['#markup'])) {
+            return $item['rendered']['#markup'];
+          }
+          return NULL;
         }, $field->getItems($row));
+
 //       Original is $field->getValue($row)
       }
       // Otherwise, get rendered field.

@@ -2,7 +2,9 @@
 
 namespace Drupal\hb_devel\Plugin\DevelGenerate;
 
+use DirectoryIterator;
 use Drupal\comment\CommentManagerInterface;
+use Drupal\comment\Entity\Comment;
 use Drupal\Component\Datetime\Time;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\content_translation\ContentTranslationManagerInterface;
@@ -19,7 +21,9 @@ use Drupal\Core\Url;
 use Drupal\devel_generate\DevelGenerateBase;
 use Drupal\devel_generate\Plugin\DevelGenerate\ContentDevelGenerate;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\file\Entity\File;
 use Drupal\hb_product\HbProductInterface;
+use Drupal\media\Entity\Media;
 use Drupal\node\NodeInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\path_alias\PathAliasStorage;
@@ -231,6 +235,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
       $options[$type->id()] = [
         'type' => ['#markup' => $type->label()],
       ];
+
       if ($this->commentManager) {
         $comment_fields = $this->commentManager->getFields('hb_product');
         $map = [$this->t('Hidden'), $this->t('Closed'), $this->t('Open')];
@@ -248,6 +253,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
             ]);
           }
         }
+
         // @todo Refactor display of comment fields.
         if (!empty($fields)) {
           $options[$type->id()]['comments'] = [
@@ -651,17 +657,18 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
     // Add the content type label if required.
     $title_prefix = $results['add_type_label'] ? $this->productTypeStorage->load($product_type)->label() . ' - ' : '';
     $file_arr = [];
-    for ($i = rand(1, 10); $i < 11; $i++) {
-      $file = \Drupal\file\Entity\File::create([
-        'filename' => $this->getRandom()->sentences(mt_rand(1, 20)),
-        'bundle' => 'image',
-        'uri' => 'https://picsum.photos/200/300.jpg',
-        'status' => 1,
-        'uid' => 1,
-      ]);
-      $file->save();
-      $file_arr[] = $file->id();
-    }
+
+    $ids = \Drupal::entityQuery('media')
+      ->condition('bundle', 'image')
+      ->condition('field_m_i_category', 'hb_product')
+      ->accessCheck()
+      ->execute();
+
+    $medias = Media::loadMultiple($ids);
+    $file_ids = array_map(function ($item){
+      return $item->get('thumbnail')->target_id;
+    }, $medias);
+
 
     $furniture_type = ['table', 'chair', 'sofa'];
     $furniture_category = Paragraph::create([
@@ -670,21 +677,51 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
     ]);
     $furniture_category->save();
 
+    $evaluate = Paragraph::create([
+      'type' => 'product_evaluate',
+      'field_p_p_e_evaluate' => rand(0, 50) / 10,
+      'field_p_p_e_people' => mt_rand(100, 1000),
+    ]);
+
+    $evaluate->save();
+
+    $ids = \Drupal::entityQuery('media')
+      ->condition('bundle', 'image')
+      ->condition('field_m_i_category', 'hb_product')
+      ->accessCheck()
+      ->execute();
+
+    $medias = Media::loadMultiple($ids);
+    $file_ids = array_map(function ($item){
+      return $item->get('thumbnail')->target_id;
+    }, $medias);
+    $file_id = $file_ids[array_rand($file_ids)];
+    $media_id = \Drupal::entityQuery('media')
+      ->condition('field_media_image.target_id', $file_id)
+      ->accessCheck()
+      ->execute();
+    $media_label = Media::load(reset($media_id))->get('thumbnail')->alt;
+
     $values = [
       'id' => NULL,
       'bundle' => $product_type,
-      'label' => $title_prefix . $this->getRandom()->sentences(mt_rand(1, $results['title_length']), TRUE),
+      'label' => $media_label,
       'uid' => $uid,
       'description' => $this->getRandom()->sentences(mt_rand(1, 500)),
       'field_f_p_quantity' => mt_rand(100, 1000),
       'field_p_f_discount' => mt_rand(100000, 1000000),
       'field_p_f_price' => mt_rand(1000000, 100000000),
-      'field_p_f_media' => $file_arr,
+      'field_p_f_media' => [$file_id],
       'field_p_f_hot' => mt_rand(0, 1),
       'field_p_f_attributes' => [
         'target_id' => $furniture_category->id(),
         'target_revision_id' => $furniture_category->getRevisionId(),
       ],
+      'field_p_f_evaluate' => [
+        'target_id' => $evaluate->id(),
+        'target_revision_id' => $evaluate->getRevisionId(),
+      ],
+      'field_p_f_comments' => 2,
       'field_p_f_quantity' => rand(500, 1000),
       'status' => TRUE,
       'created' => $this->time->getRequestTime() - mt_rand(0, $results['time_range']),

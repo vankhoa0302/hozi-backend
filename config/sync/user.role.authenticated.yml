@@ -5,6 +5,7 @@ dependencies:
   config:
     - filter.format.basic_html
     - rest.resource.hb_rest_cart
+    - rest.resource.hb_rest_comment
     - rest.resource.hb_rest_favorite
     - rest.resource.hb_rest_file_upload
     - rest.resource.hb_rest_paragraph_type_children
@@ -34,11 +35,14 @@ permissions:
   - 'access site-wide contact form'
   - 'access user profiles'
   - 'post comments'
+  - 'restful delete hb_rest_comment'
   - 'restful get hb_rest_paragraph_type_children'
   - 'restful patch hb_rest_cart'
+  - 'restful patch hb_rest_comment'
   - 'restful patch hb_rest_translation'
   - 'restful patch hb_rest_user_update'
   - 'restful post hb_rest'
+  - 'restful post hb_rest_comment'
   - 'restful post hb_rest_favorite'
   - 'restful post hb_rest_payment'
   - 'restful post hb_rest_user_logout'

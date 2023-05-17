@@ -1,0 +1,43 @@
+uuid: ca511897-cc3c-4a71-b0e7-6c3c111dcada
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comments_of_product
+    - field.field.comment.comments_of_product.comment_body
+  module:
+    - text
+id: comment.comments_of_product.default
+targetEntityType: comment
+bundle: comments_of_product
+mode: default
+content:
+  author:
+    weight: -2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  comment_body:
+    type: text_textarea
+    weight: 11
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  subject:
+    type: string_textfield
+    weight: 10
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

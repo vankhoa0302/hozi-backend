@@ -29,6 +29,7 @@ module:
   field_ui: 0
   file: 0
   filter: 0
+  flag: 0
   form_options_attributes: 0
   hb_account: 0
   hb_cart: 0

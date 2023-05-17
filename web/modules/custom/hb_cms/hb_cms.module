@@ -1,5 +1,11 @@
 <?php
 
+use Drupal\comment\Entity\Comment;
+use Drupal\Core\File\FileSystemInterface;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
+use Drupal\file\Entity\File;
+use Drupal\media\Entity\Media;
 use Drupal\paragraphs\Entity\Paragraph;
 
 function vn_to_str($str): array|string {
@@ -26,25 +32,65 @@ function vn_to_str($str): array|string {
   }
 
   $utf8 = [
-    '/[áàâãªä]/u'   =>   'a',
-    '/[ÁÀÂÃÄ]/u'    =>   'A',
-    '/[ÍÌÎÏ]/u'     =>   'I',
-    '/[íìîï]/u'     =>   'i',
-    '/[éèêë]/u'     =>   'e',
-    '/[ÉÈÊË]/u'     =>   'E',
-    '/[óòôõºö]/u'   =>   'o',
-    '/[ÓÒÔÕÖ]/u'    =>   'O',
-    '/[úùûü]/u'     =>   'u',
-    '/[ÚÙÛÜ]/u'     =>   'U',
-    '/ç/'           =>   'c',
-    '/Ç/'           =>   'C',
-    '/ñ/'           =>   'n',
-    '/Ñ/'           =>   'N',
-    '/–/'           =>   '-',
-    '/[’‘‹›‚]/u'    =>   ' ',
-    '/[“”«»„]/u'    =>   ' ',
-    '/ /'           =>   ' ',
+    '/[áàâãªä]/u' => 'a',
+    '/[ÁÀÂÃÄ]/u' => 'A',
+    '/[ÍÌÎÏ]/u' => 'I',
+    '/[íìîï]/u' => 'i',
+    '/[éèêë]/u' => 'e',
+    '/[ÉÈÊË]/u' => 'E',
+    '/[óòôõºö]/u' => 'o',
+    '/[ÓÒÔÕÖ]/u' => 'O',
+    '/[úùûü]/u' => 'u',
+    '/[ÚÙÛÜ]/u' => 'U',
+    '/ç/' => 'c',
+    '/Ç/' => 'C',
+    '/ñ/' => 'n',
+    '/Ñ/' => 'N',
+    '/–/' => '-',
+    '/[’‘‹›‚]/u' => ' ',
+    '/[“”«»„]/u' => ' ',
+    '/ /' => ' ',
   ];
 
   return preg_replace('/[^A-Za-z0-9. -]/', '', preg_replace(array_keys($utf8), array_values($utf8), $str));
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function hb_cms_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $ids = \Drupal::entityQuery('media')
+    ->condition('bundle', 'image')
+    ->condition('field_m_i_category', 'hb_product')
+    ->accessCheck()
+    ->execute();
+
+  $medias = Media::loadMultiple($ids);
+  $file_ids = array_map(function ($item){
+    return $item->get('thumbnail')->target_id;
+  }, $medias);
+  $file_id = $file_ids[array_rand($file_ids)];
+  $media_id = \Drupal::entityQuery('media')
+    ->condition('field_media_image.target_id', $file_id)
+    ->accessCheck()
+    ->execute();
+  $media_label = Media::load(reset($media_id))->get('thumbnail')->alt;
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function hb_cms_views_data() {
+  $data['views']['table']['group'] = t('Custom Global');
+  $data['views']['table']['join'] = [
+    '#global' => [],
+  ];
+  $data['views']['comment_views_field'] = [
+    'title' => t('Comments'),
+    'help' => t('Get all comments.'),
+    'field' => [
+      'id' => 'comment_views_field',
+    ],
+  ];
+  return $data;
 }

@@ -1,0 +1,37 @@
+uuid: 96406edf-550a-4833-81b8-01b50fdf8143
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_evaluate
+    - hb_product.hb_product_type.furniture
+    - paragraphs.paragraphs_type.product_evaluate
+  module:
+    - entity_reference_revisions
+id: hb_product.furniture.field_p_f_evaluate
+field_name: field_p_f_evaluate
+entity_type: hb_product
+bundle: furniture
+label: Evaluate
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      product_evaluate: product_evaluate
+    negate: 0
+    target_bundles_drag_drop:
+      furniture_cart:
+        weight: 4
+        enabled: false
+      furniture_category:
+        weight: 5
+        enabled: false
+      product_evaluate:
+        weight: 6
+        enabled: true
+field_type: entity_reference_revisions

@@ -1,0 +1,8 @@
+uuid: 58e445ab-ea10-4622-a010-ffd4e1498d87
+langcode: en
+status: true
+dependencies: {  }
+id: comments_of_product
+label: 'Comments of product'
+target_entity_type_id: hb_product
+description: ''

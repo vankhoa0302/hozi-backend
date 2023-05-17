@@ -1,0 +1,22 @@
+uuid: c415464c-72a7-406e-8e87-fbce4d714a10
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+    - serialization
+    - simple_oauth
+    - user
+id: hb_rest_comment
+plugin_id: hb_rest_comment
+granularity: resource
+configuration:
+  methods:
+    - POST
+    - DELETE
+    - PATCH
+  formats:
+    - json
+  authentication:
+    - oauth2
+    - cookie

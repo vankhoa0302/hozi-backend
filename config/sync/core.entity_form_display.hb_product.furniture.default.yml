@@ -4,13 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.hb_product.furniture.field_p_f_attributes
+    - field.field.hb_product.furniture.field_p_f_comments
     - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_evaluate
     - field.field.hb_product.furniture.field_p_f_hot
     - field.field.hb_product.furniture.field_p_f_media
     - field.field.hb_product.furniture.field_p_f_price
     - field.field.hb_product.furniture.field_p_f_quantity
     - hb_product.hb_product_type.furniture
   module:
+    - comment
     - file
     - paragraphs
     - text
@@ -29,7 +32,7 @@ content:
     third_party_settings: {  }
   field_p_f_attributes:
     type: entity_reference_paragraphs
-    weight: 12
+    weight: 9
     region: content
     settings:
       title: Paragraph
@@ -39,40 +42,63 @@ content:
       form_display_mode: default
       default_paragraph_type: furniture_category
     third_party_settings: {  }
+  field_p_f_comments:
+    type: comment_default
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_p_f_discount:
     type: number
-    weight: 4
+    weight: 5
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
+  field_p_f_evaluate:
+    type: entity_reference_paragraphs
+    weight: 11
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: ''
+    third_party_settings: {  }
   field_p_f_hot:
     type: boolean_checkbox
-    weight: 11
+    weight: 8
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   field_p_f_media:
     type: file_generic
-    weight: 2
+    weight: 3
     region: content
     settings:
       progress_indicator: throbber
     third_party_settings: {  }
   field_p_f_price:
     type: number
-    weight: 3
+    weight: 4
     region: content
     settings:
       placeholder: ''
     third_party_settings: {  }
   field_p_f_quantity:
     type: number
-    weight: 13
+    weight: 10
     region: content
     settings:
       placeholder: ''
+    third_party_settings: {  }
+  flag:
+    weight: 6
+    region: content
+    settings: {  }
     third_party_settings: {  }
   label:
     type: string_textfield
@@ -90,7 +116,7 @@ content:
       include_locked: true
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }

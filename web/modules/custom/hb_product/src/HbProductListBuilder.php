@@ -7,6 +7,8 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\flag\FlagService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -14,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class HbProductListBuilder extends EntityListBuilder {
 
-	protected $limit = 10;
+  protected $limit = 10;
 
   /**
    * The date formatter service.
@@ -53,7 +55,7 @@ class HbProductListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function render() {
-	  $build['table'] = parent::render();
+    $build['table'] = parent::render();
 
     $total = $this->getStorage()
       ->getQuery()
@@ -85,7 +87,7 @@ class HbProductListBuilder extends EntityListBuilder {
     /** @var \Drupal\hb_product\HbProductInterface $entity */
     $row['id'] = $entity->id();
     $row['type'] = $entity->bundle();
-    $row['label'] = $entity->label();
+    $row['label'] = $entity->toLink();
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $row['uid']['data'] = [
       '#theme' => 'username',

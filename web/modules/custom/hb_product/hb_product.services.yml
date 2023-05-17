@@ -1,0 +1,3 @@
+services:
+  hb_product.comment:
+    class: Drupal\hb_product\Services\HbCommentService
