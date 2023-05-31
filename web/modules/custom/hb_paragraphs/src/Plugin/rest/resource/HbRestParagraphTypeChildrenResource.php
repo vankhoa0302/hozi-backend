@@ -36,8 +36,12 @@ class HbRestParagraphTypeChildrenResource extends ResourceBase {
 		if (!isset($fieldDefinition['field_p_f_c_type'])) {
 			throw new NotFoundHttpException($type . ' not found!');
 		}
-		$resource = $fieldDefinition['field_p_f_c_type']->getSetting('allowed_values');
-		return new JsonResponse($resource, 200);
+    $resources = $fieldDefinition['field_p_f_c_type']->getSetting('allowed_values');
+    $results = [];
+    foreach ($resources as $key => $resource) {
+      $results[] = (object) [$key => $resource];
+    }
+		return new JsonResponse(['results' => $results], 200);
 	}
 
 }
