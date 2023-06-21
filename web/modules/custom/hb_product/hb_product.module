@@ -28,7 +28,7 @@ function hb_product_entity_operation_alter(array &$operations, \Drupal\Core\Enti
       ];
 
       if ($entity->get('status')->getString()) {
-        $operations['payment_info']['title'] = t('Pay test');
+        $operations['payment_info']['title'] = t('Pay');
       }
       break;
   }
