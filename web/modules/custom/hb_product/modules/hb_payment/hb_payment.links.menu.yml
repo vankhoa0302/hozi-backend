@@ -1,0 +1,5 @@
+entity.hb_payment.settings:
+  title: 'Payment Settings'
+  description: 'Payment settings'
+  parent: system.admin_config_system
+  route_name: hb_payment.settings

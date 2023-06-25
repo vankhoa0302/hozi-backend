@@ -11,7 +11,7 @@ function hb_product_entity_operation_alter(array &$operations, \Drupal\Core\Enti
       $operations['payment_info'] = [
         'title' => t('Payment info'),
         'weight' => 11,
-        'url' => Url::fromRoute('hb_product.payment', [
+        'url' => Url::fromRoute('hb_payment.payment', [
           'cart_id' => $entity->get('cart')->entity->id(),
           'destination' => Url::fromRoute('entity.hb_cart.collection')->toString()
         ]),
@@ -21,13 +21,13 @@ function hb_product_entity_operation_alter(array &$operations, \Drupal\Core\Enti
       $operations['payment_info'] = [
         'title' => t('Payment info'),
         'weight' => 11,
-        'url' => Url::fromRoute('hb_product.payment', [
+        'url' => Url::fromRoute('hb_payment.payment', [
           'cart_id' => $entity->id(),
           'destination' => Url::fromRoute('entity.hb_cart.collection')->toString()
         ]),
       ];
 
-      if ($entity->get('status')->getString()) {
+      if ($entity->get('moderation_state')->getString() == 'draft') {
         $operations['payment_info']['title'] = t('Pay');
       }
       break;

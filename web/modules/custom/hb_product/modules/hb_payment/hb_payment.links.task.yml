@@ -14,4 +14,3 @@ entity.hb_payment.collection:
   title: 'Payments'
   route_name: entity.hb_payment.collection
   base_route: system.admin_content
-  weight: 7

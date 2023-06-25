@@ -1,0 +1,2 @@
+redirect_after_payment: 'https://ttv-local.com:8109/'
+expired_time: '15'

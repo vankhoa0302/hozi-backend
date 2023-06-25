@@ -710,7 +710,7 @@ class ProductDevelGenerate extends DevelGenerateBase implements ContainerFactory
       'description' => $this->getRandom()->sentences(mt_rand(1, 500)),
       'field_f_p_quantity' => mt_rand(100, 1000),
       'field_p_f_discount' => mt_rand(100000, 1000000),
-      'field_p_f_price' => mt_rand(1000000, 100000000),
+      'field_p_f_price' => mt_rand(100000, 10000000),
       'field_p_f_media' => [$file_id],
       'field_p_f_hot' => mt_rand(0, 1),
       'field_p_f_attributes' => [

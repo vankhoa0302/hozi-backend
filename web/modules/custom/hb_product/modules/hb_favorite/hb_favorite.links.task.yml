@@ -14,7 +14,6 @@ entity.hb_favorite.collection:
   title: 'Favorites'
   route_name: entity.hb_favorite.collection
   base_route: system.admin_content
-  weight: 6
 entity.hb_favorite_type.edit_form:
   title: 'Edit'
   route_name: entity.hb_favorite_type.edit_form

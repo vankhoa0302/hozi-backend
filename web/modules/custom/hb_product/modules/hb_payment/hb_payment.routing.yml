@@ -1,7 +1,14 @@
-hb_product.payment:
+hb_payment.payment:
   path: '/cart/{cart_id}/pay'
   defaults:
     _title: 'Pay'
     _form: '\Drupal\hb_payment\Form\HbPaymentProgressForm'
   requirements:
     _permission: 'access content'
+hb_payment.settings:
+  path: '/admin/config/hb_payment/settings'
+  defaults:
+    _form: '\Drupal\hb_payment\Form\HbPaymentConfigForm'
+    _title: 'Payment Settings'
+  requirements:
+    _permission: 'administer site configuration'

@@ -3,7 +3,7 @@
 namespace Drupal\hb_payment\Plugin\rest\resource;
 
 use Drupal\hb_cart\Entity\HbCart;
-use Drupal\hb_payment\HbPaymentManager;
+use Drupal\hb_payment\HbPaymentFactory;
 use Drupal\rest\Plugin\ResourceBase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,10 +54,17 @@ class HbRestPaymentResource extends ResourceBase {
       return new JsonResponse(['message' => 'Forbidden!'], 403);
     }
 
-//    $payment_manager = new HbPaymentManager();
-//    $payment_manager->pay($data);
-    /** @todo complete payment api logic */
-    return new JsonResponse([], 200);
+    $payment_factory = new HbPaymentFactory($cart);
+    $vnp_ReturnUrl = \Drupal::config('hb_payment.settings')->get('redirect_after_payment');
+    $payment_factory->setReturnUrl($vnp_ReturnUrl);
+    $vnp_Url = $payment_factory->initPaymentUrl();
+    return new JsonResponse([
+      'message' => t('Success!'),
+      'result' => [
+        'url' => $vnp_Url,
+        'expired_in' => $payment_factory->getExpiredDate(),
+      ],
+    ], 200);
   }
 
 }

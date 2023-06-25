@@ -2,7 +2,6 @@ entity.hb_message.collection:
   title: 'Messages'
   route_name: entity.hb_message.collection
   base_route: system.admin_content
-  weight: 8
 entity.hb_message_type.edit_form:
   title: 'Edit'
   route_name: entity.hb_message_type.edit_form

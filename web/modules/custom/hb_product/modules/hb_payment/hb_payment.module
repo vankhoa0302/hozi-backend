@@ -9,38 +9,6 @@ use Drupal\Core\Database\Database;
 use Drupal\user\UserInterface;
 
 /**
- * Implements hook_user_cancel().
- */
-function hb_payment_user_cancel($edit, UserInterface $account, $method) {
-  switch ($method) {
-    case 'user_cancel_block_unpublish':
-      // Unpublish payments.
-      $storage = \Drupal::entityTypeManager()->getStorage('hb_payment');
-      $hb_payment_ids = $storage->getQuery()
-        ->condition('uid', $account->id())
-        ->condition('status', 1)
-        ->execute();
-      foreach ($storage->loadMultiple($hb_payment_ids) as $hb_payment) {
-        $hb_payment->set('status', FALSE);
-        $hb_payment->save();
-      }
-      break;
-
-    case 'user_cancel_reassign':
-      // Anonymize payments.
-      $storage = \Drupal::entityTypeManager()->getStorage('hb_payment');
-      $hb_payment_ids = $storage->getQuery()
-        ->condition('uid', $account->id())
-        ->execute();
-      foreach ($storage->loadMultiple($hb_payment_ids) as $hb_payment) {
-        $hb_payment->setOwnerId(0);
-        $hb_payment->save();
-      }
-      break;
-  }
-}
-
-/**
  * Implements hook_ENTITY_TYPE_predelete() for user entities.
  */
 function hb_payment_user_predelete(UserInterface $account) {

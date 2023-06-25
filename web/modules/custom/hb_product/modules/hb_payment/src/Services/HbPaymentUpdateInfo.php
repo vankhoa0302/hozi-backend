@@ -9,13 +9,12 @@ use Symfony\Component\Serializer\Serializer;
 
 class HbPaymentUpdateInfo {
   // Payment info only update changed time when paid success
-  public function updatePaymentStatus(bool $status): void {
+  public function updatePaymentStatus(int $cart_id, bool $status): void {
+
     try {
-      $cart_id = \Drupal::routeMatch()->getParameter('cart_id');
       $exist_payment = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties([
         'cart' => $cart_id
       ]);
-
       if ($exist_payment) {
         /** @var HbPayment $payment */
         $payment = reset($exist_payment);
@@ -34,8 +33,7 @@ class HbPaymentUpdateInfo {
     }
   }
 
-  public function updatePaymentInfo(array $info): void {
-    $cart_id = \Drupal::routeMatch()->getParameter('cart_id');
+  public function updatePaymentInfo(int $cart_id, array $info): void {
     $exist_payment = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties([
       'cart' => $cart_id
     ]);

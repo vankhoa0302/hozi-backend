@@ -748,15 +748,21 @@
 					"name": "Get Product Detail",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{url}}api/product/1220?_format=json",
+							"raw": "{{url}}api/product/2251?_format=json",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"product",
-								"1220"
+								"2251"
 							],
 							"query": [
 								{
@@ -886,7 +892,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"cart_id\": 202,\r\n    \"ip_address\": \"127.0.0.1\"\r\n}"
+							"raw": "{\r\n    \"cart_id\": 4,\r\n    \"ip_address\": \"127.0.0.1\"\r\n}"
 						},
 						"url": {
 							"raw": "{{url}}api/payment?lang=vi",

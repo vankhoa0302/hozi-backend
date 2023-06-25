@@ -6,7 +6,6 @@ entity.hb_cart.collection:
   title: 'Carts'
   route_name: entity.hb_cart.collection
   base_route: system.admin_content
-  weight: 5
 entity.hb_cart.edit_form:
   title: 'Edit'
   route_name: entity.hb_cart.edit_form
