@@ -39,7 +39,10 @@ class HbRestParagraphTypeChildrenResource extends ResourceBase {
     $resources = $fieldDefinition['field_p_f_c_type']->getSetting('allowed_values');
     $results = [];
     foreach ($resources as $key => $resource) {
-      $results[] = (object) [$key => $resource];
+      $results[] = (object) [
+        'id' => $key,
+        'typeName' => $resource,
+      ];
     }
 		return new JsonResponse(['results' => $results], 200);
 	}
