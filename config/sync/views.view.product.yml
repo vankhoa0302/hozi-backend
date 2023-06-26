@@ -2708,10 +2708,8 @@ display:
             offset_label: Offset
           quantity: 9
       access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+        type: none
+        options: {  }
       filters:
         bundle:
           id: bundle
@@ -3017,7 +3015,6 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-        - user.roles
       tags:
         - 'config:field.storage.hb_product.field_p_f_comments'
         - 'config:field.storage.hb_product.field_p_f_discount'
