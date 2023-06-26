@@ -25,6 +25,17 @@ class HbSerializerWithPager extends Serializer {
    */
   public function render() {
     $rows = $pager_info = [];
+
+    // If the data entity row plugin is used, this will be an array of entities
+    // which will pass through serializer to one of the registered normalizers,
+    // which will transform it to arrays/scalars. If the data field row plugin
+    // is used, $rows will not contain objects and will pass directly to the
+    // encoder.
+    foreach ($this->view->result as $row_index => $row) {
+      $this->view->row_index = $row_index;
+      $rows[] = $this->view->rowPlugin->render($row);
+    }
+
     // Create pager info if pagination is enabled in view.
     $plugin_id = !empty($this->view->pager) ? $this->view->pager->getPluginId() : NULL;
     if ($plugin_id == 'mini' || $plugin_id == 'full') {
@@ -47,17 +58,10 @@ class HbSerializerWithPager extends Serializer {
         'current_page' => (int)$current_page,
         'next_page' => $next_page,
       ];
+    } elseif ($plugin_id == 'some' && $this->view->pager->options['items_per_page'] == 1){
+      $rows = reset($rows);
     }
-    // If the data entity row plugin is used, this will be an array of entities
-    // which will pass through serializer to one of the registered normalizers,
-    // which will transform it to arrays/scalars. If the data field row plugin
-    // is used, $rows will not contain objects and will pass directly to the
-    // encoder.
 
-    foreach ($this->view->result as $row_index => $row) {
-      $this->view->row_index = $row_index;
-      $rows[] = $this->view->rowPlugin->render($row);
-    }
     unset($this->view->row_index);
     // Get the content type configured in the display or fallback to the
     // default.
