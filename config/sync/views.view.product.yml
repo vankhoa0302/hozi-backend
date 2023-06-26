@@ -15,7 +15,6 @@ dependencies:
     - field.storage.paragraph.field_p_p_e_people
     - flag.flag.favorite
     - hb_product.hb_product_type.furniture
-    - user.role.authenticated
   module:
     - comment
     - file
@@ -28,7 +27,6 @@ dependencies:
     - rest
     - serialization
     - text
-    - user
 id: product
 label: Product
 module: views
@@ -1746,10 +1744,8 @@ display:
           separator: ', '
           field_api_classes: false
       access:
-        type: role
-        options:
-          role:
-            authenticated: authenticated
+        type: none
+        options: {  }
       sorts: {  }
       arguments:
         id:
@@ -1904,7 +1900,6 @@ display:
         - 'languages:language_interface'
         - request_format
         - url
-        - user.roles
       tags:
         - 'config:field.storage.hb_product.field_p_f_comments'
         - 'config:field.storage.hb_product.field_p_f_discount'
