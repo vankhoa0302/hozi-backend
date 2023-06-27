@@ -27,6 +27,7 @@
     "drupal/form_options_attributes": "^2.0",
     "drupal/image_url_formatter": "dev-1.x",
     "drupal/paragraphs": "^1.15",
+    "drupal/phone_number": "^2.0@alpha",
     "drupal/phpmailer_smtp": "^2.2",
     "drupal/restui": "^1.21",
     "drupal/simple_oauth": "^5.2",

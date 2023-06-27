@@ -7,8 +7,8 @@ dependencies:
     - serialization
     - simple_oauth
     - user
-id: hb_rest_user_update
-plugin_id: hb_rest_user_update
+id: hb_rest_user
+plugin_id: hb_rest_user
 granularity: resource
 configuration:
   methods:

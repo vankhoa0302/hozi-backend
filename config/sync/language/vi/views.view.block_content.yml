@@ -33,3 +33,6 @@ display:
             label: 'Kiểu khối'
   page_1:
     display_title: Trang
+    display_options:
+      menu:
+        title: Khối

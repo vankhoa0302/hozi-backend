@@ -10,9 +10,10 @@ dependencies:
     - rest.resource.hb_rest_file_upload
     - rest.resource.hb_rest_paragraph_type_children
     - rest.resource.hb_rest_payment
+    - rest.resource.hb_rest_payment_detail
     - rest.resource.hb_rest_translation
+    - rest.resource.hb_rest_user
     - rest.resource.hb_rest_user_logout
-    - rest.resource.hb_rest_user_update
   module:
     - comment
     - contact
@@ -37,10 +38,12 @@ permissions:
   - 'post comments'
   - 'restful delete hb_rest_comment'
   - 'restful get hb_rest_paragraph_type_children'
+  - 'restful get hb_rest_payment'
+  - 'restful get hb_rest_payment_detail'
   - 'restful patch hb_rest_cart'
   - 'restful patch hb_rest_comment'
   - 'restful patch hb_rest_translation'
-  - 'restful patch hb_rest_user_update'
+  - 'restful patch hb_rest_user'
   - 'restful post hb_rest'
   - 'restful post hb_rest_comment'
   - 'restful post hb_rest_favorite'

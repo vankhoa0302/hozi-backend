@@ -1,0 +1,21 @@
+uuid: f02c00cb-8af5-4c44-a786-d4e84e4d65b2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_u_c_i_default
+    - paragraphs.paragraphs_type.user_contact_info
+id: paragraph.user_contact_info.field_p_u_c_i_default
+field_name: field_p_u_c_i_default
+entity_type: paragraph
+bundle: user_contact_info
+label: Default
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

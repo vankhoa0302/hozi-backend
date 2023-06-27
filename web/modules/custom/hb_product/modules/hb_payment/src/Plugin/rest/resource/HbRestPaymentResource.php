@@ -4,7 +4,10 @@ namespace Drupal\hb_payment\Plugin\rest\resource;
 
 use Drupal\hb_cart\Entity\HbCart;
 use Drupal\hb_payment\HbPaymentFactory;
+use Drupal\hb_product\Entity\HbProduct;
+use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\rest\Plugin\ResourceBase;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,7 +18,8 @@ use Symfony\Component\HttpFoundation\Request;
  *   id = "hb_rest_payment",
  *   label = @Translation("Payment"),
  *   uri_paths = {
- *     "create" = "/api/payment"
+ *     "create" = "/api/payment",
+ *     "canonical" = "/api/payment"
  *   }
  * )
  *
@@ -65,6 +69,32 @@ class HbRestPaymentResource extends ResourceBase {
         'expired_in' => $payment_factory->getExpiredDate(),
       ],
     ], 200);
+  }
+
+  public function get(Request $request) {
+    $user = User::load(\Drupal::currentUser()->id());
+    $state = $request->get('state');
+    $props = [
+      'uid' => $user->id()
+    ];
+    if (!is_null($state)) {
+      $props['status'] = (boolean) $state;
+    }
+    $results = [];
+    $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties($props);
+    foreach ($payments as $payment) {
+      $results['results'][$payment->id()] = [
+        'name' => t('Đơn hàng số ' . $payment->get('cart')->getString(), [], ['langcode' => 'vi']),
+        'amount' => $payment->get('info')->vnp_Amount,
+        'created' => $payment->get('created')->getString(),
+        'changed' => $payment->get('changed')->getString(),
+        'pay_date' => $payment->get('info')->vnp_PayDate,
+        'bank_code' => $payment->get('info')->vnp_BankCode,
+        'card_type' => $payment->get('info')->vnp_CardType,
+        'status' => (boolean) $payment->get('status')->getString(),
+      ];
+    }
+    return new JsonResponse($results, 200);
   }
 
 }

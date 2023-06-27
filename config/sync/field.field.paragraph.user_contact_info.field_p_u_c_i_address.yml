@@ -1,0 +1,19 @@
+uuid: ad75aded-e0d6-4558-9dfc-f348f7bbf4f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_p_u_c_i_address
+    - paragraphs.paragraphs_type.user_contact_info
+id: paragraph.user_contact_info.field_p_u_c_i_address
+field_name: field_p_u_c_i_address
+entity_type: paragraph
+bundle: user_contact_info
+label: Address
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

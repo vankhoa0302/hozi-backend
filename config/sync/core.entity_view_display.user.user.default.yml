@@ -3,10 +3,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.user.user.field_user_address
+    - field.field.user.user.field_user_info
     - field.field.user.user.user_picture
     - image.style.thumbnail
   module:
+    - entity_reference_revisions
     - image
     - user
 _core:
@@ -16,12 +17,14 @@ targetEntityType: user
 bundle: user
 mode: default
 content:
-  field_user_address:
-    type: basic_string
+  field_user_info:
+    type: entity_reference_revisions_entity_view
     label: above
-    settings: {  }
+    settings:
+      view_mode: default
+      link: ''
     third_party_settings: {  }
-    weight: 1
+    weight: 3
     region: content
   member_for:
     settings: {  }

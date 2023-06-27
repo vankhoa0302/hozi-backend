@@ -1,4 +1,4 @@
-uuid: 4610db42-81c6-4545-817e-8da0ac9ea851
+uuid: 11ddf787-332f-4e73-85b0-e1059cc042ab
 langcode: en
 status: true
 dependencies:
@@ -7,13 +7,12 @@ dependencies:
     - serialization
     - simple_oauth
     - user
-id: hb_rest_payment
-plugin_id: hb_rest_payment
+id: hb_rest_payment_detail
+plugin_id: hb_rest_payment_detail
 granularity: resource
 configuration:
   methods:
     - GET
-    - POST
   formats:
     - json
   authentication:

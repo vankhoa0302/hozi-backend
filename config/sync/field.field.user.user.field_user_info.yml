@@ -1,0 +1,40 @@
+uuid: 7dc55db4-d9ee-4618-be45-bfa64ed5b4fb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_user_info
+    - paragraphs.paragraphs_type.user_contact_info
+  module:
+    - entity_reference_revisions
+    - user
+id: user.user.field_user_info
+field_name: field_user_info
+entity_type: user
+bundle: user
+label: 'User info'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      user_contact_info: user_contact_info
+    negate: 0
+    target_bundles_drag_drop:
+      furniture_cart:
+        weight: 5
+        enabled: false
+      furniture_category:
+        weight: 6
+        enabled: false
+      product_evaluate:
+        weight: 7
+        enabled: false
+      user_contact_info:
+        weight: 8
+        enabled: true
+field_type: entity_reference_revisions

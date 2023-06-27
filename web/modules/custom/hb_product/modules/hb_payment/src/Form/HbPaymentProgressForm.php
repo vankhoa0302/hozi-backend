@@ -46,7 +46,8 @@ class HbPaymentProgressForm extends FormBase {
     $form_state->set('amount', $amount);
     $vnp_Url = $payment_factory->initPaymentUrl();
     $response = new TrustedRedirectResponse($vnp_Url);
-    $form_state->setResponse($response);
+    $response->send();
+    exit();
   }
 
 }

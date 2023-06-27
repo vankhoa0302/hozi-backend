@@ -1,18 +1,18 @@
-uuid: d3d82dfb-1641-4dcc-ad2a-e9deae410d66
+uuid: 8ab8651d-df9c-4326-ab39-f544e79f17d6
 langcode: en
 status: true
 dependencies:
   module:
-    - user
-id: user.field_user_address
-field_name: field_user_address
-entity_type: user
+    - paragraphs
+id: paragraph.field_p_u_c_i_address
+field_name: field_p_u_c_i_address
+entity_type: paragraph
 type: string_long
 settings:
   case_sensitive: false
 module: core
 locked: false
-cardinality: -1
+cardinality: 1
 translatable: true
 indexes: {  }
 persist_with_no_fields: false

@@ -1,0 +1,51 @@
+uuid: a8288714-4807-4cab-b99e-7e883ac3e6f1
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.user_contact_info.field_p_u_c_i_address
+    - field.field.paragraph.user_contact_info.field_p_u_c_i_default
+    - field.field.paragraph.user_contact_info.field_p_u_c_i_name
+    - field.field.paragraph.user_contact_info.field_p_u_c_i_phone_number
+    - paragraphs.paragraphs_type.user_contact_info
+  module:
+    - phone_number
+id: paragraph.user_contact_info.default
+targetEntityType: paragraph
+bundle: user_contact_info
+mode: default
+content:
+  field_p_u_c_i_address:
+    type: string_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_u_c_i_default:
+    type: boolean_checkbox
+    weight: 1
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_p_u_c_i_name:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_p_u_c_i_phone_number:
+    type: phone_number_default
+    weight: 3
+    region: content
+    settings:
+      default_country: US
+      placeholder: null
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

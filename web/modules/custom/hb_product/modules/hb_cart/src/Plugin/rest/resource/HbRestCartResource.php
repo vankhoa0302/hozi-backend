@@ -62,25 +62,10 @@ class HbRestCartResource extends ResourceBase {
 			$furniture_cart->set('field_p_f_c_quantity', $field_p_f_c_quantity + $data['product_quantity']);
 			$furniture_cart->save();
 		}
-		$view = Views::getView('cart');
-		$view->setDisplay('rest_export_cart');
-		$view->execute();
-		$content = $view->buildRenderable('rest_export_cart');
-		foreach ($content['#view']->result as $row_index => $row) {
-			$content['#view']->row_index = $row_index;
-			$rows[] = $content['#view']->rowPlugin->render($row);
-		}
-		unset($content['#view']->row_index);
-		$result['results'] = \Drupal::service('serializer')->normalize($rows, 'json') ?? [];
-		$pager = $content['#view']->pager;
-		$total = (int) $pager->getTotalItems();
-		$result['pager'] = [
-			'count'          => $total,
-			'pages'          => $pager->getCurrentPage(),
-			'items_per_page' => $pager->getItemsPerPage(),
-			'current_page'   => $pager->getCurrentPage(),
-			'next_page'      => $total > $pager->getItemsPerPage() * ($pager->getCurrentPage() + 1) ? $pager->getCurrentPage() + 1 : $pager->getCurrentPage(),
-		];
+		$result['results'] = [
+      'success' => true,
+      'cart-count-item' => count($furniture),
+    ];
 		return new JsonResponse($result, 200);
 	}
 

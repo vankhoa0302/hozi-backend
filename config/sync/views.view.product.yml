@@ -1236,10 +1236,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_p_f_discount:
-          id: field_p_f_discount
-          table: hb_product__field_p_f_discount
-          field: field_p_f_discount
+        field_p_f_price:
+          id: field_p_f_price
+          table: hb_product__field_p_f_price
+          field: field_p_f_price
           relationship: none
           group_type: group
           admin_label: ''
@@ -1302,10 +1302,10 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        field_p_f_price:
-          id: field_p_f_price
-          table: hb_product__field_p_f_price
-          field: field_p_f_price
+        field_p_f_discount:
+          id: field_p_f_discount
+          table: hb_product__field_p_f_discount
+          field: field_p_f_discount
           relationship: none
           group_type: group
           admin_label: ''
@@ -1313,8 +1313,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{% set discount = field_p_f_discount|trim|number_format %}\r\n{% set price = field_p_f_price|trim|number_format %}\r\n{{ discount // price}}"
             make_link: false
             path: ''
             absolute: false
@@ -1356,8 +1356,8 @@ display:
           settings:
             thousand_separator: ''
             decimal_separator: .
-            scale: 2
-            prefix_suffix: true
+            scale: 0
+            prefix_suffix: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -1688,8 +1688,8 @@ display:
           label: ''
           exclude: false
           alter:
-            alter_text: false
-            text: ''
+            alter_text: true
+            text: "{{ field_p_p_e_evaluate__value|trim('0')|trim('.') }}"
             make_link: false
             path: ''
             absolute: false
@@ -1727,12 +1727,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: number_decimal
-          settings:
-            thousand_separator: ''
-            decimal_separator: .
-            scale: 2
-            prefix_suffix: true
+          type: number_unformatted
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true

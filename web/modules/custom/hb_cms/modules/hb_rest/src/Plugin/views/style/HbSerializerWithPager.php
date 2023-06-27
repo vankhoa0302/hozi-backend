@@ -37,29 +37,31 @@ class HbSerializerWithPager extends Serializer {
     }
 
     // Create pager info if pagination is enabled in view.
-    $plugin_id = !empty($this->view->pager) ? $this->view->pager->getPluginId() : NULL;
-    if ($plugin_id == 'mini' || $plugin_id == 'full') {
-      $items_per_page = (int)$this->view->pager->options['items_per_page'];
-      $count = (int)$this->view->pager->getTotalItems();
-      if ($items_per_page === 0) {
-        $items_per_page = $count;
-      }
-      $pages = ceil($count / $items_per_page);
-      $current_page = $this->view->pager->getCurrentPage() ?? 0;
-      $next_page = $current_page + 1;
-      if ($next_page == $pages || $pages == 0) {
-        $next_page = 0;
-      }
+    if ($pager = $this->view->pager) {
+      $plugin_id = $pager->getPluginId();
+      if ($plugin_id == 'mini' || $plugin_id == 'full') {
+        $items_per_page = (int)$pager->options['items_per_page'];
+        $count = (int)$pager->getTotalItems();
+        if ($items_per_page === 0) {
+          $items_per_page = $count;
+        }
+        $pages = ceil($count / $items_per_page);
+        $current_page = $pager->getCurrentPage() ?? 0;
+        $next_page = $current_page + 1;
+        if ($next_page == $pages || $pages == 0) {
+          $next_page = 0;
+        }
 
-      $pager_info['pager'] = [
-        'count' => $count,
-        'pages' => (int)$pages,
-        'items_per_page' => $items_per_page,
-        'current_page' => (int)$current_page,
-        'next_page' => $next_page,
-      ];
-    } elseif ($plugin_id == 'some' && $this->view->pager->options['items_per_page'] == 1){
-      $rows = reset($rows);
+        $pager_info['pager'] = [
+          'count' => $count,
+          'pages' => (int)$pages,
+          'items_per_page' => $items_per_page,
+          'current_page' => (int)$current_page,
+          'next_page' => $next_page,
+        ];
+      } elseif ($plugin_id == 'some' && $pager->options['items_per_page'] == 1){
+        $rows = reset($rows);
+      }
     }
 
     unset($this->view->row_index);

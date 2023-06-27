@@ -161,6 +161,7 @@ class HbPaymentManager {
           'repeat' => FALSE,
         ];
         $response_salt = '';
+        $service_update_info->updateTotalProduct($cart_id);
       }
       $service_update_info->updatePaymentInfo($cart_id, $payment_info);
     }
