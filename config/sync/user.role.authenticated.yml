@@ -17,6 +17,7 @@ dependencies:
   module:
     - comment
     - contact
+    - file
     - filter
     - media
     - rest
@@ -35,7 +36,9 @@ permissions:
   - 'access shortcuts'
   - 'access site-wide contact form'
   - 'access user profiles'
+  - 'delete own files'
   - 'post comments'
+  - 'restful delete hb_rest_cart'
   - 'restful delete hb_rest_comment'
   - 'restful get hb_rest_paragraph_type_children'
   - 'restful get hb_rest_payment'

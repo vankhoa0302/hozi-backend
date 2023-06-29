@@ -12,6 +12,7 @@ plugin_id: hb_rest_cart
 granularity: resource
 configuration:
   methods:
+    - DELETE
     - PATCH
   formats:
     - json

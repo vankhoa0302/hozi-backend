@@ -34,3 +34,14 @@ function hb_product_entity_operation_alter(array &$operations, \Drupal\Core\Enti
   }
 
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function hb_product_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($_GET['label'] === '') {
+    $values = $form_state->getUserInput();
+    $values['label'] = 'There\'r nothing';
+    $form_state->setUserInput($values);
+  }
+}

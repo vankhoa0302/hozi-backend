@@ -33,15 +33,28 @@ class HbRestParagraphTypeChildrenResource extends ResourceBase {
 	 */
 	public function get($type) {
 		$fieldDefinition = \Drupal::getContainer()->get('entity_field.manager')->getFieldDefinitions('paragraph', $type);
+
 		if (!isset($fieldDefinition['field_p_f_c_type'])) {
 			throw new NotFoundHttpException($type . ' not found!');
 		}
+
     $resources = $fieldDefinition['field_p_f_c_type']->getSetting('allowed_values');
     $results = [];
+    $images = [];
+    $medias = \Drupal::entityTypeManager()->getStorage('media')->loadByProperties([
+      'field_m_i_category' => 'hb_furniture_category'
+    ]);
+    foreach ($medias as $media) {
+      $file = $media->get('field_media_image')->entity;
+      $image_uri = $file->getFileUri();
+      $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($image_uri);
+      $images[strtok($media->label(), '.')] = $image_url;
+    }
     foreach ($resources as $key => $resource) {
       $results[] = (object) [
         'id' => $key,
         'typeName' => $resource,
+        'image' => $images[$key],
       ];
     }
 		return new JsonResponse(['results' => $results], 200);
