@@ -43,6 +43,7 @@ permissions:
   - 'restful get hb_rest_paragraph_type_children'
   - 'restful get hb_rest_payment'
   - 'restful get hb_rest_payment_detail'
+  - 'restful get hb_rest_user'
   - 'restful patch hb_rest_cart'
   - 'restful patch hb_rest_comment'
   - 'restful patch hb_rest_translation'

@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - field.field.hb_cart.furniture.field_c_f_furniture
+    - field.field.hb_cart.furniture.field_c_f_pay_after_receive
     - hb_cart.hb_cart_type.furniture
+    - workflows.workflow.payment
   module:
+    - content_moderation
     - paragraphs
     - text
 id: hb_cart.furniture.default
@@ -44,6 +47,13 @@ content:
       features:
         collapse_edit_all: collapse_edit_all
         duplicate: duplicate
+    third_party_settings: {  }
+  field_c_f_pay_after_receive:
+    type: boolean_checkbox
+    weight: 101
+    region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   label:
     type: string_textfield

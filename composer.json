@@ -110,6 +110,9 @@
     },
     "enable-patching": true,
     "patches": {
+        "drupal/core": {
+            "[PP-1] Disable CSRF token check for non-CSRF vulnerable authentication providers": "https://www.drupal.org/files/issues/2019-05-17/core-X-CSRF-Token_request_header_check-3055260-3-8.7.1.patch"
+        }
     }
   }
 }

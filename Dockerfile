@@ -66,7 +66,7 @@ RUN { \
 RUN apt-get clean && apt-get update
 
 RUN apt-get install -y --no-install-recommends \
-    python2 \
+    python3 \
     git \
     vim \
     curl \

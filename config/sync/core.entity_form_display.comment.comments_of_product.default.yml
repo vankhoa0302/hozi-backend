@@ -5,6 +5,7 @@ dependencies:
   config:
     - comment.type.comments_of_product
     - field.field.comment.comments_of_product.comment_body
+    - field.field.comment.comments_of_product.field_c_c_o_p_rating
   module:
     - text
 id: comment.comments_of_product.default
@@ -25,6 +26,13 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
+  field_c_c_o_p_rating:
+    type: number
+    weight: 12
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 2
@@ -39,5 +47,10 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

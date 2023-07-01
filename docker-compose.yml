@@ -28,7 +28,6 @@ services:
     container_name: ttv
     ports:
       - "8109:443"
-      - "80:80"
     depends_on:
       - ttv_db
     build: .

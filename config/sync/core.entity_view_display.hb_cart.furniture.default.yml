@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.hb_cart.furniture.field_c_f_furniture
+    - field.field.hb_cart.furniture.field_c_f_pay_after_receive
     - hb_cart.hb_cart_type.furniture
   module:
     - entity_reference_revisions
@@ -53,6 +54,16 @@ content:
       link: ''
     third_party_settings: {  }
     weight: 21
+    region: content
+  field_c_f_pay_after_receive:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 22
     region: content
   label:
     type: string

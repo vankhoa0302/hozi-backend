@@ -43,6 +43,7 @@ class HbRestCommentResource extends ResourceBase {
 
     if ($data_guard_service->guardRequiredData([
       'comment',
+      'rating',
     ], $data)) {
       $userData = \Drupal::service('user.data');
       return new JsonResponse(['message' => $userData->get('hb_guard', \Drupal::currentUser()->id(), 'guard_field') . ' is missing!'], 400);
@@ -56,6 +57,7 @@ class HbRestCommentResource extends ResourceBase {
       'comment_type' => 'comments_of_product',
       'subject' => "User {$uid}:",
       'comment_body' => $data['comment'],
+      'field_c_c_o_p_rating' => $data['rating'],
       'status' => 1,
     ];
     $comment = Comment::create($values);

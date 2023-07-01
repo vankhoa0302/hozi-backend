@@ -4,6 +4,7 @@ namespace Drupal\hb_payment\Plugin\rest\resource;
 
 use Drupal\hb_cart\Entity\HbCart;
 use Drupal\hb_payment\HbPaymentFactory;
+use Drupal\hb_payment\Services\HbPaymentUpdateInfo;
 use Drupal\hb_product\Entity\HbProduct;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\rest\Plugin\ResourceBase;
@@ -24,8 +25,8 @@ use Symfony\Component\HttpFoundation\Request;
  * )
  *
  */
-class HbRestPaymentResource extends ResourceBase {
-
+class HbRestPaymentResource extends ResourceBase
+{
 
 
   /**
@@ -37,7 +38,8 @@ class HbRestPaymentResource extends ResourceBase {
    * @return JsonResponse
    *   The HTTP response object.
    */
-  public function post(Request $request, array $data) {
+  public function post(Request $request, array $data)
+  {
     $uid = \Drupal::currentUser()->id();
 
     if (\Drupal::service('hb_guard.data_guard')->guardRequiredData([
@@ -49,13 +51,29 @@ class HbRestPaymentResource extends ResourceBase {
     }
 
     $cart = HbCart::load($data['cart_id']);
-
     if (empty($cart)) {
       return new JsonResponse(['message' => 'Cart not found!'], 404);
     }
 
+    $cart_are_in_stack = $cart->get('field_c_f_pay_after_receive')->value;
+    if (!$cart_are_in_stack and $cart->get('moderation_state')->getString() != 'published') {
+      return new JsonResponse(['message' => 'Cart is paid or waiting for payment!'], 400);
+    }
+
     if ($cart->get('uid')->target_id != $uid) {
       return new JsonResponse(['message' => 'Forbidden!'], 403);
+    }
+
+    if (!$cart_are_in_stack and $request->get('pay_after_receive')) {
+      /** @var HbPaymentUpdateInfo $service_update_info */
+      $service_update_info = \Drupal::service('hb_payment.update_info');
+      $cart->set('status', 0);
+      $cart->set('moderation_state', 'draft');
+      $cart->set('field_c_f_pay_after_receive', 1);
+      $cart->save();
+      $service_update_info->updatePaymentStatus($cart->id(), FALSE);
+      $service_update_info->updateTotalProduct($cart->id());
+      return new JsonResponse(['message' => 'Success!'], 200);
     }
 
     $payment_factory = new HbPaymentFactory($cart);
@@ -71,14 +89,15 @@ class HbRestPaymentResource extends ResourceBase {
     ], 200);
   }
 
-  public function get(Request $request) {
+  public function get(Request $request)
+  {
     $user = User::load(\Drupal::currentUser()->id());
     $state = $request->get('state');
     $props = [
       'uid' => $user->id()
     ];
     if (!is_null($state)) {
-      $props['status'] = (boolean) $state;
+      $props['status'] = (boolean)$state;
     }
     $results = [];
     $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties($props);
@@ -91,7 +110,7 @@ class HbRestPaymentResource extends ResourceBase {
         'pay_date' => $payment->get('info')->vnp_PayDate,
         'bank_code' => $payment->get('info')->vnp_BankCode,
         'card_type' => $payment->get('info')->vnp_CardType,
-        'status' => (boolean) $payment->get('status')->getString(),
+        'status' => (boolean)$payment->get('status')->getString(),
       ];
     }
     return new JsonResponse($results, 200);

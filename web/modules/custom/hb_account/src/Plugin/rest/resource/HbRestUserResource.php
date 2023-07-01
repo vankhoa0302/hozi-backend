@@ -134,10 +134,12 @@ class HbRestUserResource extends ResourceBase {
     $results['results'] = [
       'user_id' => $user->id(),
       'user_name' => $user->label(),
-      'user_picture' => \Drupal::service('file_url_generator')
-        ->generateAbsoluteString($user_picture->getFileUri()),
       'user_info' => [],
     ];
+    if (!empty($user_picture)) {
+      $results['results']['user_picture'] = \Drupal::service('file_url_generator')
+        ->generateAbsoluteString($user_picture->getFileUri());
+    }
     $user_info = $user->get(self::FIELD_USER_INFO)->getValue();
     foreach ($user_info as $item) {
       $para = Paragraph::load($item['target_id']);

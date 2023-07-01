@@ -902,7 +902,6 @@ display:
       path: api/cart
       auth:
         - oauth2
-        - cookie
     cache_metadata:
       max-age: -1
       contexts:

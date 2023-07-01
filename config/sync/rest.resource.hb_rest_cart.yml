@@ -6,7 +6,6 @@ dependencies:
     - hb_cart
     - serialization
     - simple_oauth
-    - user
 id: hb_rest_cart
 plugin_id: hb_rest_cart
 granularity: resource
@@ -18,4 +17,3 @@ configuration:
     - json
   authentication:
     - oauth2
-    - cookie

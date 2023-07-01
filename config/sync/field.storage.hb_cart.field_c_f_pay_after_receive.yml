@@ -1,0 +1,18 @@
+uuid: 5155631c-9550-4cef-80cd-a96eab50de74
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_cart
+id: hb_cart.field_c_f_pay_after_receive
+field_name: field_c_f_pay_after_receive
+entity_type: hb_cart
+type: boolean
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

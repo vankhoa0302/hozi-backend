@@ -1,0 +1,23 @@
+uuid: df9a3566-7914-4c03-8038-bd7e2d5d0389
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.comments_of_product
+    - field.storage.comment.field_c_c_o_p_rating
+id: comment.comments_of_product.field_c_c_o_p_rating
+field_name: field_c_c_o_p_rating
+entity_type: comment
+bundle: comments_of_product
+label: Rating
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0.0
+  max: 5.0
+  prefix: ''
+  suffix: ''
+field_type: float

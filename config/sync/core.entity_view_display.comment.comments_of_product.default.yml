@@ -5,6 +5,7 @@ dependencies:
   config:
     - comment.type.comments_of_product
     - field.field.comment.comments_of_product.comment_body
+    - field.field.comment.comments_of_product.field_c_c_o_p_rating
   module:
     - text
 id: comment.comments_of_product.default
@@ -18,6 +19,17 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 0
+    region: content
+  field_c_c_o_p_rating:
+    type: number_decimal
+    label: above
+    settings:
+      thousand_separator: ''
+      decimal_separator: .
+      scale: 2
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 101
     region: content
   links:
     settings: {  }

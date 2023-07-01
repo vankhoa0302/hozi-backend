@@ -1,0 +1,21 @@
+uuid: 3d5d12b8-6a78-4cbe-aa61-943610625de2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_cart.field_c_f_pay_after_receive
+    - hb_cart.hb_cart_type.furniture
+id: hb_cart.furniture.field_c_f_pay_after_receive
+field_name: field_c_f_pay_after_receive
+entity_type: hb_cart
+bundle: furniture
+label: 'Pay after receive'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
