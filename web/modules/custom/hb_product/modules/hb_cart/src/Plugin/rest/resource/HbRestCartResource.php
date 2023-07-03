@@ -23,7 +23,8 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @see \Drupal\rest\Plugin\rest\resource\EntityResource
  */
-class HbRestCartResource extends ResourceBase {
+class HbRestCartResource extends ResourceBase
+{
 
   /**
    * Responds to PATCH requests.
@@ -36,7 +37,8 @@ class HbRestCartResource extends ResourceBase {
    * @return JsonResponse
    *   The HTTP response object.
    */
-  public function patch(array $data) {
+  public function patch(array $data)
+  {
     $service_guard_data = \Drupal::service('hb_guard.data_guard');
     if ($service_guard_data->guardRequiredData([
       'product_id',
@@ -118,7 +120,8 @@ class HbRestCartResource extends ResourceBase {
     return new JsonResponse($result, 200);
   }
 
-  public function delete(Request $request) {
+  public function delete(Request $request)
+  {
     $carts = \Drupal::entityTypeManager()->getStorage('hb_cart')->loadByProperties([
       'bundle' => 'furniture',
       'moderation_state' => 'draft',
@@ -135,15 +138,14 @@ class HbRestCartResource extends ResourceBase {
           return new JsonResponse(['message' => 'Product not found!'], 404);
         }
         $furniture = !empty($cart->get('field_c_f_furniture')) ? $cart->get('field_c_f_furniture')->getValue() : [];
-        foreach ($furniture as $item) {
+        foreach ($furniture as $key => $item) {
           $furniture_cart = Paragraph::load($item['target_id']);
           if ($furniture_cart->get('field_p_f_c_furniture')->target_id == $request->get('product_id')) {
+            unset($furniture[$key]);
             $furniture_cart->delete();
-            $furniture = !empty($cart->get('field_c_f_furniture')) ? $cart->get('field_c_f_furniture')->getValue() : [];
             $cart->set('field_c_f_furniture', $furniture)->save();
           }
         }
-
       } else {
         $cart->delete();
       }
