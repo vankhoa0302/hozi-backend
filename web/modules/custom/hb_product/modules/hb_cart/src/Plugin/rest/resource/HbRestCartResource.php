@@ -8,6 +8,7 @@ use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\rest\Plugin\ResourceBase;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Represents Cart records as resources.
@@ -58,7 +59,7 @@ class HbRestCartResource extends ResourceBase {
       $furniture_cart = Paragraph::create([
         'type' => 'furniture_cart',
         'field_p_f_c_furniture' => $product->id(),
-        'field_p_f_c_quantity' => $data['product_quantity'],
+        'field_p_f_c_quantity' => 0,
       ]);
       $furniture_cart->save();
       $cart = HbCart::create([
@@ -89,6 +90,7 @@ class HbRestCartResource extends ResourceBase {
         }
         $furniture_cart->set('field_p_f_c_quantity', $field_p_f_c_quantity + $data['product_quantity']);
         $furniture_cart->save();
+
         $updated = TRUE;
       }
     }
@@ -106,14 +108,15 @@ class HbRestCartResource extends ResourceBase {
       ];
       $cart->set('field_c_f_furniture', $furniture)->save();
     }
+
     $result['results'] = [
       'success' => true,
-      'cart-count-item' => count($furniture),
+      'cart_count_item' => count($furniture),
     ];
     return new JsonResponse($result, 200);
   }
 
-  public function delete() {
+  public function delete(Request $request) {
     $carts = \Drupal::entityTypeManager()->getStorage('hb_cart')->loadByProperties([
       'bundle' => 'furniture',
       'uid' => \Drupal::currentUser()->id(),
@@ -123,7 +126,24 @@ class HbRestCartResource extends ResourceBase {
       if (\Drupal::currentUser()->id() != $cart->getOwner()->id()) {
         return new JsonResponse(['message' => 'Forbidden!'], 403);
       }
-      $cart->delete();
+      if (!empty($request->get('product_id'))) {
+        $service_guard_data = \Drupal::service('hb_guard.data_guard');
+        if (!$service_guard_data->existEntity(HbProduct::class, $request->get('product_id'))) {
+          return new JsonResponse(['message' => 'Product not found!'], 404);
+        }
+        $furniture = !empty($cart->get('field_c_f_furniture')) ? $cart->get('field_c_f_furniture')->getValue() : [];
+        foreach ($furniture as $item) {
+          $furniture_cart = Paragraph::load($item['target_id']);
+          if ($furniture_cart->get('field_p_f_c_furniture')->target_id == $request->get('product_id')) {
+            $furniture_cart->delete();
+            $furniture = !empty($cart->get('field_c_f_furniture')) ? $cart->get('field_c_f_furniture')->getValue() : [];
+            $cart->set('field_c_f_furniture', $furniture)->save();
+          }
+        }
+
+      } else {
+        $cart->delete();
+      }
       return new JsonResponse(['message' => 'Success!'], 200);
     }
     return new JsonResponse(['message' => 'Cart is empty!'], 400);
