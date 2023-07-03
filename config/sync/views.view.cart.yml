@@ -943,10 +943,26 @@ display:
     position: 1
     display_options:
       pager:
-        type: some
+        type: full
         options:
           offset: 0
-          items_per_page: 1
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: true
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
       style:
         type: hb_serializer_with_pager
         options:
@@ -989,6 +1005,47 @@ display:
             field_p_f_c_type:
               alias: product_type
               raw_output: false
+      defaults:
+        relationships: false
+      relationships:
+        uid:
+          id: uid
+          table: hb_cart_field_data
+          field: uid
+          relationship: none
+          group_type: group
+          admin_label: User
+          entity_type: hb_cart
+          entity_field: uid
+          plugin_id: standard
+          required: true
+        field_c_f_furniture:
+          id: field_c_f_furniture
+          table: hb_cart__field_c_f_furniture
+          field: field_c_f_furniture
+          relationship: none
+          group_type: group
+          admin_label: 'field_c_f_furniture: Paragraph'
+          plugin_id: standard
+          required: false
+        field_p_f_c_furniture:
+          id: field_p_f_c_furniture
+          table: paragraph__field_p_f_c_furniture
+          field: field_p_f_c_furniture
+          relationship: field_c_f_furniture
+          group_type: group
+          admin_label: 'field_p_f_c_furniture: Product'
+          plugin_id: standard
+          required: true
+        field_p_f_attributes:
+          id: field_p_f_attributes
+          table: hb_product__field_p_f_attributes
+          field: field_p_f_attributes
+          relationship: field_p_f_c_furniture
+          group_type: group
+          admin_label: 'field_p_f_attributes: Paragraph'
+          plugin_id: standard
+          required: false
       display_description: ''
       display_extenders: {  }
       path: api/cart
@@ -1000,6 +1057,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - request_format
+        - url.query_args
         - user
         - user.roles
       tags:
