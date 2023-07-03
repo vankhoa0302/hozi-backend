@@ -56,7 +56,8 @@ class HbRestPaymentResource extends ResourceBase
     }
 
     $cart_are_in_stack = $cart->get('field_c_f_pay_after_receive')->value;
-    if (!$cart_are_in_stack and $cart->get('moderation_state')->getString() != 'published') {
+    $service_cart_validate = \Drupal::service('hb_cart.validate');
+    if (!$cart_are_in_stack and !$service_cart_validate->isCurrentCart($cart)) {
       return new JsonResponse(['message' => 'Cart is paid or waiting for payment!'], 400);
     }
 
@@ -68,7 +69,7 @@ class HbRestPaymentResource extends ResourceBase
       /** @var HbPaymentUpdateInfo $service_update_info */
       $service_update_info = \Drupal::service('hb_payment.update_info');
       $cart->set('status', 0);
-      $cart->set('moderation_state', 'draft');
+      $cart->set('moderation_state', 'in_progressing');
       $cart->set('field_c_f_pay_after_receive', 1);
       $cart->save();
       $service_update_info->updatePaymentStatus($cart->id(), FALSE);
@@ -102,7 +103,9 @@ class HbRestPaymentResource extends ResourceBase
     $results = [];
     $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties($props);
     foreach ($payments as $payment) {
-      $results['results'][$payment->id()] = [
+      $results['results'][] = [
+        'id' => $payment->id(),
+        'cart_id' => $payment->get('cart')->getString(),
         'name' => t('Đơn hàng số ' . $payment->get('cart')->getString(), [], ['langcode' => 'vi']),
         'amount' => $payment->get('info')->vnp_Amount,
         'created' => $payment->get('created')->getString(),

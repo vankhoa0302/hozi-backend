@@ -39,6 +39,7 @@ class HbRestPaymentDetailResource extends ResourceBase {
     foreach ($payments as $payment) {
       $results['results'] = [
         'id' => $payment->id(),
+        'cart_id' => $payment->get('cart')->getString(),
         'name' => t('Đơn hàng số ' . $payment->get('cart')->getString(), [], ['langcode' => 'vi']),
         'transfer_content' => $payment->get('info')->vnp_OrderInfo,
         'amount' => $payment->get('info')->vnp_Amount,

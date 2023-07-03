@@ -11,31 +11,103 @@ label: Payment
 type: content_moderation
 type_settings:
   states:
+    approved:
+      label: Approved
+      weight: 2
+      published: false
+      default_revision: true
+    cancel:
+      label: Cancel
+      weight: 4
+      published: false
+      default_revision: true
     draft:
       label: "\tAwaiting payment"
       weight: -2
       published: false
       default_revision: false
+    in_progressing:
+      label: In-progressing
+      weight: 3
+      published: false
+      default_revision: true
     published:
       label: Completed
       weight: 0
       published: true
       default_revision: true
+    waiting_for_approve:
+      label: 'Waiting for approve'
+      weight: 1
+      published: false
+      default_revision: true
   transitions:
+    approved:
+      label: Approved
+      from:
+        - approved
+        - cancel
+        - draft
+        - in_progressing
+        - published
+        - waiting_for_approve
+      to: approved
+      weight: 5
     awaiting_payment:
       label: 'Awaiting payment'
       from:
+        - approved
+        - cancel
         - draft
+        - in_progressing
         - published
+        - waiting_for_approve
       to: draft
       weight: 3
+    cancel:
+      label: Cancel
+      from:
+        - approved
+        - cancel
+        - draft
+        - in_progressing
+        - published
+        - waiting_for_approve
+      to: cancel
+      weight: 7
     completed:
       label: Completed
       from:
+        - approved
+        - cancel
         - draft
+        - in_progressing
         - published
+        - waiting_for_approve
       to: published
       weight: 2
+    in_progressing:
+      label: In-progressing
+      from:
+        - approved
+        - cancel
+        - draft
+        - in_progressing
+        - published
+        - waiting_for_approve
+      to: in_progressing
+      weight: 6
+    waiting_for_approve:
+      label: 'Waiting for approve'
+      from:
+        - approved
+        - cancel
+        - draft
+        - in_progressing
+        - published
+        - waiting_for_approve
+      to: waiting_for_approve
+      weight: 4
   entity_types:
     hb_cart:
       - furniture

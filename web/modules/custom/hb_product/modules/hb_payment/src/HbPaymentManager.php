@@ -137,7 +137,9 @@ class HbPaymentManager {
     $service_update_info = \Drupal::service('hb_payment.update_info');
 
     $valid_signature = \Drupal::service('hb_payment.validate')->validSignature();
+    $cart = HbCart::load($cart_id);
     if ($valid_signature) {
+      $cart->set('status', 0);
       $response = [
         'message' => '<div>' . t('GD Không thành công', [], [
             'langcode' => 'vi'
@@ -145,13 +147,11 @@ class HbPaymentManager {
         'type' => 'warning',
         'repeat' => TRUE,
       ];
+      $cart->set('moderation_state', 'cancel');
 
       if ($payment_info['vnp_ResponseCode'] == '00') {
         $service_update_info->updatePaymentStatus($cart_id, TRUE);
-        $cart = HbCart::load($cart_id);
-        $cart->set('status', 0);
         $cart->set('moderation_state', 'published');
-        $cart->save();
 
         $response = [
           'message' => '<div>' . t('GD Thành công', [], [
@@ -165,7 +165,7 @@ class HbPaymentManager {
       }
       $service_update_info->updatePaymentInfo($cart_id, $payment_info);
     }
-
+    $cart->save();
     $response_message = Markup::create($response['message'] . $response_salt);
 
     \Drupal::messenger()->addMessage($response_message, $response['type'], $response['repeat']);

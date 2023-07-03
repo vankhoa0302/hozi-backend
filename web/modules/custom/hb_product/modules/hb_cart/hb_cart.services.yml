@@ -1,3 +1,5 @@
 services:
   hb_cart.calculate:
     class: Drupal\hb_cart\Services\HbCartCalculate
+  hb_cart.validate:
+    class: Drupal\hb_cart\Services\HbCartValidate

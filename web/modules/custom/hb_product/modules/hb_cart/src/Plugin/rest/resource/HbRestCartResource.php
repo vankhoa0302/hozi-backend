@@ -53,8 +53,10 @@ class HbRestCartResource extends ResourceBase {
     $product = HbProduct::load($data['product_id']);
     $carts = \Drupal::entityTypeManager()->getStorage('hb_cart')->loadByProperties([
       'bundle' => 'furniture',
+      'moderation_state' => 'draft',
       'uid' => \Drupal::currentUser()->id(),
     ]);
+
     if (empty($carts)) {
       $furniture_cart = Paragraph::create([
         'type' => 'furniture_cart',
@@ -119,6 +121,7 @@ class HbRestCartResource extends ResourceBase {
   public function delete(Request $request) {
     $carts = \Drupal::entityTypeManager()->getStorage('hb_cart')->loadByProperties([
       'bundle' => 'furniture',
+      'moderation_state' => 'draft',
       'uid' => \Drupal::currentUser()->id(),
     ]);
     if (!empty($carts)) {
