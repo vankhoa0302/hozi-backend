@@ -1,0 +1,43 @@
+uuid: b19da920-206b-44e1-8e71-ce964c443d5c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_slider
+    - node.type.slider
+    - paragraphs.paragraphs_type.slider
+  module:
+    - entity_reference_revisions
+id: node.slider.field_slider
+field_name: field_slider
+entity_type: node
+bundle: slider
+label: Slider
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      slider: slider
+    negate: 0
+    target_bundles_drag_drop:
+      furniture_cart:
+        weight: 6
+        enabled: false
+      furniture_category:
+        weight: 7
+        enabled: false
+      product_evaluate:
+        weight: 8
+        enabled: false
+      slider:
+        weight: 9
+        enabled: true
+      user_contact_info:
+        weight: 10
+        enabled: false
+field_type: entity_reference_revisions
