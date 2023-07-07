@@ -87,7 +87,15 @@ class HbPaymentListBuilder extends EntityListBuilder {
     /** @var \Drupal\hb_payment\HbPaymentInterface $entity */
     $row['id'] = $entity->toLink();
     $row['cart'] = $entity->get('cart')->entity->toLink();
-    $row['status'] = $entity->get('status')->value ? $this->t('Paid') : $this->t('Awaiting payment');
+    $status = [
+      'draft' => 'Awaiting payment',
+      'completed' => 'Awaiting payment',
+      'waiting_for_approve' => 'Waiting for approve',
+      'approved' => 'Approved',
+      'in_progressing' => 'In-progressing',
+      'cancel' => 'Cancel',
+    ];
+    $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
     $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),

@@ -131,9 +131,13 @@ class HbRestUserResource extends ResourceBase {
     $user = User::load(\Drupal::currentUser()->id());
     /** @var File $user_picture */
     $user_picture = $user->get(self::FIELD_PICTURE)->entity;
+    $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties([
+      'uid' => $user->id()
+    ]);
     $results['results'] = [
       'user_id' => $user->id(),
       'user_name' => $user->label(),
+      'order_count' => count($payments),
       'user_info' => [],
     ];
     if (!empty($user_picture)) {

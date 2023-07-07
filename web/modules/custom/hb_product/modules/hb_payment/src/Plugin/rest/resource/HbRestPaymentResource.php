@@ -93,28 +93,42 @@ class HbRestPaymentResource extends ResourceBase
   public function get(Request $request)
   {
     $user = User::load(\Drupal::currentUser()->id());
-    $state = $request->get('state');
+    $transaction_status = $request->get('transaction_status');
     $props = [
       'uid' => $user->id()
     ];
-    if (!is_null($state)) {
-      $props['status'] = (boolean)$state;
-    }
     $results = [];
     $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties($props);
+    $status = [
+      'draft' => 'Awaiting payment',
+      'completed' => 'Awaiting payment',
+      'waiting_for_approve' => 'Waiting for approve',
+      'approved' => 'Approved',
+      'in_progressing' => 'In-progressing',
+      'cancel' => 'Cancel',
+    ];
+    $results['results'] = [];
     foreach ($payments as $payment) {
-      $results['results'][] = [
-        'id' => $payment->id(),
-        'cart_id' => $payment->get('cart')->getString(),
-        'name' => t('Đơn hàng số ' . $payment->get('cart')->getString(), [], ['langcode' => 'vi']),
-        'amount' => $payment->get('info')->vnp_Amount,
-        'created' => $payment->get('created')->getString(),
-        'changed' => $payment->get('changed')->getString(),
-        'pay_date' => $payment->get('info')->vnp_PayDate,
-        'bank_code' => $payment->get('info')->vnp_BankCode,
-        'card_type' => $payment->get('info')->vnp_CardType,
-        'status' => (boolean)$payment->get('status')->getString(),
-      ];
+      $s = $payment->get('cart')->entity->get('moderation_state')->value;
+      $filter_moderation_state = TRUE;
+      if (!is_null($transaction_status)) {
+        $filter_moderation_state = ($s == $transaction_status);
+      }
+      if ($s != 'draft' && $s != 'published' && $filter_moderation_state) {
+        $results['results'][] = [
+          'id' => $payment->id(),
+          'cart_id' => $payment->get('cart')->getString(),
+          'name' => t('Đơn hàng số ' . $payment->get('cart')->getString(), [], ['langcode' => 'vi']),
+//        'amount' => $payment->get('info')->vnp_Amount,
+          'amount' => \Drupal::service('hb_cart.calculate')->calculateTotalAmount($payment->get('cart')->entity),
+          'created' => $payment->get('created')->getString(),
+          'changed' => $payment->get('changed')->getString(),
+          'pay_date' => $payment->get('info')->vnp_PayDate,
+          'bank_code' => $payment->get('info')->vnp_BankCode,
+          'card_type' => $payment->get('info')->vnp_CardType,
+          'status' => $status[$s],
+        ];
+      }
     }
     return new JsonResponse($results, 200);
   }

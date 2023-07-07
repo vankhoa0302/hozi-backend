@@ -146,6 +146,10 @@ class HbRestCartResource extends ResourceBase
             $cart->set('field_c_f_furniture', $furniture)->save();
           }
         }
+        return new JsonResponse([
+          'message' => 'Success!',
+          'quantity' => count($furniture),
+        ], 200);
       } else {
         $cart->delete();
       }
