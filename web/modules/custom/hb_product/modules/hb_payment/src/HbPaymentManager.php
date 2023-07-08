@@ -147,7 +147,6 @@ class HbPaymentManager {
         'type' => 'warning',
         'repeat' => TRUE,
       ];
-      $cart->set('moderation_state', 'cancel');
 
       if ($payment_info['vnp_ResponseCode'] == '00') {
         $service_update_info->updatePaymentStatus($cart_id, TRUE);

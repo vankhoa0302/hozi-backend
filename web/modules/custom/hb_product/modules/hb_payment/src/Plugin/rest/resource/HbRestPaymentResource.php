@@ -99,23 +99,14 @@ class HbRestPaymentResource extends ResourceBase
     ];
     $results = [];
     $payments = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties($props);
-    $status = [
-      'draft' => 'Awaiting payment',
-      'completed' => 'Awaiting payment',
-      'waiting_for_approve' => 'Waiting for approve',
-      'approved' => 'Approved',
-      'in_progressing' => 'In-progressing',
-      'cancel' => 'Cancel',
-      'shipping' => 'Shipping',
-    ];
     $results['results'] = [];
     foreach ($payments as $payment) {
-      $s = $payment->get('cart')->entity->get('moderation_state')->value;
+      $status = $payment->get('cart')->entity->get('moderation_state')->value;
       $filter_moderation_state = TRUE;
       if (!is_null($transaction_status)) {
-        $filter_moderation_state = ($s == $transaction_status);
+        $filter_moderation_state = ($status == $transaction_status);
       }
-      if ($s != 'draft' && $s != 'published' && $filter_moderation_state) {
+      if ($status != 'draft' && $status != 'published' && $filter_moderation_state) {
         $results['results'][] = [
           'id' => $payment->id(),
           'cart_id' => $payment->get('cart')->getString(),
@@ -127,7 +118,7 @@ class HbRestPaymentResource extends ResourceBase
           'pay_date' => $payment->get('info')->vnp_PayDate,
           'bank_code' => $payment->get('info')->vnp_BankCode,
           'card_type' => $payment->get('info')->vnp_CardType,
-          'status' => $status[$s],
+          'status' => $status,
         ];
       }
     }
