@@ -58,7 +58,7 @@ class HbRestUserRegisterResource extends ResourceBase {
       $user->enforceIsNew();
       $user->setEmail($data['mail']);
       $user->setUsername($data['name']);
-      $user->addRole('authenticated');
+      $user->set('roles', ['authenticated']);
 			$user->save();
 		} catch (\Exception $e) {
 			$this->logger->error($e);
