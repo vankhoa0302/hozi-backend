@@ -29,11 +29,11 @@ Access phpmyadmin http://localhost:8105
 
 # Account
 admin
-123456
+12345678
 
 # Setup api
-client_id: 53e3332f-2a75-4492-9a6c-a92bdc37561b
-client_secret: encPajhJR4nQgpA5EkfL6XJL0ijYkTd2
+client_id: 58dc70b3-f6b8-4a80-a9fc-8598f4ff62b7
+client_secret: 53e3332f-2a75-4492-9a6c-a92bdc37561b
 
 # Generate product in https://ttv-local.com:8109/admin/config/development/generate/product
 Select furniture, in tab user select member then click generate

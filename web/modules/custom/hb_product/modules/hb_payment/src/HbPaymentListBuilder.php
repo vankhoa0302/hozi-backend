@@ -94,6 +94,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
       'approved' => 'Approved',
       'in_progressing' => 'In-progressing',
       'cancel' => 'Cancel',
+      'shipping' => 'Shipping',
     ];
     $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
     $row['uid']['data'] = [

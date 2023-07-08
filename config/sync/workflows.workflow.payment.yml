@@ -36,6 +36,11 @@ type_settings:
       weight: 0
       published: true
       default_revision: true
+    shipping:
+      label: Shipping
+      weight: 5
+      published: false
+      default_revision: true
     waiting_for_approve:
       label: 'Waiting for approve'
       weight: 1
@@ -97,6 +102,18 @@ type_settings:
         - waiting_for_approve
       to: in_progressing
       weight: 6
+    shipping:
+      label: Shipping
+      from:
+        - approved
+        - cancel
+        - draft
+        - in_progressing
+        - published
+        - shipping
+        - waiting_for_approve
+      to: shipping
+      weight: 8
     waiting_for_approve:
       label: 'Waiting for approve'
       from:

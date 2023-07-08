@@ -106,6 +106,7 @@ class HbRestPaymentResource extends ResourceBase
       'approved' => 'Approved',
       'in_progressing' => 'In-progressing',
       'cancel' => 'Cancel',
+      'shipping' => 'Shipping',
     ];
     $results['results'] = [];
     foreach ($payments as $payment) {
