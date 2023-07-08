@@ -46,6 +46,7 @@ permissions:
   - 'restful get hb_rest_user'
   - 'restful patch hb_rest_cart'
   - 'restful patch hb_rest_comment'
+  - 'restful patch hb_rest_payment_detail'
   - 'restful patch hb_rest_translation'
   - 'restful patch hb_rest_user'
   - 'restful post hb_rest'
