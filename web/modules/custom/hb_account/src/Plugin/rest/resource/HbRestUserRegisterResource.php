@@ -54,7 +54,7 @@ class HbRestUserRegisterResource extends ResourceBase {
 				return new JsonResponse(['message' => 'User\'s exist!'], 406);
 			}
       $user = User::create();
-      $user->setPassword($data['password']);
+      $user->setPassword($data['pass']);
       $user->enforceIsNew();
       $user->setEmail($data['mail']);
       $user->setUsername($data['name']);
