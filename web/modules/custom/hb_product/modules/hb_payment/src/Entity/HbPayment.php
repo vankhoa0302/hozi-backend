@@ -105,16 +105,18 @@ class HbPayment extends ContentEntityBase implements HbPaymentInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['address'] = BaseFieldDefinition::create('text')
+    $fields['address'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Address'))
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
+        'label' => 'hidden',
         'type' => 'text_default',
-        'weight' => 10,
+        'weight' => 0,
       ])
       ->setDisplayConfigurable('view', TRUE)
       ->setDisplayOptions('form', [
-        'type' => 'text_textfield',
-        'weight' => 10,
+        'type' => 'text_textarea',
+        'weight' => 0,
       ])
       ->setDisplayConfigurable('form', TRUE);
 
