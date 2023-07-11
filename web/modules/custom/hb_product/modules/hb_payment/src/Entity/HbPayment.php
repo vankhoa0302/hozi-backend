@@ -118,6 +118,7 @@ class HbPayment extends ContentEntityBase implements HbPaymentInterface {
         'type' => 'text_textarea',
         'weight' => 0,
       ])
+      ->setSetting('allowed_formats', [0 => 'plain_text'])
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
