@@ -36,6 +36,27 @@ class HbPaymentUpdateInfo {
     }
   }
 
+  public function updatePaymentAddress(int $cart_id, $address): void {
+    $exist_payment = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties([
+      'cart' => $cart_id
+    ]);
+
+    if (!$exist_payment) {
+      HbPayment::create([
+        'uid' => \Drupal::currentUser()->id(),
+        'cart' => $cart_id,
+      ])->save();
+    }
+
+    \Drupal::database()->update('hb_payment_field_data')
+      ->fields([
+        'address' => $address
+      ])
+      ->condition('cart', $cart_id)
+      ->execute();
+  }
+
+
   public function updatePaymentInfo(int $cart_id, array $info): void {
     $exist_payment = \Drupal::entityTypeManager()->getStorage('hb_payment')->loadByProperties([
       'cart' => $cart_id

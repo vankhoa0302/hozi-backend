@@ -73,6 +73,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
     $header['id'] = $this->t('ID');
     $header['cart'] = $this->t('Cart');
     $header['status'] = $this->t('Status');
+    $header['address'] = $this->t('Address');
     $header['uid'] = $this->t('Author');
     $header['created'] = $this->t('Created');
     $header['changed'] = $this->t('Updated');
@@ -97,6 +98,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
       'shipping' => 'Shipping',
     ];
     $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
+    $row['address'] = $entity->get('address')->getString();
     $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),

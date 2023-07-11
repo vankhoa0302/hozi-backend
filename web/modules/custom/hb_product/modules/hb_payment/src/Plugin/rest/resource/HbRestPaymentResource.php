@@ -41,10 +41,13 @@ class HbRestPaymentResource extends ResourceBase
   public function post(Request $request, array $data)
   {
     $uid = \Drupal::currentUser()->id();
+    /** @var HbPaymentUpdateInfo $service_update_info */
+    $service_update_info = \Drupal::service('hb_payment.update_info');
 
     if (\Drupal::service('hb_guard.data_guard')->guardRequiredData([
       'cart_id',
       'ip_address',
+      'address',
     ], $data)) {
       $userData = \Drupal::service('user.data');
       return new JsonResponse(['message' => $userData->get('hb_guard', $uid, 'guard_field') . ' is missing!'], 400);
@@ -66,8 +69,6 @@ class HbRestPaymentResource extends ResourceBase
     }
 
     if (!$cart_are_in_stack and $request->get('pay_after_receive')) {
-      /** @var HbPaymentUpdateInfo $service_update_info */
-      $service_update_info = \Drupal::service('hb_payment.update_info');
       $cart->set('status', 0);
       $cart->set('moderation_state', 'in_progressing');
       $cart->set('field_c_f_pay_after_receive', 1);
@@ -77,6 +78,7 @@ class HbRestPaymentResource extends ResourceBase
       return new JsonResponse(['message' => 'Success!'], 200);
     }
 
+    $service_update_info->updatePaymentAddress($cart->id(), $data['address']);
     $payment_factory = new HbPaymentFactory($cart);
     $vnp_ReturnUrl = \Drupal::config('hb_payment.settings')->get('redirect_after_payment');
     $payment_factory->setReturnUrl($vnp_ReturnUrl);
@@ -119,6 +121,7 @@ class HbRestPaymentResource extends ResourceBase
           'bank_code' => $payment->get('info')->vnp_BankCode,
           'card_type' => $payment->get('info')->vnp_CardType,
           'status' => $status,
+          'address' => $payment->get('address')->getString(),
         ];
       }
     }

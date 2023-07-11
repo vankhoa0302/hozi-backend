@@ -59,6 +59,7 @@ class HbRestPaymentDetailResource extends ResourceBase {
         'bank_code' => $payment->get('info')->vnp_BankCode,
         'card_type' => $payment->get('info')->vnp_CardType,
         'status' => $payment->get('cart')->entity->get('moderation_state')->value,
+        'address' => $payment->get('address')->getString(),
       ];
     }
     return new JsonResponse($results, 200);
@@ -95,6 +96,7 @@ class HbRestPaymentDetailResource extends ResourceBase {
       'bank_code' => $payment->get('info')->vnp_BankCode,
       'card_type' => $payment->get('info')->vnp_CardType,
       'status' => $cart->get('moderation_state')->value,
+      'address' => $payment->get('address')->getString(),
     ];
 
     return new JsonResponse($results, 200);
