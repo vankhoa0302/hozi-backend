@@ -82,7 +82,6 @@ class HbCartListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /** @var \Drupal\hb_product\HbCartInterface $entity */
     $row['id'] = $entity->id();
     $row['label'] = $entity->toLink();
     $status = [

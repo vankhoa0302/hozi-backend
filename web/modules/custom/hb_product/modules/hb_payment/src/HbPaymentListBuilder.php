@@ -99,7 +99,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
       'published' => 'Completed',
     ];
     $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
-    $row['address'] = $entity->get('address')->getString();
+    $row['address'] = $entity->get('address')->value ?? '';
     $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),

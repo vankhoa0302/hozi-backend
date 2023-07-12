@@ -121,7 +121,7 @@ class HbRestPaymentResource extends ResourceBase
           'bank_code' => $payment->get('info')->vnp_BankCode,
           'card_type' => $payment->get('info')->vnp_CardType,
           'status' => $status,
-          'address' => $payment->get('address')->getString(),
+          'address' => $payment->get('address')->value ?? '',
         ];
       }
     }
