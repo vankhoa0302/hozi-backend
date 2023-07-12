@@ -63,17 +63,18 @@ class HbPaymentUpdateInfo {
 
     $encode_info = serialize($info);
     if (!$exist_payment) {
-      $payment = HbPayment::create([
+      HbPayment::create([
         'uid' => \Drupal::currentUser()->id(),
         'cart' => $cart_id,
-      ]);
-      $payment->save();
-    } else {
-      $payment = reset($exist_payment);
+      ])->save();
     }
 
-    $payment->set('info', $encode_info);
-    $payment->save();
+    \Drupal::database()->update('hb_payment_field_data')
+      ->fields([
+        'info' => $encode_info
+      ])
+      ->condition('cart', $cart_id)
+      ->execute();
   }
 
   public function updateTotalProduct(int $cart_id) {
