@@ -42,19 +42,17 @@ class HbPaymentUpdateInfo {
     ]);
 
     if (!$exist_payment) {
-      HbPayment::create([
+      $payment = HbPayment::create([
         'uid' => \Drupal::currentUser()->id(),
         'cart' => $cart_id,
-      ])->save();
+      ]);
+      $payment->save();
+    } else {
+      $payment = reset($exist_payment);
     }
 
-    \Drupal::database()->update('hb_payment_field_data')
-      ->fields([
-        'address__value' => $address,
-        'address__format' => 'plain_text',
-      ])
-      ->condition('cart', $cart_id)
-      ->execute();
+    $payment->set('address', $address);
+    $payment->save();
   }
 
 
@@ -65,18 +63,17 @@ class HbPaymentUpdateInfo {
 
     $encode_info = serialize($info);
     if (!$exist_payment) {
-      HbPayment::create([
+      $payment = HbPayment::create([
         'uid' => \Drupal::currentUser()->id(),
         'cart' => $cart_id,
-      ])->save();
+      ]);
+      $payment->save();
+    } else {
+      $payment = reset($exist_payment);
     }
 
-    \Drupal::database()->update('hb_payment_field_data')
-      ->fields([
-        'info' => $encode_info
-      ])
-      ->condition('cart', $cart_id)
-      ->execute();
+    $payment->set('info', $encode_info);
+    $payment->save();
   }
 
   public function updateTotalProduct(int $cart_id) {
