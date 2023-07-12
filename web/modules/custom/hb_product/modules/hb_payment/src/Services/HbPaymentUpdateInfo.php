@@ -50,7 +50,7 @@ class HbPaymentUpdateInfo {
 
     \Drupal::database()->update('hb_payment_field_data')
       ->fields([
-        'address' => $address
+        'address__value' => $address
       ])
       ->condition('cart', $cart_id)
       ->execute();
