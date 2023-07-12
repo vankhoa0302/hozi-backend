@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class HbCartListBuilder extends EntityListBuilder {
 
-	protected $limit = 10;
+  protected $limit = 10;
 
   /**
    * The date formatter service.
@@ -85,7 +85,17 @@ class HbCartListBuilder extends EntityListBuilder {
     /** @var \Drupal\hb_product\HbCartInterface $entity */
     $row['id'] = $entity->id();
     $row['label'] = $entity->toLink();
-    $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
+    $status = [
+      'draft' => 'Awaiting payment',
+      'completed' => 'Awaiting payment',
+      'waiting_for_approve' => 'Waiting for approve',
+      'approved' => 'Approved',
+      'in_progressing' => 'In-progressing',
+      'cancel' => 'Cancel',
+      'shipping' => 'Shipping',
+      'published' => 'Completed',
+    ];
+    $row['status'] = $status[$entity->get('moderation_state')->getString()] ?? '';
     $row['uid']['data'] = [
       '#theme' => 'username',
       '#account' => $entity->getOwner(),

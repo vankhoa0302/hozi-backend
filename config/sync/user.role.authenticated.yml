@@ -14,9 +14,11 @@ dependencies:
     - rest.resource.hb_rest_translation
     - rest.resource.hb_rest_user
     - rest.resource.hb_rest_user_logout
+    - workflows.workflow.payment
   module:
     - comment
     - contact
+    - content_moderation
     - file
     - filter
     - media
@@ -56,6 +58,13 @@ permissions:
   - 'restful post hb_rest_user_logout'
   - 'search content'
   - 'skip comment approval'
+  - 'use payment transition approved'
+  - 'use payment transition awaiting_payment'
+  - 'use payment transition cancel'
+  - 'use payment transition completed'
+  - 'use payment transition in_progressing'
+  - 'use payment transition shipping'
+  - 'use payment transition waiting_for_approve'
   - 'use text format basic_html'
   - 'view media'
   - 'view user email addresses'
