@@ -75,6 +75,7 @@ class HbRestPaymentResource extends ResourceBase
       $cart->save();
       $service_update_info->updatePaymentStatus($cart->id(), FALSE);
       $service_update_info->updateTotalProduct($cart->id());
+      $service_update_info->updatePaymentAddress($cart->id(), $data['address']);
       return new JsonResponse(['message' => 'Success!'], 200);
     }
 
