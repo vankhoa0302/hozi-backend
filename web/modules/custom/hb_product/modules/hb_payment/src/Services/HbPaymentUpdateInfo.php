@@ -47,10 +47,13 @@ class HbPaymentUpdateInfo {
         'cart' => $cart_id,
       ])->save();
     }
-    
-    $cart = HbCart::load($cart_id);
-    $cart->set('address', $address);
-    $cart->save();
+
+    \Drupal::database()->update('hb_payment_field_data')
+      ->fields([
+        'address__value' => $address
+      ])
+      ->condition('cart', $cart_id)
+      ->execute();
   }
 
 
