@@ -63,7 +63,7 @@ class ImportProductsForm extends FormBase {
 
 
     $spreadsheet = IOFactory::load($inputFileName);
-
+    dump($spreadsheet);
     $sheetData = $spreadsheet->getActiveSheet();
 
     $rows = [];
