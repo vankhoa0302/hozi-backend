@@ -8,6 +8,7 @@ dependencies:
     - rest.resource.hb_rest_translation
     - rest.resource.hb_rest_user_forgot_password
     - rest.resource.hb_rest_user_register
+    - rest.resource.user_registration
   module:
     - comment
     - contact
@@ -30,6 +31,7 @@ permissions:
   - 'restful patch hb_rest_translation'
   - 'restful post hb_rest_user_forgot_password'
   - 'restful post hb_rest_user_register'
+  - 'restful post user_registration'
   - 'search content'
   - 'use text format restricted_html'
   - 'view media'

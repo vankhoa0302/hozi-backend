@@ -1,0 +1,23 @@
+uuid: 80c36b72-4d7e-4918-97c0-41884d27c3e3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.feeds_item
+    - hb_product.hb_product_type.furniture
+  module:
+    - feeds
+id: hb_product.furniture.feeds_item
+field_name: feeds_item
+entity_type: hb_product
+bundle: furniture
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item

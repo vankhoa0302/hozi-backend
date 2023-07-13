@@ -1,0 +1,36 @@
+uuid: aff8237b-fa87-45e2-9ab6-a2976e76911d
+langcode: en
+status: true
+dependencies:
+  config:
+    - feeds.feed_type.products
+id: feeds_feed.products.default
+targetEntityType: feeds_feed
+bundle: products
+mode: default
+content:
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 5
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

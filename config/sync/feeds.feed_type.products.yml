@@ -1,0 +1,170 @@
+uuid: c4edeb45-5540-4425-861a-fcabb2eeb0a3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.hb_product.furniture.field_p_f_attributes
+    - field.field.hb_product.furniture.field_p_f_discount
+    - field.field.hb_product.furniture.field_p_f_hot
+    - field.field.hb_product.furniture.field_p_f_media
+    - field.field.hb_product.furniture.field_p_f_price
+    - field.field.hb_product.furniture.field_p_f_quantity
+    - hb_product.hb_product_type.furniture
+  module:
+    - hb_product
+    - paragraphs
+label: Products
+id: products
+description: ''
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: '|'
+  no_headers: false
+  line_limit: 100
+processor: 'entity:hb_product'
+processor_configuration:
+  values:
+    bundle: furniture
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  label:
+    value: label
+    label: label
+    machine_name: label
+    type: blank
+  description:
+    value: description
+    label: description
+    machine_name: description
+    type: blank
+  images:
+    value: images
+    label: images
+    machine_name: images
+    type: blank
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: blank
+  description__value:
+    value: description__value
+    label: description__value
+    machine_name: description__value
+    type: blank
+  field_p_f_quantity:
+    value: field_p_f_quantity
+    label: field_p_f_quantity
+    machine_name: field_p_f_quantity
+    type: blank
+  field_p_f_media:
+    value: field_p_f_media
+    label: field_p_f_media
+    machine_name: field_p_f_media
+    type: blank
+  field_p_f_discount:
+    value: field_p_f_discount
+    label: field_p_f_discount
+    machine_name: field_p_f_discount
+    type: blank
+  field_p_f_price:
+    value: field_p_f_price
+    label: field_p_f_price
+    machine_name: field_p_f_price
+    type: blank
+  field_p_f_hot:
+    value: field_p_f_hot
+    label: field_p_f_hot
+    machine_name: field_p_f_hot
+    type: blank
+  desc:
+    value: description__value
+    label: description__value
+    machine_name: desc
+    type: blank
+  field_p_f_c_type:
+    value: field_p_f_c_type
+    label: field_p_f_c_type
+    machine_name: field_p_f_c_type
+    type: blank
+mappings:
+  -
+    target: label
+    map:
+      value: label
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_p_f_quantity
+    map:
+      value: field_p_f_quantity
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: field_p_f_media
+    map:
+      target_id: field_p_f_media
+      description: ''
+    settings:
+      language: ''
+      reference_by: filename
+      autocreate: 0
+      existing: '2'
+      autocreate_bundle: false
+  -
+    target: description
+    map:
+      value: desc
+    settings:
+      language: null
+      format: plain_text
+  -
+    target: field_p_f_discount
+    map:
+      value: field_p_f_discount
+    settings:
+      language: null
+  -
+    target: field_p_f_price
+    map:
+      value: field_p_f_price
+    settings:
+      language: null
+  -
+    target: field_p_f_hot
+    map:
+      value: field_p_f_hot
+    settings:
+      language: null
+  -
+    target: content_translation_source
+    map:
+      value: ''
+    settings:
+      language: null
+  -
+    target: field_p_f_attributes
+    map:
+      value: field_p_f_c_type
+    settings:
+      language: null
+      format: plain_text
+      paragraphs_type: null
+      paragraph_field: null

@@ -1,0 +1,20 @@
+uuid: fc98e4ce-088d-4aad-87c4-103c994badf7
+langcode: en
+status: true
+dependencies:
+  module:
+    - feeds
+    - hb_product
+id: hb_product.feeds_item
+field_name: feeds_item
+entity_type: hb_product
+type: feeds_item
+settings:
+  target_type: feeds_feed
+module: feeds
+locked: false
+cardinality: -1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
