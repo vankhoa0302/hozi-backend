@@ -115,6 +115,17 @@ class ImportProductsForm extends FormBase {
 
           $base_values[$fields[$index]] = $value;
         }
+        if (is_string($base_values['field_p_f_attributes'])) {
+          $furniture_category = Paragraph::create([
+            'type' => 'furniture_category',
+            'field_p_f_c_type' => $base_values['field_p_f_attributes'],
+          ]);
+          $furniture_category->save();
+          $base_values['field_p_f_attributes'] = [ 0 => [
+            'target_id' => $furniture_category->id(),
+            'target_revision_id' => $furniture_category->getRevisionId(),
+          ]];
+        }
         $product = HbProduct::create($base_values);
         $product->save();
       }
