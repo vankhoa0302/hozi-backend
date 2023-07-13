@@ -118,6 +118,9 @@
         "drupal/core": {
             "[PP-1] Disable CSRF token check for non-CSRF vulnerable authentication providers": "https://www.drupal.org/files/issues/2019-05-17/core-X-CSRF-Token_request_header_check-3055260-3-8.7.1.patch",
             "Provide a way for fields with computed or custom storage to decide how to impact entity queries.": "https://www.drupal.org/files/issues/2021-12-06/3025164-33.patch"
+        },
+        "drupal/entity_reference_revisions": {
+            "Allow single scalar value in EntityReferenceRevisions data type plugin": "https://www.drupal.org/files/issues/2020-04-14/allow_scalar_values-2667748-D8-41.patch"
         }
     }
   }

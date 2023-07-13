@@ -5,6 +5,8 @@ namespace Drupal\hb_product\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
+use Drupal\hb_product\Entity\HbProduct;
+use Drupal\paragraphs\Entity\Paragraph;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -63,7 +65,6 @@ class ImportProductsForm extends FormBase {
 
 
     $spreadsheet = IOFactory::load($inputFileName);
-    dump($spreadsheet);
     $sheetData = $spreadsheet->getActiveSheet();
 
     $rows = [];
@@ -73,11 +74,53 @@ class ImportProductsForm extends FormBase {
       $cells = [];
       foreach ($cellIterator as $cell) {
         $cells[] = $cell->getValue();
-
-
       }
       $rows[] = $cells;
+    }
+    $fields = $rows[0];
+    unset($rows[0]);
+    try {
+      $base_values = [
+        'bundle' => 'furniture',
+        'status' => TRUE,
+      ];
+      foreach ($rows as $values) {
+        foreach ($values as $index => $value) {
+          if ($fields[$index] === 'description__value') {
+            $fields[$index] = 'description';
+          }
+          if ($fields[$index] === 'field_p_f_c_type') {
+            $furniture_category = Paragraph::create([
+              'type' => 'furniture_category',
+              'field_p_f_c_type' => $value,
+            ]);
+            $furniture_category->save();
+            $fields[$index] = 'field_p_f_attributes';
+            $value = [ 0 => [
+              'target_id' => $furniture_category->id(),
+              'target_revision_id' => $furniture_category->getRevisionId(),
+            ]];
+          }
+          if ($fields[$index] === 'field_p_f_media') {
+            $file = File::create([
+              'filename' => 'Ghế',
+              'uri' => $value,
+              'status' => 1,
+              'uid' => 1,
+            ]);
+            $file->setPermanent(TRUE);
+            $file->save();
+            $value = [$file->id()];
+          }
 
+          $base_values[$fields[$index]] = $value;
+        }
+        $product = HbProduct::create($base_values);
+        $product->save();
+      }
+    } catch (\Exception $exception) {
+      \Drupal::logger('hb_product')->error($exception->getMessage());
+      \Drupal::messenger()->addError($exception->getMessage());
     }
     $form_state->setRedirect('entity.hb_product.collection');
   }
