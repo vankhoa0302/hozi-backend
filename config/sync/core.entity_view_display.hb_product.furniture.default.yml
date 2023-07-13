@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - core.entity_view_display.comment.comments_of_product.default
+    - field.field.hb_product.furniture.feeds_item
     - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_comments
     - field.field.hb_product.furniture.field_p_f_discount
@@ -157,4 +158,5 @@ content:
     weight: 3
     region: content
 hidden:
+  feeds_item: true
   langcode: true

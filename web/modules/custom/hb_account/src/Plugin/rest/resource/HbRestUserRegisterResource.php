@@ -50,6 +50,13 @@ class HbRestUserRegisterResource extends ResourceBase {
 				->loadByProperties([
 					'mail' => $data['mail'],
 				]);
+      if (!$exist_user) {
+        $exist_user = \Drupal::entityTypeManager()
+          ->getStorage('user')
+          ->loadByProperties([
+            'name' => $data['name'],
+          ]);
+      }
 			if ($exist_user) {
 				return new JsonResponse(['message' => 'User\'s exist!'], 406);
 			}

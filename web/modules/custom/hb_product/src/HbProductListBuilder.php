@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
 use Drupal\flag\FlagService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -55,6 +56,14 @@ class HbProductListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function render() {
+    $current_page = \Drupal::request()->get('page', 0);
+    $link_to_import = Url::fromRoute('hb_product.import_products')->toString();
+    $build['header']['#markup'] = $this->t('<a href="/products/export_per_page?items_per_page=10&page=' . $current_page .'"
+ class="button button--action button--primary">Export current page</a>
+ <a href="' . $link_to_import .'"
+ class="button button--action button--primary">Import products</a>
+');
+    $this->sort();
     $build['table'] = parent::render();
 
     $total = $this->getStorage()
@@ -62,8 +71,18 @@ class HbProductListBuilder extends EntityListBuilder {
       ->accessCheck(FALSE)
       ->count()
       ->execute();
-    $build['summary']['#markup'] = $this->t('Total products: @total', ['@total' => $total]);
+
+    $build['summary']['#markup'] = $this->t('<p>Total products: @total</p>
+<a href="/products/export" class="button button--action button--primary">Export all</a>
+', ['@total' => $total]);
     return $build;
+  }
+
+  public function sort() {
+    $query = $this->getStorage()->getQuery();
+    $query->sort('id', 'ASC');
+    $query->accessCheck(FALSE);
+    $this->getStorage()->loadMultiple($query->execute());
   }
 
   /**

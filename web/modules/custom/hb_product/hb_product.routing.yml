@@ -1,0 +1,7 @@
+hb_product.import_products:
+  path: '/products/import'
+  defaults:
+    _title: 'Import products'
+    _form: 'Drupal\hb_product\Form\ImportProductsForm'
+  requirements:
+    _permission: 'access content'

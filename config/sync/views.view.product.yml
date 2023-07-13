@@ -27,6 +27,7 @@ dependencies:
     - rest
     - serialization
     - text
+    - xls_serialization
 id: product
 label: Product
 module: views
@@ -681,187 +682,6 @@ display:
           plugin_id: bundle
           value:
             furniture: furniture
-        field_p_f_hot_value:
-          id: field_p_f_hot_value
-          table: hb_product__field_p_f_hot
-          field: field_p_f_hot_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: boolean
-          operator: '='
-          value: All
-          group: 1
-          exposed: true
-          expose:
-            operator_id: ''
-            label: 'Hot (field_p_f_hot)'
-            description: ''
-            use_operator: false
-            operator: field_p_f_hot_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: hot
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              web_admin: '0'
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-        field_p_f_discount_value:
-          id: field_p_f_discount_value
-          table: hb_product__field_p_f_discount
-          field: field_p_f_discount_value
-          relationship: none
-          group_type: group
-          admin_label: ''
-          plugin_id: numeric
-          operator: '>'
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_p_f_discount_value_op
-            label: 'Discount (field_p_f_discount)'
-            description: ''
-            use_operator: false
-            operator: field_p_f_discount_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: discount
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              web_admin: '0'
-            min_placeholder: ''
-            max_placeholder: ''
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: 'Discount (field_p_f_discount)'
-            description: null
-            identifier: field_p_f_discount_value
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1: {  }
-              2: {  }
-              3: {  }
-        field_p_f_c_type_value:
-          id: field_p_f_c_type_value
-          table: paragraph__field_p_f_c_type
-          field: field_p_f_c_type_value
-          relationship: field_p_f_attributes
-          group_type: group
-          admin_label: ''
-          plugin_id: list_field
-          operator: or
-          value:
-            table: table
-            chair: chair
-            sofa: sofa
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_p_f_c_type_value_op
-            label: 'Type (field_p_f_c_type)'
-            description: ''
-            use_operator: false
-            operator: field_p_f_c_type_value_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: type
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              web_admin: '0'
-            reduce: false
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-        label:
-          id: label
-          table: hb_product_field_data
-          field: label
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: hb_product
-          entity_field: label
-          plugin_id: string
-          operator: contains
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: label_op
-            label: Label
-            description: ''
-            use_operator: false
-            operator: label_op
-            operator_limit_selection: false
-            operator_list: {  }
-            identifier: label
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              web_admin: '0'
-            placeholder: ''
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
       style:
         type: serializer
       row:
@@ -898,10 +718,126 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - request_format
-        - url
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
+      tags:
+        - 'config:field.storage.hb_product.field_p_f_discount'
+        - 'config:field.storage.hb_product.field_p_f_hot'
+        - 'config:field.storage.hb_product.field_p_f_media'
+        - 'config:field.storage.hb_product.field_p_f_price'
+        - 'config:field.storage.hb_product.field_p_f_quantity'
+        - 'config:field.storage.paragraph.field_p_f_c_type'
+  excel_export_1:
+    id: excel_export_1
+    display_title: 'Excel export'
+    display_plugin: excel_export
+    position: 3
+    display_options:
+      pager:
+        type: none
+        options:
+          offset: 0
+      sorts: {  }
+      style:
+        type: excel_export
+        options:
+          formats:
+            xls: xls
+          xls_settings:
+            xls_format: Excel2007
+            metadata:
+              creator: ''
+              last_modified_by: ''
+              title: ''
+              description: ''
+              subject: ''
+              keywords: ''
+              category: ''
+              manager: ''
+              company: ''
+      defaults:
+        sorts: false
+      display_extenders: {  }
+      path: products/export
+      filename: products.xlxs
+      header_bold: true
+      header_italic: false
+      header_background_color: FFFFFF
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+      tags:
+        - 'config:field.storage.hb_product.field_p_f_discount'
+        - 'config:field.storage.hb_product.field_p_f_hot'
+        - 'config:field.storage.hb_product.field_p_f_media'
+        - 'config:field.storage.hb_product.field_p_f_price'
+        - 'config:field.storage.hb_product.field_p_f_quantity'
+        - 'config:field.storage.paragraph.field_p_f_c_type'
+  excel_export_2:
+    id: excel_export_2
+    display_title: 'Excel export per page'
+    display_plugin: excel_export
+    position: 3
+    display_options:
+      pager:
+        type: full
+        options:
+          offset: 0
+          items_per_page: 10
+          total_pages: null
+          id: 0
+          tags:
+            next: 'Next ›'
+            previous: '‹ Previous'
+            first: '« First'
+            last: 'Last »'
+          expose:
+            items_per_page: true
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          quantity: 9
+      sorts: {  }
+      style:
+        type: excel_export
+        options:
+          formats:
+            xls: xls
+          xls_settings:
+            xls_format: Excel2007
+            metadata:
+              creator: ''
+              last_modified_by: ''
+              title: ''
+              description: ''
+              subject: ''
+              keywords: ''
+              category: ''
+              manager: ''
+              company: ''
+      defaults:
+        sorts: false
+      display_description: ''
+      display_extenders: {  }
+      path: products/export_per_page
+      filename: products.xlxs
+      header_bold: true
+      header_italic: false
+      header_background_color: FFFFFF
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - request_format
+        - url.query_args
       tags:
         - 'config:field.storage.hb_product.field_p_f_discount'
         - 'config:field.storage.hb_product.field_p_f_hot'

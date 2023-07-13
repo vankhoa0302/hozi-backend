@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\hb_payment\Entity\HbPayment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -72,7 +73,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
   public function buildHeader() {
     $header['id'] = $this->t('ID');
     $header['cart'] = $this->t('Cart');
-    $header['status'] = $this->t('Status');
+//    $header['status'] = $this->t('Status');
     $header['address'] = $this->t('Address');
     $header['uid'] = $this->t('Author');
     $header['created'] = $this->t('Created');
@@ -87,7 +88,10 @@ class HbPaymentListBuilder extends EntityListBuilder {
 
     /** @var \Drupal\hb_payment\HbPaymentInterface $entity */
     $row['id'] = $entity->toLink();
-    $row['cart'] = $entity->get('cart')->entity->toLink();
+    $cart = $entity->get('cart')->entity;
+    $cart_id = $cart->id();
+    $row['cart'] = $this->t('<a href="/cart/' . $cart_id .'/edit"
+     hreflang="en">' . $cart->label() .'</a>');
     $status = [
       'draft' => 'Awaiting payment',
       'completed' => 'Awaiting payment',
@@ -98,7 +102,7 @@ class HbPaymentListBuilder extends EntityListBuilder {
       'shipping' => 'Shipping',
       'published' => 'Completed',
     ];
-    $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
+//    $row['status'] = $status[$entity->get('cart')->entity->get('moderation_state')->value] ?? '';
     $row['address'] = $entity->get('address')->value ?? '';
     $row['uid']['data'] = [
       '#theme' => 'username',
@@ -107,6 +111,24 @@ class HbPaymentListBuilder extends EntityListBuilder {
     $row['created'] = $this->dateFormatter->format($entity->get('created')->value);
     $row['changed'] = $this->dateFormatter->format($entity->getChangedTime());
     return $row + parent::buildRow($entity);
+  }
+
+  /**
+   * Returns a query object for loading entity IDs from the storage.
+   *
+   * @return \Drupal\Core\Entity\Query\QueryInterface
+   *   A query object used to load entity IDs.
+   */
+  protected function getEntityListQuery(): QueryInterface {
+    $query = $this->getStorage()->getQuery()
+      ->accessCheck(TRUE)
+      ->sort($this->entityType->getKey('id'), 'DESC');
+
+    // Only add the pager if a limit is specified.
+    if ($this->limit) {
+      $query->pager($this->limit);
+    }
+    return $query;
   }
 
 }

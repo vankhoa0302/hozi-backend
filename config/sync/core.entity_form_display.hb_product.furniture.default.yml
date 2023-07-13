@@ -3,6 +3,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.hb_product.furniture.feeds_item
     - field.field.hb_product.furniture.field_p_f_attributes
     - field.field.hb_product.furniture.field_p_f_comments
     - field.field.hb_product.furniture.field_p_f_discount
@@ -122,5 +123,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  feeds_item: true
   status: true
   uid: true
