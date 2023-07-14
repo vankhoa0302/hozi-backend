@@ -93,7 +93,10 @@ class HbPaymentListBuilder extends EntityListBuilder {
     $row['id'] = $entity->toLink();
     $cart = $entity->get('cart')->entity;
     $cart_id = $cart->id();
-    $row['cart'] = $this->t('<a href="/cart/' . $cart_id .'/edit"
+    $cart_url = Url::fromRoute('entity.hb_cart.edit_form', [
+      'hb_cart' => $cart_id,
+    ]);
+    $row['cart'] = $this->t('<a href="' . $cart_url->toString() .'"
      hreflang="en">' . $cart->label() .'</a>');
     $status = [
       'draft' => 'Awaiting payment',
