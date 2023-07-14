@@ -80,7 +80,7 @@ class HbProductListBuilder extends EntityListBuilder {
 
     $export_all = Url::fromRoute('view.product.excel_export_1');
     $build['summary']['#markup'] = $this->t('<p>Total products: @total</p>
-<a href="' . $export_all . '" class="button button--action button--primary">Export all</a>
+<a href="' . $export_all->toString() . '" class="button button--action button--primary">Export all</a>
 ', ['@total' => $total]);
     return $build;
   }
