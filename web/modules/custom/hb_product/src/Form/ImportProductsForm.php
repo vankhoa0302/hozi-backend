@@ -42,7 +42,7 @@ class ImportProductsForm extends FormBase {
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Imprt'),
+      '#value' => $this->t('Import'),
     ];
 
     return $form;
