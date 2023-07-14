@@ -19,8 +19,15 @@ class HbCartCalculate {
     $amount = 0;
     foreach ($furniture as $item) {
       $quantity = $item->get('field_p_f_c_quantity')->getString();
-      $price = $item->get('field_p_f_c_furniture')->entity->get('field_p_f_price')->getString();
-      $discount = $item->get('field_p_f_c_furniture')->entity->get('field_p_f_discount')->getString();
+      if ($f = $item->get('field_p_f_c_furniture')->entity) {
+        $price = $f->get('field_p_f_price')
+          ->getString();
+        $discount = $f->get('field_p_f_discount')
+          ->getString();
+      } else {
+        $price = 0;
+        $discount = 0;
+      }
       $amount += $quantity * $price - $discount;
     }
     return $amount;
