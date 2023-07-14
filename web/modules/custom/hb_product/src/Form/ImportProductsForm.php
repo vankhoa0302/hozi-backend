@@ -29,10 +29,10 @@ class ImportProductsForm extends FormBase {
 
     $form['file'] = [
       '#type' => 'managed_file',
-      '#title' => $this->t('File (.xlsx)'),
+      '#title' => $this->t('File (.xlxs)'),
       '#upload_location' => 'private://products',
       '#upload_validators' => [
-        'file_validate_extensions' => ['xlsx'],
+        'file_validate_extensions' => ['xlxs'],
       ],
       '#required' => TRUE,
     ];
