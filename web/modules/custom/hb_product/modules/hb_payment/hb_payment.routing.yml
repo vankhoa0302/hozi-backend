@@ -12,3 +12,11 @@ hb_payment.settings:
     _title: 'Payment Settings'
   requirements:
     _permission: 'administer site configuration'
+
+hb_payment.turn_over:
+  path: '/turnover'
+  defaults:
+    _title: 'Turnover'
+    _form: 'Drupal\hb_payment\Form\TurnOverForm'
+  requirements:
+    _permission: 'access content'

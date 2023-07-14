@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
+use Drupal\Core\Url;
 use Drupal\hb_payment\Entity\HbPayment;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -55,6 +56,9 @@ class HbPaymentListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function render() {
+    $link_to_turnover = Url::fromRoute('hb_payment.turn_over')->toString();
+    $build['header']['#markup'] = $this->t('<a href="' . $link_to_turnover .'"
+ class="button button--action button--primary">Turnover</a>');
     $build['table'] = parent::render();
 
     $total = $this->getStorage()
@@ -85,7 +89,6 @@ class HbPaymentListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-
     /** @var \Drupal\hb_payment\HbPaymentInterface $entity */
     $row['id'] = $entity->toLink();
     $cart = $entity->get('cart')->entity;

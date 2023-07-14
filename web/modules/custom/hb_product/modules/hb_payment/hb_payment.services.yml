@@ -3,3 +3,5 @@ services:
     class: Drupal\hb_payment\Services\HbPaymentValidate
   hb_payment.update_info:
     class: Drupal\hb_payment\Services\HbPaymentUpdateInfo
+  hb_payment.calculate:
+    class: Drupal\hb_payment\Services\HbPaymentCalculate
