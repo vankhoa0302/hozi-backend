@@ -63,7 +63,7 @@ class HbProductListBuilder extends EntityListBuilder {
       'items_per_page' => 10,
       'page' => $current_page,
     ]);
-    
+
     $build['header']['#markup'] = $this->t('<a href="' . $export_current_page_url->toString() .'"
  class="button button--action button--primary">Export current page</a>
  <a href="' . $link_to_import .'"
@@ -78,8 +78,9 @@ class HbProductListBuilder extends EntityListBuilder {
       ->count()
       ->execute();
 
+    $export_all = Url::fromRoute('view.product.excel_export_1');
     $build['summary']['#markup'] = $this->t('<p>Total products: @total</p>
-<a href="/products/export" class="button button--action button--primary">Export all</a>
+<a href="' . $export_all . '" class="button button--action button--primary">Export all</a>
 ', ['@total' => $total]);
     return $build;
   }
