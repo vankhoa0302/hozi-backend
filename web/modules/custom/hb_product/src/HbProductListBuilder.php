@@ -58,7 +58,13 @@ class HbProductListBuilder extends EntityListBuilder {
   public function render() {
     $current_page = \Drupal::request()->get('page', 0);
     $link_to_import = Url::fromRoute('hb_product.import_products')->toString();
-    $build['header']['#markup'] = $this->t('<a href="/products/export_per_page?items_per_page=10&page=' . $current_page .'"
+    $export_current_page_url = Url::fromRoute('view.product.excel_export_2');
+    $export_current_page_url->setRouteParameters([
+      'items_per_page' => 10,
+      'page' => $current_page,
+    ]);
+    
+    $build['header']['#markup'] = $this->t('<a href="' . $export_current_page_url->toString() .'"
  class="button button--action button--primary">Export current page</a>
  <a href="' . $link_to_import .'"
  class="button button--action button--primary">Import products</a>
