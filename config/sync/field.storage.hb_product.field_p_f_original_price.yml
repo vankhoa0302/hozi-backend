@@ -1,0 +1,18 @@
+uuid: 64aa7d24-3493-4037-9f86-142c8870f89f
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+id: hb_product.field_p_f_original_price
+field_name: field_p_f_original_price
+entity_type: hb_product
+type: float
+settings: {  }
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

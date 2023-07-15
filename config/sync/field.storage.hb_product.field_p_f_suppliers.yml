@@ -1,0 +1,20 @@
+uuid: f9cdfc4b-b2cf-4718-8aea-5607baed81e2
+langcode: en
+status: true
+dependencies:
+  module:
+    - hb_product
+    - node
+id: hb_product.field_p_f_suppliers
+field_name: field_p_f_suppliers
+entity_type: hb_product
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

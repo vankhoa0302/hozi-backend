@@ -1,0 +1,29 @@
+uuid: 2f1f2110-7121-48ca-9ca9-0eb443aed712
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_suppliers
+    - hb_product.hb_product_type.furniture
+    - node.type.supplier
+id: hb_product.furniture.field_p_f_suppliers
+field_name: field_p_f_suppliers
+entity_type: hb_product
+bundle: furniture
+label: Suppliers
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      supplier: supplier
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
