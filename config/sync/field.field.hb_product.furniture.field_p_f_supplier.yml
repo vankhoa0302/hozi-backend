@@ -1,0 +1,46 @@
+uuid: c09d47cd-3346-49fd-8e21-e9448a759dfb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.hb_product.field_p_f_supplier
+    - hb_product.hb_product_type.furniture
+    - paragraphs.paragraphs_type.suppliers
+  module:
+    - entity_reference_revisions
+id: hb_product.furniture.field_p_f_supplier
+field_name: field_p_f_supplier
+entity_type: hb_product
+bundle: furniture
+label: Supplier
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      suppliers: suppliers
+    negate: 0
+    target_bundles_drag_drop:
+      furniture_cart:
+        weight: 7
+        enabled: false
+      furniture_category:
+        weight: 8
+        enabled: false
+      product_evaluate:
+        weight: 9
+        enabled: false
+      slider:
+        weight: 10
+        enabled: false
+      suppliers:
+        weight: 11
+        enabled: true
+      user_contact_info:
+        weight: 12
+        enabled: false
+field_type: entity_reference_revisions

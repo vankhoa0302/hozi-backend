@@ -1,0 +1,23 @@
+uuid: 545003a9-b70f-417d-9fa5-dd81097a2d36
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.suppliers.field_p_s_name
+    - paragraphs.paragraphs_type.suppliers
+id: paragraph.suppliers.default
+targetEntityType: paragraph
+bundle: suppliers
+mode: default
+content:
+  field_p_s_name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

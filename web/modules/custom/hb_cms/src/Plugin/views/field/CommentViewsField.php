@@ -33,15 +33,15 @@ class CommentViewsField extends EntityField {
     $storage = \Drupal::entityTypeManager()->getStorage('comment');
     $commentField = $entity->get($this->definition['field_name']);
     $comments = $storage->loadThread($entity, $commentField->getFieldDefinition()->getName(), \Drupal\comment\CommentManagerInterface::COMMENT_MODE_FLAT);
-
-    $items = array_map(function ($item) {
-      /** @var Comment $item */
-      return ['rendered' => ['#markup' => [
-        'author' => $item->getOwner()->label(),
-        'value' => $item->get('comment_body')->getString()
+    $items = [];
+    foreach ($comments as $comment) {
+      $items[] = ['rendered' => ['#markup' => [
+        'id' => $comment->id(),
+        'author' => $comment->getOwner()->label(),
+        'value' => $comment->get('comment_body')->getString(),
+        'rating' =>  $comment->get('field_c_c_o_p_rating')->getString(),
       ]]];
-    }, $comments);
-
+    }
     return $items;
   }
 }
